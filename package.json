@@ -4,6 +4,7 @@
   "description": "",
   "main": "app.js",
   "scripts": {
+    "start": "node server/index.js",
     "start:client": "webpack-dev-server --open",
     "start:server": "node-dev --respawn server/index.js",
     "build": "webpack --mode=\"production\"",
