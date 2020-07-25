@@ -11,6 +11,8 @@ app.get('/', (req, res) => {
     res.sendFile(path.join(__dirname, '../dist/index.html'));
 })
 
+
+// sync the db then start the server
 sync()
     .then(() => {
 
