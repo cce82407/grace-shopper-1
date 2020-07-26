@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
+import { connect } from 'react-redux';
 import axios from 'axios';
 
-const Login = () => {
+const Login = ({ user }) => {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
     const [message, setMessage] = useState('');
@@ -25,11 +26,11 @@ const Login = () => {
                 />
             </label>
             <label>
-                Username:
+                Password:
             <input
                     type='password'
                     value={password}
-                    id='username'
+                    id='password'
                     onChange={
                         e => setPassword(e.target.value)
                     }
@@ -46,4 +47,6 @@ const Login = () => {
     );
 }
 
-export default Login;
+const mapStateToProps = ({ user }) => ({ user });
+
+export default connect(mapStateToProps)(Login);
