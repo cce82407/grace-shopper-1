@@ -1,6 +1,6 @@
 const express = require('express');
 const path = require('path');
-const { db, sync } = require('./db/db');
+const { sync } = require('./db/db');
 const router = require('./routes')
 
 const app = express();
@@ -14,8 +14,13 @@ app.get('/', (req, res) => {
     res.sendFile(path.join(__dirname, '../dist/index.html'));
 });
 
+app.use((err, req, res, next) => {
+    console.error(err);
+    res.status(500).send({ message: err.message });
+});
+
 // sync the db then start the server
-sync()
+sync(false)
     .then(() => {
         app.listen(PORT, () => console.log(`listening on port: ${PORT}`));
     })
