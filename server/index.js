@@ -7,6 +7,7 @@ const app = express();
 const PORT = process.env.PORT || 3000;
 
 app.use(express.json());
+app.use('/client/assets', express.static(path.join(__dirname, '../client/assets')))
 app.use(express.static(path.join(__dirname, '../dist')))
 app.use('/api', router);
 
