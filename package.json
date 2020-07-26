@@ -1,10 +1,10 @@
 {
-  "name": "acme-products-express",
+  "name": "grace-shopper",
   "version": "1.0.0",
   "description": "",
   "main": "app.js",
   "scripts": {
-    "start": "node server/index.js",
+    "start": "node server",
     "start:client": "webpack-dev-server --open",
     "start:server": "node-dev --respawn server/index.js",
     "build": "webpack --mode=\"production\"",

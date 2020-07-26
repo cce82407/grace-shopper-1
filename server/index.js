@@ -12,11 +12,10 @@ app.use('/api', router);
 
 app.get('/', (req, res) => {
     res.sendFile(path.join(__dirname, '../dist/index.html'));
-})
+});
 
 // sync the db then start the server
 sync()
     .then(() => {
-
-        app.listen(PORT, () => console.log('listening on port 3000'));
+        app.listen(PORT, () => console.log(`listening on port: ${PORT}`));
     })
