@@ -6,7 +6,7 @@
   "scripts": {
     "start": "node server",
     "start:client": "webpack-dev-server --open",
-    "start:server": "node-dev --respawn server/index.js",
+    "start:server": "nodemon server/index.js",
     "build": "webpack --mode=\"production\"",
     "build:watch": "webpack --watch"
   },
@@ -14,8 +14,10 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "axios": "^0.19.2",
     "bcrypt": "^5.0.0",
     "chalk": "^4.1.0",
+    "cookie-parser": "^1.4.5",
     "express": "^4.17.1",
     "pg": "^8.3.0",
     "react": "^16.13.1",

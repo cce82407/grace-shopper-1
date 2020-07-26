@@ -1,10 +1,11 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import Login from './components/login';
 
 const App = () => {
     console.log('app component')
     return (
-        <h1>Hello World</h1>
+        <Login />
     )
 }
 
