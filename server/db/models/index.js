@@ -1,5 +1,9 @@
-const User = require('./user');
-const Session = require('./session');
+const { User } = require('./user');
+const { Session } = require('./session');
+
+Session.belongsTo(User);
+User.hasMany(Session);
+
 const ProductCart= require('./product-cart');
 const Cart = require('./cart');
 const Product = require('./product');
@@ -13,7 +17,6 @@ Cart.belongsToMany(Product, {through: ProductCart });
 
 User.hasMany(Cart);
 Cart.belongsTo(User);
-
 
 module.exports = {
     User,
