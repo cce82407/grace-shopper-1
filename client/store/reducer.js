@@ -25,12 +25,22 @@ const loginReducer = (state = initialUserState, action) => {
     }
 }
 
-const loadingReducer = (state = true, action) => {
+const initialLoadingState = {
+    loading: true,
+    payload: null
+}
+const loadingReducer = (state = initialLoadingState, action) => {
     switch (action.type) {
         case LOADING:
-            return true;
+            return {
+                ...state,
+                loading: true,
+            };
         case LOADED:
-            return false;
+            return {
+                loading: false,
+                payload: action.payload
+            };
         default:
             return state;
     }

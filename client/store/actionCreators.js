@@ -19,9 +19,10 @@ export const loading = () => {
     }
 }
 
-export const loaded = () => {
+export const loaded = (payload) => {
     return {
-        type: LOADED
+        type: LOADED,
+        payload
     }
 }
 
@@ -29,10 +30,13 @@ export const loginThunk = (username, password) => {
     return (dispatch) => {
         dispatch(loading());
         return axios.post('/api/login', { username, password })
-            .then(() => {
+            .then((res) => {
+                console.log(res.data)
                 dispatch(login(username));
-                dispatch(loaded());
-                return 'Login Successful'
+                dispatch(loaded(null));
+            })
+            .catch((res) => {
+                dispatch(loaded({ message: 'Incorrect Username or Password' }));
             })
     }
 }

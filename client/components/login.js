@@ -1,15 +1,22 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { connect } from 'react-redux';
 import { loginThunk } from '../store/actionCreators';
-const Login = ({ login }) => {
+const Login = ({ login, loading }) => {
+    console.log(loading)
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
-    const [message, setMessage] = useState('');
 
     const handleSubmit = (e) => {
         e.preventDefault();
         login(username, password)
-            .catch(() => setMessage('Login Failed'))
+            .catch(console.log)
+    }
+
+    const loginMessage = () => {
+        if (loading && loading.payload && loading.payload.message) {
+            return loading.payload.message;
+        }
+        return null;
     }
 
     return (
@@ -42,12 +49,12 @@ const Login = ({ login }) => {
             >
                 Login
             </button>
-            <p>{message}</p>
+            <p>{loginMessage()}</p>
         </form>
     );
 }
 
-const mapStateToProps = ({ user }) => ({ user });
+const mapStateToProps = ({ loading }) => ({ loading });
 const mapDispatchToProps = (dispatch) => {
     return {
         login: (username, password) => dispatch(loginThunk(username, password))
