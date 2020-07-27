@@ -1,4 +1,4 @@
-import { LOGIN, LOGOUT, LOADED, LOADING } from './actions';
+import { LOGIN, LOGOUT, LOGIN_FAIL, LOADED, LOADING } from './actions';
 import axios from 'axios';
 
 const login = (username) => {
@@ -13,16 +13,22 @@ const logout = () => {
     }
 }
 
+const loginFail = (message) => {
+    return {
+        type: LOGIN_FAIL,
+        message
+    }
+}
+
 export const loading = () => {
     return {
         type: LOADING
     }
 }
 
-export const loaded = (payload) => {
+export const loaded = () => {
     return {
-        type: LOADED,
-        payload
+        type: LOADED
     }
 }
 
@@ -33,10 +39,11 @@ export const loginThunk = (username, password) => {
             .then((res) => {
                 console.log(res.data)
                 dispatch(login(username));
-                dispatch(loaded(null));
+                dispatch(loaded());
             })
             .catch((res) => {
-                dispatch(loaded({ message: 'Incorrect Username or Password' }));
+                dispatch(loginFail('Incorrect username or password'));
+                dispatch(loaded());
             })
     }
 }
@@ -45,7 +52,6 @@ export const whoami = () => {
         dispatch(loading());
         return axios.get('/api/whoami')
             .then(({ data }) => {
-                console.log(data)
                 if (data.loggedIn) {
                     dispatch(login(data.username));
                 } else {

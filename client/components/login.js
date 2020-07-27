@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import { connect } from 'react-redux';
 import { loginThunk } from '../store/actionCreators';
-const Login = ({ login, loading }) => {
-    console.log(loading)
+const Login = ({ login, user }) => {
+
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
 
@@ -10,13 +10,6 @@ const Login = ({ login, loading }) => {
         e.preventDefault();
         login(username, password)
             .catch(console.log)
-    }
-
-    const loginMessage = () => {
-        if (loading && loading.payload && loading.payload.message) {
-            return loading.payload.message;
-        }
-        return null;
     }
 
     return (
@@ -49,12 +42,12 @@ const Login = ({ login, loading }) => {
             >
                 Login
             </button>
-            <p>{loginMessage()}</p>
+            <p>{user && user.message}</p>
         </form>
     );
 }
 
-const mapStateToProps = ({ loading }) => ({ loading });
+const mapStateToProps = ({ user }) => ({ user });
 const mapDispatchToProps = (dispatch) => {
     return {
         login: (username, password) => dispatch(loginThunk(username, password))

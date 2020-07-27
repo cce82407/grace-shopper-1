@@ -1,46 +1,46 @@
 import { createStore, applyMiddleware, combineReducers } from 'redux';
 import thunks from 'redux-thunk';
 
-import { LOGIN, LOGOUT, LOADING, LOADED } from './actions';
+import { LOGIN, LOGOUT, LOGIN_FAIL, LOADING, LOADED } from './actions';
 
 const initialUserState = {
     username: null,
-    loggedIn: false
+    loggedIn: false,
+    message: ''
 }
 
 const loginReducer = (state = initialUserState, action) => {
     switch (action.type) {
         case LOGIN:
             return {
+                ...state,
                 username: action.username,
                 loggedIn: true
             };
         case LOGOUT:
             return {
+                ...state,
                 username: null,
                 loggedIn: false
             };
+        case LOGIN_FAIL: {
+            return {
+                username: null,
+                loggedIn: false,
+                message: action.message
+            }
+        }
         default:
             return state;
     }
 }
 
-const initialLoadingState = {
-    loading: true,
-    payload: null
-}
-const loadingReducer = (state = initialLoadingState, action) => {
+const loadingReducer = (state = true, action) => {
     switch (action.type) {
         case LOADING:
-            return {
-                ...state,
-                loading: true,
-            };
+            return true
         case LOADED:
-            return {
-                loading: false,
-                payload: action.payload
-            };
+            return false
         default:
             return state;
     }

@@ -12,7 +12,7 @@ const LoginForm = ({ user, whoami, loading }) => {
     return (
         <div>
             {
-                loading.loading ? <Loading /> : !!user.username ? <Logout /> : <Login />
+                loading ? <Loading /> : !!user.username ? <Logout /> : <Login />
             }
         </div>
     )
