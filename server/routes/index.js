@@ -60,7 +60,7 @@ router.post('/login', async (req, res) => {
     }
 });
 
-router.get('/login', (req, res) => {
+router.get('/whoami', (req, res) => {
     if (req.user) {
         res.send({
             username: req.user.username,

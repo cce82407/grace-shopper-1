@@ -1,7 +1,7 @@
 import { createStore, applyMiddleware, combineReducers } from 'redux';
 import thunks from 'redux-thunk';
 
-import { LOGIN, LOGOUT } from './actions';
+import { LOGIN, LOGOUT, LOADING, LOADED } from './actions';
 
 const initialUserState = {
     username: null,
@@ -17,7 +17,7 @@ const loginReducer = (state = initialUserState, action) => {
             };
         case LOGOUT:
             return {
-                username: action.username,
+                username: null,
                 loggedIn: false
             };
         default:
@@ -25,8 +25,20 @@ const loginReducer = (state = initialUserState, action) => {
     }
 }
 
+const loadingReducer = (state = true, action) => {
+    switch (action.type) {
+        case LOADING:
+            return true;
+        case LOADED:
+            return false;
+        default:
+            return state;
+    }
+}
+
 const reducer = combineReducers({
-    user: loginReducer
+    user: loginReducer,
+    loading: loadingReducer
 });
 
 
