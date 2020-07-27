@@ -1,16 +1,17 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
 import { loginThunk } from '../store/actionCreators';
-const Login = ({ user, login }) => {
+const Login = ({ login }) => {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
     const [message, setMessage] = useState('');
+
     const handleSubmit = (e) => {
         e.preventDefault();
         login(username, password)
-            .then((res) => setMessage(res))
             .catch(() => setMessage('Login Failed'))
     }
+
     return (
         <form>
             <label>
@@ -42,9 +43,6 @@ const Login = ({ user, login }) => {
                 Login
             </button>
             <p>{message}</p>
-            {
-                !!user.loggedIn && <h1>you're logged in</h1>
-            }
         </form>
     );
 }
