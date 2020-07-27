@@ -43,7 +43,7 @@ const Login = ({ user, login }) => {
             </button>
             <p>{message}</p>
             {
-                user.loggedIn && <h1>you're logged in</h1>
+                !!user.loggedIn && <h1>you're logged in</h1>
             }
         </form>
     );
