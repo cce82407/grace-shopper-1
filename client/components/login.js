@@ -1,15 +1,15 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { connect } from 'react-redux';
 import { loginThunk } from '../store/actionCreators';
-const Login = ({ login }) => {
+const Login = ({ login, user }) => {
+
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
-    const [message, setMessage] = useState('');
 
     const handleSubmit = (e) => {
         e.preventDefault();
         login(username, password)
-            .catch(() => setMessage('Login Failed'))
+            .catch(console.log)
     }
 
     return (
@@ -42,7 +42,7 @@ const Login = ({ login }) => {
             >
                 Login
             </button>
-            <p>{message}</p>
+            <p>{user && user.message}</p>
         </form>
     );
 }
