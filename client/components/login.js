@@ -1,15 +1,15 @@
 import React, { useState } from 'react';
-import axios from 'axios';
-
-const Login = () => {
+import { connect } from 'react-redux';
+import { loginThunk } from '../store/actionCreators';
+const Login = ({ user, login }) => {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
     const [message, setMessage] = useState('');
     const handleSubmit = (e) => {
         e.preventDefault();
-        axios.post('/api/login', { username, password })
-            .then(() => setMessage('logged in'))
-            .catch(() => setMessage('login failed'))
+        login(username, password)
+            .then((res) => setMessage(res))
+            .catch(() => setMessage('Login Failed'))
     }
     return (
         <form>
@@ -25,11 +25,11 @@ const Login = () => {
                 />
             </label>
             <label>
-                Username:
+                Password:
             <input
                     type='password'
                     value={password}
-                    id='username'
+                    id='password'
                     onChange={
                         e => setPassword(e.target.value)
                     }
@@ -42,8 +42,18 @@ const Login = () => {
                 Login
             </button>
             <p>{message}</p>
+            {
+                user.loggedIn && <h1>you're logged in</h1>
+            }
         </form>
     );
 }
 
-export default Login;
+const mapStateToProps = ({ user }) => ({ user });
+const mapDispatchToProps = (dispatch) => {
+    return {
+        login: (username, password) => dispatch(loginThunk(username, password))
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Login);
