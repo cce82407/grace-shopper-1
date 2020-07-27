@@ -15,6 +15,5 @@ export const loginThunk = (username, password) => {
                 dispatch(login(username));
                 return 'Login Successful'
             })
-            .catch(e => e)
     }
 }

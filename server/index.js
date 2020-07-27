@@ -15,6 +15,7 @@ app.use(express.static(path.join(__dirname, '../dist')))
 app.use(cookieParser());
 
 app.use(async (req, res, next) => {
+
     try {
         if (!req.cookies.session_id) {
 
@@ -65,7 +66,6 @@ app.get('/', (req, res) => {
 });
 
 app.use((err, req, res, next) => {
-
     console.error(err);
     res.status(500).send({ message: err.message });
 });
