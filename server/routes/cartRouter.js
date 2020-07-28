@@ -24,6 +24,27 @@ cartRouter.post('/add/:id', async (req, res) => {
     }
 });
 
+cartRouter.get('/get', async (req, res) => {
+    try {
+        let cart;
+        cart = await Cart.findOne({
+            where: {
+                id: req.cart_id
+            },
+            include: [Product]
+        });
+        if (!cart) {
+            cart = {
+                products: []
+            }
+        }
+        res.send(cart)
+    } catch (e) {
+        console.log(e);
+        res.sendStatus(500);
+    }
+})
+
 
 module.exports = {
     path: '/cart',

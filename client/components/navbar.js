@@ -6,8 +6,8 @@ const NavBar = () => {
     <div>
       <nav>
         <Link to='/products'>Shop By Category</Link>
-        {'  '}
         <Link to='/musicians'>Rent a Musician</Link>
+        <Link to='/cart'>Cart</Link>
       </nav>
     </div>
   );
