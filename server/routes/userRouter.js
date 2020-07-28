@@ -70,10 +70,11 @@ userRouter.get("/whoami", (req, res) => {
 userRouter.get("/logout", async (req, res) => {
     try {
         res.clearCookie("session_id");
-
+        res.clearCookie("cart_id");
         console.log(chalk.black(chalk.bgGreen(`${req.user.username} LOGGED OUT`)));
         res.sendStatus(200);
     } catch (e) {
+        console.log(e)
         res.status(500).send(e);
     }
 });
