@@ -77,7 +77,10 @@ export const logoutThunk = () => {
                 dispatch(logout());
                 dispatch(loaded());
             })
-            .catch(console.log)
+            .catch((e) => {
+                dispatch(loaded());
+                console.log(e)
+            })
     }
 }
 

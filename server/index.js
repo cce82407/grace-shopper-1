@@ -17,33 +17,7 @@ app.use(cookieParser());
 app.use(async (req, res, next) => {
 
     try {
-        if (!req.cookies.session_id) {
-
-            const session = await Session.create();
-            const newCart = {
-                sessionId: session.id
-            }
-            const cart = await Cart.create(newCart);
-
-
-            const oneYear = 1000 * 60 * 60 * 24 * 7 * 52;
-
-            res.cookie('session_id', session.id, {
-                path: '/',
-                expires: new Date(Date.now() + oneYear)
-            });
-
-            res.cookie('cart_id', cart.id, {
-                path: '/',
-                expires: new Date(Date.now() + oneYear)
-            });
-
-            req.session_id = session.id;
-            req.cart_id = cart.id;
-
-            next();
-
-        } else {
+        if (req.cookies.session_id && req.cookies.cart_id) {
 
             req.session_id = req.cookies.session_id;
             req.cart_id = req.cookies.cart_id;
@@ -55,12 +29,6 @@ app.use(async (req, res, next) => {
                         where: {
                             id: req.session_id
                         }
-                    },
-                    {
-                        model: Cart,
-                        where: {
-                            id: req.cart_id
-                        }
                     }
                 ]
             });
@@ -70,6 +38,36 @@ app.use(async (req, res, next) => {
             }
 
             next();
+        }
+        else {
+            const oneYear = 1000 * 60 * 60 * 24 * 7 * 52;
+
+            if (!req.cookies.session_id) {
+                const session = await Session.create();
+
+                res.cookie('session_id', session.id, {
+                    path: '/',
+                    expires: new Date(Date.now() + oneYear)
+                });
+
+                req.session_id = session.id;
+
+            }
+
+            if (!req.cookies.cart_id) {
+                const cart = await Cart.create();
+
+                res.cookie('cart_id', cart.id, {
+                    path: '/',
+                    expires: new Date(Date.now() + oneYear)
+                });
+
+                req.cart_id = cart.id;
+            }
+
+
+            next();
+
         }
     }
     catch (e) {
