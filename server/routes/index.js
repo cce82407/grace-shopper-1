@@ -3,7 +3,7 @@ const router = Router();
 const bcrypt = require("bcrypt");
 const chalk = require("chalk");
 
-const { User, Session } = require("../db/models/index");
+const { User, Session, Product } = require("../db/models/index");
 
 router.get("/users", async (req, res) => {
   const users = await User.findAll();

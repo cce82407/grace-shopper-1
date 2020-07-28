@@ -20,6 +20,8 @@ const Login = ({ login, user }) => {
                     type='text'
                     value={username}
                     id='username'
+                    placeholder='rebelalliance'
+                    required
                     onChange={
                         e => setUsername(e.target.value)
                     }
@@ -31,6 +33,8 @@ const Login = ({ login, user }) => {
                     type='password'
                     value={password}
                     id='password'
+                    placeholder='usetheforce'
+                    required
                     onChange={
                         e => setPassword(e.target.value)
                     }
