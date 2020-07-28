@@ -79,6 +79,35 @@ userRouter.get("/logout", async (req, res) => {
     }
 });
 
+// Basic user API calls
+userRouter.get("/users", async (req, res) => {
+    const users = await User.findAll();
+    res.status(200).send(users);
+});
+
+userRouter.post("/users", async (req, res)=>{
+    const { username, password, role } = req.body;
+    const createdUser = await User.create({username, password, role})
+    res.status(201).send({
+        user: createdUser,
+        message: `User ${username} created sucessfully`
+    })
+})
+
+userRouter.put('/users/:id', async (req, res)=>{
+    const { username, password, role, id } = req.body
+    await User.update({ username, password, role },{where:{ id }})
+    const users = await User.findAll()
+    res.send(users);
+})
+
+userRouter.delete('/users/:id', async (req, res) => {
+    const deletedUser =await  User.findByPk(req.params.id)
+    await deletedUser.destroy()
+    const users = await User.findAll()
+    res.send(users);
+})
+
 module.exports = {
     path: '/user',
     router: userRouter
