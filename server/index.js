@@ -1,7 +1,7 @@
 const express = require('express');
 const path = require('path');
 const { sync } = require('./db/db');
-const router = require('./routes');
+const routes = require('./routes');
 const cookieParser = require('cookie-parser');
 const { Session, User, Cart } = require('./db/models');
 
@@ -79,7 +79,9 @@ app.use(async (req, res, next) => {
 
 });
 
-app.use('/api', router);
+routes.forEach(({ path, router }) => {
+    app.use(path, router)
+})
 
 app.get('/*', (req, res) => {
     res.sendFile(path.join(__dirname, '../dist/index.html'));

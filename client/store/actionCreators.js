@@ -42,7 +42,7 @@ const getProducts = (products) => {
 export const loginThunk = (username, password) => {
     return (dispatch) => {
         dispatch(loading());
-        return axios.post('/api/login', { username, password })
+        return axios.post('/user/login', { username, password })
             .then((res) => {
                 console.log(res.data)
                 dispatch(login(username));
@@ -57,7 +57,7 @@ export const loginThunk = (username, password) => {
 export const whoami = () => {
     return (dispatch) => {
         dispatch(loading());
-        return axios.get('/api/whoami')
+        return axios.get('/user/whoami')
             .then(({ data }) => {
                 if (data.loggedIn) {
                     dispatch(login(data.username));
@@ -72,7 +72,7 @@ export const whoami = () => {
 export const logoutThunk = () => {
     return (dispatch) => {
         dispatch(loading());
-        return axios.get('/api/logout')
+        return axios.get('/user/logout')
             .then(() => {
                 dispatch(logout());
                 dispatch(loaded());
