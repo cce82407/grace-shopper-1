@@ -5,13 +5,15 @@ import Loading from './loading';
 import ProductList from './productList';
 import ProductCard from './productCard';
 import Cart from './cart';
+import NavBar from './navbar';
 
 export {
-    Login,
-    Logout,
-    LoginForm,
-    Loading,
-    ProductList,
-    ProductCard,
-    Cart
-}
+  Login,
+  Logout,
+  LoginForm,
+  Loading,
+  ProductList,
+  ProductCard,
+  Cart,
+  NavBar,
+};
