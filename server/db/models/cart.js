@@ -1,7 +1,9 @@
 const { db } = require('../db');
 const { UUID, UUIDV4, DECIMAL, BOOLEAN } = require('sequelize');
+
 const Product = require('./product');
 const ProductCart=require('./product-cart');
+
 
 
 const Cart = db.define('cart', {
@@ -10,13 +12,13 @@ const Cart = db.define('cart', {
         defaultValue: UUIDV4,
         primaryKey: true
     },
-    total:{
-       type: DECIMAL,
-       defaultValue: 0
+    total: {
+        type: DECIMAL,
+        defaultValue: 0
     },
-    active:{
+    completed: {
         type: BOOLEAN,
-        defaultValue:true,
+        defaultValue: false,
         allowNull: false
     }
 });

@@ -1,13 +1,19 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import LoginForm from './components/loginForm';
+import { BrowserRouter, Route, Switch, Redirect } from 'react-router-dom';
 import store from './store';
 import { Provider } from 'react-redux';
+import { ProductList, LoginForm } from './components';
 
 const App = () => {
     return (
         <Provider store={store}>
-            <LoginForm />
+            <BrowserRouter>
+                <Switch>
+                    <Route path='/login' component={LoginForm} />
+                    <Route path='/products' component={ProductList} />
+                </Switch>
+            </BrowserRouter>
         </Provider>
     )
 }

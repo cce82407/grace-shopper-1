@@ -1,4 +1,4 @@
-import { LOGIN, LOGOUT, LOGIN_FAIL, LOADED, LOADING } from './actions';
+import { LOGIN, LOGOUT, LOGIN_FAIL, LOADED, LOADING, GET_PRODUCTS } from './actions';
 import axios from 'axios';
 
 const login = (username) => {
@@ -34,6 +34,7 @@ export const loaded = () => {
 
 const getProducts = (products) => {
     return {
+        type: GET_PRODUCTS,
         products
     }
 }
