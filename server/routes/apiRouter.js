@@ -37,7 +37,7 @@ apiRouter.post("/categories", async (req, res)=>{
     const { name } = req.body;
     const createdCategory = await Category.create({name})
     res.status(201).send({
-        product: createdCategory,
+        category: createdCategory,
         message: `Category ${name} created sucessfully`
     })
 })
