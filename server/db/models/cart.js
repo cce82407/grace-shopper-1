@@ -21,19 +21,24 @@ const Cart = db.define('cart', {
     }
 });
 
-Cart.prototype.addItem = function (productID){
-    const addedProduct = Product.findOne({where: { id: productID }});
-    ProductCart.create({
+Cart.prototype.addItem = async function (productId){
+    const addedProduct = await Product.findOne({where: { id: productId }});
+    await ProductCart.create({
         productId: addedProduct.id,
-        categoryId: this.id 
+        cartId: this.id 
     })
 }
-
-Cart.prototype.getTotal = function(){
-    const products = ProductCart.findAll({where: {cartId: this.id}});
+ 
+Cart.prototype.getTotal = async function(){
+    const products = await ProductCart.findAll({where: {cartId: this.id}});
     this.total = products.reduce((accum, currentProduct)=>{
         return accum + currentProduct.price
     }, 0)
+}
+
+Cart.prototype.deleteProduct = async function(productId){
+    const deletedProduct = await ProductCart.findOne({where: {productId}});
+    await deletedProduct.destroy();
 }
 
 module.exports = Cart;
