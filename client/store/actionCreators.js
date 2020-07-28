@@ -1,4 +1,4 @@
-import { LOGIN, LOGOUT, LOGIN_FAIL, LOADED, LOADING, GET_PRODUCTS } from './actions';
+import { LOGIN, LOGOUT, LOGIN_FAIL, LOADED, LOADING, GET_PRODUCTS, types } from './actions';
 import axios from 'axios';
 
 const login = (username) => {
@@ -98,4 +98,39 @@ export const getProductsThunk = () => {
                 return 'Error fetching products'
             })
     }
+}
+
+export const addProductThunk = (obj) => async (dispatch) => {
+    return axios.post('/api/products', {
+        price: obj.price,
+        name: obj.name,
+        description: obj.description,
+        categoryId: obj.categoryId
+    })
+        .then(() => axios.get('/api/products'))
+        .then((res)=> {
+            dispatch({
+            type: types.ADD_PRODUCT,
+            payload: res.data.products
+            })
+        })
+        .catch((e)=>{
+            console.log(e);
+        })
+}
+
+export const addCategoryThunk = (obj) => async (dispatch) => {
+    return axios.post('/api/category', {
+        name: obj.name,
+    })
+    .then(()=> axios.get('/api/category'))
+    .then((res)=> {
+        dispatch({
+            type: types.ADD_CATEGORY,
+            payload: res.data.categories
+        })
+    })
+    .catch((e)=>{
+        console.log(e);
+    })
 }
