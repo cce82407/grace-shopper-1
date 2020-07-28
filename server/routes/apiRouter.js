@@ -1,13 +1,7 @@
 const { Router } = require("express");
 const apiRouter = Router();
 
-const { User, Product, Category } = require("../db/models/index");
-
-
-apiRouter.get("/users", async (req, res) => {
-    const users = await User.findAll();
-    res.status(200).send(users);
-});
+const { Product, Category } = require("../db/models/index");
 
 apiRouter.get("/products", async (req, res) => {
     const products = await Product.findAll();

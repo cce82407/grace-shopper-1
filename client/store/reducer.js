@@ -1,7 +1,7 @@
 import { createStore, applyMiddleware, combineReducers } from 'redux';
 import thunks from 'redux-thunk';
 
-import { LOGIN, LOGOUT, LOGIN_FAIL, LOADING, LOADED, GET_PRODUCTS } from './actions';
+import { LOGIN, LOGOUT, LOGIN_FAIL, LOADING, LOADED, GET_PRODUCTS, types } from './actions';
 
 const initialUserState = {
     username: null,
@@ -50,6 +50,23 @@ const productsReducer = (state = [], action) => {
     switch (action.type) {
         case GET_PRODUCTS:
             return action.products;
+        case types.ADD_PRODUCT:
+            return {
+                ...state,
+                products: action.payload
+            }
+        default:
+            return state;
+    }
+}
+
+const categoriesReducer = (state = [], action) => {
+    switch (action.type) {
+        case types.ADD_CATEGORY:
+            return {
+                ...state,
+                categories: action.payload
+            }
         default:
             return state;
     }
@@ -58,7 +75,8 @@ const productsReducer = (state = [], action) => {
 const reducer = combineReducers({
     user: loginReducer,
     loading: loadingReducer,
-    products: productsReducer
+    products: productsReducer,
+    categories: categoriesReducer
 });
 
 
