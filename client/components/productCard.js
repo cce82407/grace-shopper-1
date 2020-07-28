@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { Stack, Heading, Button, Input } from "@chakra-ui/core";
 import { addToCartThunk } from '../store/actionCreators'
 
+
 const ProductCard = ({ product, addToCart }) => {
     const [quantity, setQuantity] = useState(1);
     const handleAddToCart = (e, productId, quantity) => {
