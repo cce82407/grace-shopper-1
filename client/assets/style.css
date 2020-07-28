@@ -1,12 +1,13 @@
 :root {
-  --bg-dark: #111;
+  --bg: #fff;
   --text-light: #eee;
+  --text-dark: #111;
 }
 
-body {
-  background-color: var(--bg-dark);
-  color: var(--text-light);
-}
+/* body {
+  background-color: var(--bg);
+  color: var(--text-dark);
+} */
 
 /* 
  * LOADING Spinner

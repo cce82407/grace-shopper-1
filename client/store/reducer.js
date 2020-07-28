@@ -1,7 +1,8 @@
 import { createStore, applyMiddleware, combineReducers } from 'redux';
 import thunks from 'redux-thunk';
 
-import { LOGIN, LOGOUT, LOGIN_FAIL, LOADING, LOADED, GET_PRODUCTS } from './actions';
+import { LOGIN, LOGOUT, LOGIN_FAIL, LOADING, LOADED, GET_PRODUCTS, ADD_TO_CART } from './actions';
+import cart from '../components/cart';
 
 const initialUserState = {
     username: null,
@@ -55,10 +56,21 @@ const productsReducer = (state = [], action) => {
     }
 }
 
+const cartReducer = (state = [], action) => {
+    switch (action.type) {
+        case ADD_TO_CART:
+            return action.cart;
+        default:
+            return state;
+    }
+}
+
+
 const reducer = combineReducers({
     user: loginReducer,
     loading: loadingReducer,
-    products: productsReducer
+    products: productsReducer,
+    cart: cartReducer
 });
 
 

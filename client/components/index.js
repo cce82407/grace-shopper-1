@@ -4,6 +4,7 @@ import LoginForm from './loginForm';
 import Loading from './loading';
 import ProductList from './productList';
 import ProductCard from './productCard';
+import Cart from './cart';
 
 export {
     Login,
@@ -11,5 +12,6 @@ export {
     LoginForm,
     Loading,
     ProductList,
-    ProductCard
+    ProductCard,
+    Cart
 }
