@@ -1,4 +1,4 @@
-import { LOGIN, LOGOUT, LOGIN_FAIL, LOADED, LOADING, GET_PRODUCTS, ADD_TO_CART, types } from './actions';
+import { LOGIN, LOGOUT, LOGIN_FAIL, LOADED, LOADING, GET_PRODUCTS, ADD_TO_CART, types, GET_CART } from './actions';
 import axios from 'axios';
 
 const login = (username) => {
@@ -42,6 +42,13 @@ const getProducts = (products) => {
 const addToCart = (cart) => {
     return {
         type: ADD_TO_CART,
+        cart
+    }
+}
+
+const getCart = (cart) => {
+    return {
+        type: GET_CART,
         cart
     }
 }
@@ -148,7 +155,18 @@ export const addToCartThunk = (productId, quantity) => {
         return axios.post(`/cart/add/${productId}?quantity=${quantity}`)
             .then(({ data }) => {
                 dispatch(addToCart(data));
-                dispatch(loaded())
+                dispatch(loaded());
+            })
+    }
+}
+
+export const getCartThunk = () => {
+    return (dispatch) => {
+        dispatch(loading());
+        return axios.get('/cart/get')
+            .then(({ data }) => {
+                dispatch(getCart(data));
+                dispatch(loaded());
             })
     }
 }
