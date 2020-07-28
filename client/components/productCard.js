@@ -11,11 +11,17 @@ const ProductCard = ({ product, addToCart }) => {
         addToCart(productId, quantity)
     }
     return (
-        <div style={{ margin: '1em' }}>
+        <div style={{ margin: '1em', borderWidth: '1px' }}>
             <Stack spacing='3'>
-                <Heading as='h2' size='xl'>{product.name}</Heading>
-                <Heading as='h4' size='md'>{product.description}</Heading>
-                <p>${product.price}</p>
+                <Heading as='h2' size='xl'>
+                  {product.name}
+                </Heading>
+                <Heading as='h4' size='md'>
+                  {product.description}
+                </Heading>
+                <p>
+                  ${product.price}
+                </p>
             </Stack>
             <Input
                 value={quantity}
@@ -39,3 +45,4 @@ const mapDispatchToProps = (dispatch) => {
 }
 
 export default connect(null, mapDispatchToProps)(ProductCard);
+
