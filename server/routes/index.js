@@ -6,12 +6,12 @@ const chalk = require("chalk");
 const { User, Session } = require("../db/models/index");
 
 router.get("/users", async (req, res) => {
-  users = await User.findAll();
+  const users = await User.findAll();
   res.status(200).send(users);
 });
 
-router.get("/product", async (req, res) => {
-  products = await Product.findAll();
+router.get("/products", async (req, res) => {
+  const products = await Product.findAll();
   res.status(200).send(products);
 });
 
