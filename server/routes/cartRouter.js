@@ -9,7 +9,6 @@ cartRouter.post('/add/:id', async (req, res) => {
         const { quantity } = req.query;
         const { id } = req.params;
         const cart = await Cart.findByPk(req.cart_id);
-        console.log(quantity)
         await cart.addItem(id, quantity);
         const updatedCart = await Cart.findOne({
             where: {

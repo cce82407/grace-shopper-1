@@ -21,7 +21,7 @@ const Cart = db.define('cart', {
     }
 });
 
-Cart.prototype.addItem = async function (productId, quantity = 1) {
+Cart.prototype.addItem = async function (productId, quantity) {
     const addedProduct = await Product.findOne({ where: { id: productId } });
     const productCart = await ProductCart.findOne({
         where: {
@@ -30,23 +30,28 @@ Cart.prototype.addItem = async function (productId, quantity = 1) {
         }
     });
     if (productCart) {
-        productCart.quantity += +quantity
-        productCart.save();
+        const newQuantity = productCart.quantity += +quantity
+        await productCart.update({
+            quantity: newQuantity
+        });
     } else {
         await ProductCart.create({
             productId: addedProduct.id,
             cartId: this.id,
-            quantity
+            quantity: quantity
         })
-
     }
+    await this.getTotal();
 }
 
 Cart.prototype.getTotal = async function () {
     const products = await ProductCart.findAll({ where: { cartId: this.id } });
-    this.total = products.reduce((accum, currentProduct) => {
-        return accum + currentProduct.price
+    const total = await products.reduce(async (accum, currentProduct) => {
+        const product = await Product.findByPk(currentProduct.productId);
+        return await accum + +product.price * +currentProduct.quantity
     }, 0)
+    console.log(typeof total, total)
+    await this.update({ total });
 }
 
 Cart.prototype.deleteProduct = async function (productId) {

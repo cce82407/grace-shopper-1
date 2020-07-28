@@ -1,12 +1,7 @@
 import { createStore, applyMiddleware, combineReducers } from 'redux';
 import thunks from 'redux-thunk';
 
-<<<<<<< HEAD
-import { LOGIN, LOGOUT, LOGIN_FAIL, LOADING, LOADED, GET_PRODUCTS, ADD_TO_CART } from './actions';
-import cart from '../components/cart';
-=======
-import { LOGIN, LOGOUT, LOGIN_FAIL, LOADING, LOADED, GET_PRODUCTS, types } from './actions';
->>>>>>> 92b1e7beb54230f600893eefddadfdda8e0c4b34
+import { LOGIN, LOGOUT, LOGIN_FAIL, LOADING, LOADED, GET_PRODUCTS, ADD_TO_CART, types } from './actions';
 
 const initialUserState = {
     username: null,
@@ -91,11 +86,8 @@ const reducer = combineReducers({
     user: loginReducer,
     loading: loadingReducer,
     products: productsReducer,
-<<<<<<< HEAD
-    cart: cartReducer
-=======
+    cart: cartReducer,
     categories: categoriesReducer
->>>>>>> 92b1e7beb54230f600893eefddadfdda8e0c4b34
 });
 
 
