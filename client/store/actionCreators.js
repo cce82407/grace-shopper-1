@@ -1,4 +1,4 @@
-import { LOGIN, LOGOUT, LOGIN_FAIL, LOADED, LOADING, GET_PRODUCTS, types } from './actions';
+import { LOGIN, LOGOUT, LOGIN_FAIL, LOADED, LOADING, GET_PRODUCTS, ADD_TO_CART, types } from './actions';
 import axios from 'axios';
 
 const login = (username) => {
@@ -36,6 +36,13 @@ const getProducts = (products) => {
     return {
         type: GET_PRODUCTS,
         products
+    }
+}
+
+const addToCart = (cart) => {
+    return {
+        type: ADD_TO_CART,
+        cart
     }
 }
 
@@ -108,13 +115,13 @@ export const addProductThunk = (obj) => async (dispatch) => {
         categoryId: obj.categoryId
     })
         .then(() => axios.get('/api/products'))
-        .then((res)=> {
+        .then((res) => {
             dispatch({
-            type: types.ADD_PRODUCT,
-            payload: res.data.products
+                type: types.ADD_PRODUCT,
+                payload: res.data.products
             })
         })
-        .catch((e)=>{
+        .catch((e) => {
             console.log(e);
         })
 }
@@ -123,14 +130,25 @@ export const addCategoryThunk = (obj) => async (dispatch) => {
     return axios.post('/api/category', {
         name: obj.name,
     })
-    .then(()=> axios.get('/api/category'))
-    .then((res)=> {
-        dispatch({
-            type: types.ADD_CATEGORY,
-            payload: res.data.categories
+        .then(() => axios.get('/api/category'))
+        .then((res) => {
+            dispatch({
+                type: types.ADD_CATEGORY,
+                payload: res.data.categories
+            })
         })
-    })
-    .catch((e)=>{
-        console.log(e);
-    })
+        .catch((e) => {
+            console.log(e);
+        })
+}
+
+export const addToCartThunk = (productId, quantity) => {
+    return (dispatch) => {
+        dispatch(loading())
+        return axios.post(`/cart/add/${productId}?quantity=${quantity}`)
+            .then(({ data }) => {
+                dispatch(addToCart(data));
+                dispatch(loaded())
+            })
+    }
 }
