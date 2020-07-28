@@ -32,6 +32,12 @@ export const loaded = () => {
     }
 }
 
+const getProducts = (products) => {
+    return {
+        products
+    }
+}
+
 export const loginThunk = (username, password) => {
     return (dispatch) => {
         dispatch(loading());
@@ -71,5 +77,21 @@ export const logoutThunk = () => {
                 dispatch(loaded());
             })
             .catch(console.log)
+    }
+}
+
+export const getProductsThunk = () => {
+    return (dispatch) => {
+        dispatch(loading());
+        return axios.get('/api/products')
+            .then(({ data }) => {
+                dispatch(getProducts(data));
+                dispatch(loaded());
+            })
+            .catch((e) => {
+                console.error(e);
+                dispatch(loaded());
+                return 'Error fetching products'
+            })
     }
 }
