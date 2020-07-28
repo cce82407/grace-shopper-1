@@ -1,11 +1,20 @@
 import React from 'react';
+import { Stack, Heading, Button } from "@chakra-ui/core";
 
 const ProductCard = ({ product }) => {
     return (
-        <div>
-            <h2>{product.name}</h2>
-            <h4>{product.description}</h4>
-            <p>${product.price}</p>
+        <div style={{ margin: '1em' }}>
+            <Stack spacing='3'>
+                <Heading as='h2' size='xl'>{product.name}</Heading>
+                <Heading as='h4' size='md'>{product.description}</Heading>
+                <p>${product.price}</p>
+            </Stack>
+            <Button
+                variantColor='green'
+                size='xs'
+            >
+                Add to Cart
+            </Button>
         </div>
     );
 }

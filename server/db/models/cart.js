@@ -4,8 +4,6 @@ const { UUID, UUIDV4, DECIMAL, BOOLEAN } = require('sequelize');
 const Product = require('./product');
 const ProductCart = require('./product-cart');
 
-
-
 const Cart = db.define('cart', {
     id: {
         type: UUID,
