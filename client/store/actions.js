@@ -5,3 +5,11 @@ export const LOADING = 'LOADING';
 export const LOADED = 'LOADED';
 export const GET_PRODUCTS = 'GET_PRODUCTS';
 export const ADD_TO_CART = 'ADD_TO_CART';
+
+
+export const types = {
+    ADD_USER: 'ADD_USER',
+    ADD_PRODUCT: 'ADD_PRODUCT',
+    ADD_CATEGORY: 'ADD_CATEGORY'
+}
+
