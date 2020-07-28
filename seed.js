@@ -44,24 +44,6 @@ const seed = async () => {
             password: 'usetheforce',
             role: 'customer',
         }
-        
-        const products = [
-            {
-                price: 99.99,
-                name: 'Gibson Guitar',
-                description: 'fancy lookin guitar'
-            },
-            {
-                price: 40.99,
-                name: 'Drums',
-                description: 'fancy lookin drums'
-            },
-            {
-                price: 30.99,
-                name: 'trumpet'
-                description: 'fancy lookin trumpet'
-            },
-        ]
         const saltRounds = 10;
         bcrypt.hash(user.password, saltRounds)
             .then(hash => user.password = hash)
