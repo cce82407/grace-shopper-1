@@ -21,6 +21,7 @@ module.exports = {
   rules: {
     'react/prop-types': 0,
     'react/jsx-filename-extension': [1, { extensions: ['.js', '.jsx'] }],
-    "react/jsx-one-expression-per-line": [0, { "allow": "single-child" }],
+    'react/jsx-one-expression-per-line': [0, { "allow": "single-child" }],
+    'no-console': 'off',
   },
 };

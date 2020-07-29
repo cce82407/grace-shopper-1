@@ -1,9 +1,9 @@
 import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
-import { Stack, Heading, Flex } from '@chakra-ui/core';
-import { getCartThunk } from '../store/actionCreators';
+import { Stack, Heading, Flex, Button } from '@chakra-ui/core';
+import { getCartThunk, removeFromCartThunk } from '../store/actionCreators';
 
-const Cart = ({ cart, getCart }) => {
+const Cart = ({ cart, getCart, remove }) => {
   useEffect(() => {
     getCart();
   }, []);
@@ -27,10 +27,18 @@ const Cart = ({ cart, getCart }) => {
               <p>
                 Total: {product.price * product.productCart.quantity}
               </p>
+              <Button
+                variantColor='red'
+                size='xs'
+                onClick={() => remove(product.id)}
+              >
+                Remove
+              </Button>
             </Flex>
           ))
         }
       </Stack>
+      <p>Total: {cart.total}</p>
     </div>
   );
 };
@@ -38,6 +46,7 @@ const Cart = ({ cart, getCart }) => {
 const mapStateToProps = ({ cart }) => ({ cart });
 const mapDispatchToProps = (dispatch) => ({
   getCart: () => dispatch(getCartThunk()),
+  remove: (id) => dispatch(removeFromCartThunk(id))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Cart);

@@ -1,5 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import { Button } from "@chakra-ui/core";
 import { logoutThunk } from '../store/actionCreators';
 
 const Logout = ({ user, logout }) => (
@@ -9,11 +10,11 @@ const Logout = ({ user, logout }) => (
       {user.username}
       !
     </h2>
-    <button
-      onClick={() => logout()}
+    <Button
+      onClick={logout}
     >
       Logout
-    </button>
+    </Button>
   </div>
 );
 

@@ -161,15 +161,40 @@ export const addToCartThunk = (productId, quantity) => (dispatch) => {
   return axios
     .post(`/cart/add/${productId}?quantity=${quantity}`)
     .then(({ data }) => {
+      console.log(data)
       dispatch(addToCart(data));
       dispatch(loaded());
-    });
+    })
+    .catch((e) => {
+      dispatch(loaded());
+      console.error(e);
+      return 'Error adding to cart'
+    })
 };
 
 export const getCartThunk = () => (dispatch) => {
   dispatch(loading());
-  return axios.get('/cart/get').then(({ data }) => {
-    dispatch(getCart(data));
-    dispatch(loaded());
-  });
+  return axios.get('/cart/get')
+    .then(({ data }) => {
+      dispatch(getCart(data));
+      dispatch(loaded());
+    })
+    .catch((e) => {
+      console.error(e);
+      dispatch(loaded())
+    })
 };
+
+export const removeFromCartThunk = (id) => (dispatch) => {
+  dispatch(loading());
+  return axios.delete(`/cart/remove/${id}`)
+    .then(({ data }) => {
+      console.log(data)
+      dispatch(getCart(data));
+      dispatch(loaded());
+    })
+    .catch((e) => {
+      console.error(e);
+      dispatch(loaded())
+    })
+}
