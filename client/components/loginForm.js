@@ -1,25 +1,30 @@
 import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
-import { Login, Logout, Loading } from './index';
+import Login from './login';
+import Logout from './logout';
+import Loading from './loading';
 import { whoami } from '../store/actionCreators';
 
-const LoginForm = ({ user, whoami, loading }) => {
+const LoginForm = ({ user, whoAmI, loading }) => {
   useEffect(() => {
-    whoami();
+    whoAmI();
   }, []);
 
+  const showLoginOrLogout = () => {
+    return user.username ? <Logout /> : <Login />;
+  }
   return (
     <div className="box">
       {
-                loading ? <Loading /> : user.username ? <Logout /> : <Login />
-            }
+        loading ? <Loading /> : showLoginOrLogout()
+      }
     </div>
   );
 };
 
 const mapStateToProps = ({ user, loading }) => ({ user, loading });
 const mapDispatchToProps = (dispatch) => ({
-  whoami: () => dispatch(whoami()),
+  whoAmI: () => dispatch(whoami()),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(LoginForm);

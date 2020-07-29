@@ -14,7 +14,9 @@ const Login = ({ login, user }) => {
 
   return (
     <form>
-      <label>
+      <label
+        htmlFor='username'
+      >
         Username:
         <input
           type="text"
@@ -23,11 +25,13 @@ const Login = ({ login, user }) => {
           placeholder="rebelalliance"
           required
           onChange={
-                        (e) => setUsername(e.target.value)
-                    }
+            (e) => setUsername(e.target.value)
+          }
         />
       </label>
-      <label>
+      <label
+        htmlFor='username'
+      >
         Password:
         <input
           type="password"
@@ -36,8 +40,8 @@ const Login = ({ login, user }) => {
           placeholder="usetheforce"
           required
           onChange={
-                        (e) => setPassword(e.target.value)
-                    }
+            (e) => setPassword(e.target.value)
+          }
         />
       </label>
       <button

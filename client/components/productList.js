@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
-import { Loading, ProductCard } from './index';
+import Loading from './loading';
+import ProductCard from './productCard';
 import { getProductsThunk } from '../store/actionCreators';
 
 const ProductList = ({ loading, products, getProducts }) => {
@@ -9,15 +10,20 @@ const ProductList = ({ loading, products, getProducts }) => {
     getProducts();
   }, []);
 
+  const showProductsList = () => {
+    return products.length
+      ? products.map((product) => (
+        <div key={product.id}>
+          <ProductCard product={product} />
+        </div>
+      ))
+      : <p>Error fetching products</p>
+  }
   return (
     <div>
       {
-                loading ? <Loading /> : products.length ? products.map((product) => (
-                  <div key={product.id}>
-                    <ProductCard product={product} />
-                  </div>
-                )) : <p>Error fetching products</p>
-            }
+        loading ? <Loading /> : showProductsList()
+      }
     </div>
   );
 };

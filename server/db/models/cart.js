@@ -1,5 +1,5 @@
-const { db } = require('../db');
 const { UUID, UUIDV4, DECIMAL, BOOLEAN } = require('sequelize');
+const { db } = require('../db');
 
 const Product = require('./product');
 const ProductCart = require('./product-cart');
