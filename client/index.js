@@ -18,6 +18,8 @@ const App = () => {
               <Route exact path='/' component={LoginForm} />
               <Route exact path='/cart' component={Cart} />
               <Route exact path='/products' component={ProductList} />
+              <Route exact path='/categories'/>
+              <Route exact path='/musicians'/>
             </Switch>
           </ColorModeProvider>
         </ThemeProvider>

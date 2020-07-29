@@ -43,6 +43,7 @@ const Login = ({ login, user }) => {
             <button
                 type='submit'
                 onClick={handleSubmit}
+                className='button is-primary'
             >
                 Login
             </button>
