@@ -5,9 +5,8 @@ import { Provider } from 'react-redux';
 import { ThemeProvider, CSSReset, ColorModeProvider } from '@chakra-ui/core';
 import store from './store';
 import {
-  ProductList, LoginForm, Cart, NavBar,Categories
+  ProductList, LoginForm, Cart, NavBar,Categories, Home
 } from './components';
-import Home from './components/home';
 
 const App = () => (
   <Provider store={store}>
