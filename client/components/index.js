@@ -6,6 +6,8 @@ import ProductList from './productList';
 import ProductCard from './productCard';
 import Cart from './cart';
 import NavBar from './navbar';
+import Home from './home';
+import Categories from './categories';
 
 export {
   Login,
@@ -16,4 +18,6 @@ export {
   ProductCard,
   Cart,
   NavBar,
+  Home, 
+  Categories
 };

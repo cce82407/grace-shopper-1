@@ -4,7 +4,7 @@ import { Button } from "@chakra-ui/core";
 import { logoutThunk } from '../store/actionCreators';
 
 const Logout = ({ user, logout }) => (
-  <div>
+  <div className='form'>
     <h2>
       Welcome
       {user.username}
@@ -12,6 +12,7 @@ const Logout = ({ user, logout }) => (
     </h2>
     <Button
       onClick={logout}
+      className='button is-danger'
     >
       Logout
     </Button>

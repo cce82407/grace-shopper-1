@@ -13,9 +13,10 @@ const Login = ({ login, user }) => {
   };
 
   return (
-    <form>
+    <form className='form'>
       <label
         htmlFor='username'
+        className='label'
       >
         Username:
         <input
@@ -27,10 +28,12 @@ const Login = ({ login, user }) => {
           onChange={
             (e) => setUsername(e.target.value)
           }
+          className='input'
         />
       </label>
       <label
         htmlFor='username'
+        className='label'
       >
         Password:
         <input
@@ -42,6 +45,7 @@ const Login = ({ login, user }) => {
           onChange={
             (e) => setPassword(e.target.value)
           }
+          className='input'
         />
       </label>
       <button

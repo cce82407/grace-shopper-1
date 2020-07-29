@@ -5,7 +5,7 @@ import { Provider } from 'react-redux';
 import { ThemeProvider, CSSReset, ColorModeProvider } from '@chakra-ui/core';
 import store from './store';
 import {
-  ProductList, LoginForm, Cart, NavBar,
+  ProductList, LoginForm, Cart, NavBar,Categories, Home
 } from './components';
 
 const App = () => (
@@ -16,11 +16,12 @@ const App = () => (
           <CSSReset />
           <Route render={() => <NavBar />} />
           <Switch>
-            <Route exact path="/" component={LoginForm} />
+            <Route exact path="/" component={Home} />
             <Route exact path="/cart" component={Cart} />
             <Route exact path="/products" component={ProductList} />
-            <Route exact path="/categories" />
+            <Route exact path="/categories" component={Categories} />
             <Route exact path="/musicians" />
+            <Route exact path="/login" component={LoginForm} />
           </Switch>
         </ColorModeProvider>
       </ThemeProvider>

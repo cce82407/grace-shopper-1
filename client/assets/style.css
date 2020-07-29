@@ -46,3 +46,15 @@ nav{
 body{
   color: white;
 }
+
+.box-container{
+  width: 33vw;
+  margin: auto;
+  margin-top: 30px;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
