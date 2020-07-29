@@ -15,7 +15,7 @@ const Categories = ({ categories, getCategories }) => {
         categories.categories &&
           categories.categories.map(category=>{
             return (
-              <div key={category.id}>
+              <div key={category.id} className='box'>
                 <h2> {category.name} </h2>
               </div>
             )
