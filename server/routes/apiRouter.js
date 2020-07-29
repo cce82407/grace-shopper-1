@@ -69,6 +69,6 @@ apiRouter.delete('/products/:id', async (req, res) => {
 })
 
 module.exports = {
-  path: '/api',
+  url: '/api',
   router: apiRouter
 };

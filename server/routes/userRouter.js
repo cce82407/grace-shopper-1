@@ -151,6 +151,6 @@ userRouter.delete('/users/:id', async (req, res) => {
 })
 
 module.exports = {
-  path: '/user',
+  url: '/user',
   router: userRouter
 };

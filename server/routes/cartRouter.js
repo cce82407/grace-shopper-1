@@ -67,6 +67,6 @@ cartRouter.delete('/remove/:id', async (req, res) => {
 
 
 module.exports = {
-  path: '/cart',
+  url: '/cart',
   router: cartRouter
 }
