@@ -55,7 +55,7 @@ const productsReducer = (state = [], action) => {
     case types.ADD_PRODUCT:
       return {
         ...state,
-        products: action.payload,
+        products: [...state, action.payload],
       };
     default:
       return state;
@@ -65,6 +65,12 @@ const productsReducer = (state = [], action) => {
 const categoriesReducer = (state = [], action) => {
   switch (action.type) {
     case types.ADD_CATEGORY:
+      return {
+        ...state,
+        categories: [...state, action.payload],
+      };
+    case types.GET_CATEGORIES:
+      console.log(action.payload)
       return {
         ...state,
         categories: action.payload,

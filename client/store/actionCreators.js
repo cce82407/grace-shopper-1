@@ -9,7 +9,6 @@ import {
   ADD_TO_CART,
   types,
   GET_CART,
-  GET_CATEGORIES,
 } from './actions';
 
 const login = (username) => ({
@@ -39,8 +38,8 @@ const getProducts = (products) => ({
 });
 
 const getCategories = (categories) => ({
-  type: GET_CATEGORIES,
-  categories,
+  type: types.GET_CATEGORIES,
+  payload: categories,
 });
 
 const addToCart = (cart) => ({
@@ -115,7 +114,6 @@ export const addProductThunk = (obj) => async (dispatch) => axios
     description: obj.description,
     categoryId: obj.categoryId,
   })
-  .then(() => axios.get('/api/products'))
   .then((res) => {
     dispatch({
       type: types.ADD_PRODUCT,
@@ -141,11 +139,10 @@ export const getCategoriesThunk = () => (dispatch) => {
     });
 };
 
-export const addCategoryThunk = (obj) => async (dispatch) => axios
+export const addCategoryThunk = (obj) => (dispatch) => axios
   .post('/api/category', {
     name: obj.name,
   })
-  .then(() => axios.get('/api/category'))
   .then((res) => {
     dispatch({
       type: types.ADD_CATEGORY,

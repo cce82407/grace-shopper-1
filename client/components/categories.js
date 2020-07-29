@@ -1,12 +1,25 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
+import { getCategoriesThunk } from '../store/actionCreators';
 
-const Categories = ({ categories }) => {
+const Categories = ({ categories, getCategories }) => {
+  
+  useEffect(() => {
+    getCategories();
+  }, []);
+
   return (
     <div>
       <h2>Categories</h2>
       {
-        categories && <p>TODO: edit categories page</p>
+        categories.categories &&
+          categories.categories.map(category=>{
+            return (
+              <div key={category.id}>
+                <h2> {category.name} </h2>
+              </div>
+            )
+          }) 
       }
     </div>
   )
@@ -15,5 +28,8 @@ const Categories = ({ categories }) => {
 const mapStateToProps = (state) => ({
   categories: state.categories,
 });
+const mapDispatchToProps = (dispatch) => ({
+  getCategories: () => dispatch(getCategoriesThunk()),
+});
 
-export default connect(mapStateToProps)(Categories);
+export default connect(mapStateToProps, mapDispatchToProps)(Categories);

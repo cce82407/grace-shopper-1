@@ -6,10 +6,10 @@ export const LOADED = 'LOADED';
 export const GET_PRODUCTS = 'GET_PRODUCTS';
 export const ADD_TO_CART = 'ADD_TO_CART';
 export const GET_CART = 'GET_CART';
-export const GET_CATEGORIES = 'GET_CATEGORIES';
 
 export const types = {
   ADD_USER: 'ADD_USER',
   ADD_PRODUCT: 'ADD_PRODUCT',
   ADD_CATEGORY: 'ADD_CATEGORY',
+  GET_CATEGORIES: 'GET_CATEGORIES',
 };

@@ -14,7 +14,7 @@ const LoginForm = ({ user, whoAmI, loading }) => {
     return user.username ? <Logout /> : <Login />;
   }
   return (
-    <div className="box">
+    <div className="box box-container">
       {
         loading ? <Loading /> : showLoginOrLogout()
       }
