@@ -23,5 +23,6 @@ module.exports = {
     'react/jsx-filename-extension': [1, { extensions: ['.js', '.jsx'] }],
     'react/jsx-one-expression-per-line': [0, { "allow": "single-child" }],
     'no-console': 'off',
+    'no-param-reassign': 'off'
   },
 };
