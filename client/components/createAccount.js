@@ -6,7 +6,7 @@ import {
   FormControl,
   FormLabel,
 } from '@chakra-ui/core';
-import { createAccountThunk } from '../store/userActions';
+import createAccountThunk from '../store/userActions';
 
 const CreateAccount = ({ createAccount, history }) => {
   const [email, setEmail] = useState('');

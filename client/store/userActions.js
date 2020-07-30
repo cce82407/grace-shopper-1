@@ -25,6 +25,4 @@ const createAccountThunk = (username, password) => {
   }
 }
 
-export {
-  createAccountThunk
-}
+export default createAccountThunk;
