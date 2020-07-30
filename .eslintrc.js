@@ -24,7 +24,7 @@ module.exports = {
     'react/jsx-one-expression-per-line': [0, { "allow": "single-child" }],
     'no-console': 'off',
     'react/prefer-stateless-function': [0, { "ignoreComponents": true }],
-    'react/destructuring-assignment': [0,"never", { "ignoreClassFields": true }]
-    'no-param-reassign': 'off'
+    'react/destructuring-assignment': [0,"never", { "ignoreClassFields": true }],
+    'no-param-reassign': 'off',
   },
 };
