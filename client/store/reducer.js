@@ -62,7 +62,7 @@ const loadingReducer = (state = true, action) => {
 const productsReducer = (state = [], action) => {
   switch (action.type) {
     case GET_PRODUCTS:
-      return action.products;
+      return action.products
     case types.ADD_PRODUCT:
       return {
         ...state,
