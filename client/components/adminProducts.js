@@ -25,13 +25,13 @@ class AdminProducts extends Component{
       <div>
         <h1>Welcome to the Admin Console!</h1>
         <div>
-          {/* {products.map(product => {
+          {products.map(product => {
               return (
                 <div key={products.id}>
                   <Link to={`/admin/product/${product.id}`} className='title tag is-white is-large'>{product.name}</Link>
                 </div>
               ) 
-            })} */}
+            })}
         </div>
       </div>
     )
