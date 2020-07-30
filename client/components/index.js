@@ -9,6 +9,9 @@ import Cart from './cart';
 import NavBar from './navbar';
 import Home from './home';
 import Categories from './categories';
+import AdminConsole from './admin';
+import AdminProducts from './adminProducts';
+import AdminCategories from './adminCategories';
 
 export {
   Login,
@@ -21,5 +24,8 @@ export {
   Cart,
   NavBar,
   Home,
-  Categories
+  Categories,
+  AdminConsole,
+  AdminCategories,
+  AdminProducts
 };
