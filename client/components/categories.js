@@ -10,7 +10,7 @@ const Categories = ({ categories, getCategories }) => {
 
   return (
     <div>
-      <h2>Categories</h2>
+      <h2>Shop By Our Categories</h2>
       {
         categories.categories &&
           categories.categories.map(category=>{

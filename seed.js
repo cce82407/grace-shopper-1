@@ -42,7 +42,7 @@ const seed = async () => {
         const user = {
             username: 'rebelalliance',
             password: 'usetheforce',
-            role: 'customer',
+            role: 'admin',
         }
         const saltRounds = 10;
         bcrypt.hash(user.password, saltRounds)

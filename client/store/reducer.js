@@ -8,22 +8,22 @@ import {
 const initialUserState = {
   username: null,
   loggedIn: false,
-  message: '',
+  role: 'guest',
 };
 
 const loginReducer = (state = initialUserState, action) => {
   switch (action.type) {
     case LOGIN:
       return {
-        ...state,
         username: action.username,
         loggedIn: true,
+        role: action.role,
       };
     case LOGOUT:
       return {
-        ...state,
         username: null,
         loggedIn: false,
+        role: 'guest'
       };
     case LOGIN_FAIL: {
       return {
@@ -70,7 +70,6 @@ const categoriesReducer = (state = [], action) => {
         categories: [...state, action.payload],
       };
     case types.GET_CATEGORIES:
-      console.log(action.payload)
       return {
         ...state,
         categories: action.payload,

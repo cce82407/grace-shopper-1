@@ -82,7 +82,7 @@ userRouter.post("/login", async (req, res) => {
       await userSession.setUser(user);
       await userCart.setUser(user);
 
-      res.sendStatus(200);
+      res.send(user);
     } else {
       res.status(401).send({
         message: "incorrect password",
@@ -100,6 +100,7 @@ userRouter.get("/whoami", (req, res) => {
     res.send({
       username: req.user.username,
       loggedIn: true,
+      role: req.user.role ,
     });
   } else {
     res.send({
