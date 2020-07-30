@@ -11,9 +11,10 @@ import {
   GET_CART,
 } from './actions';
 
-const login = (username) => ({
+const login = (username, role) => ({
   type: LOGIN,
   username,
+  role,
 });
 const logout = () => ({
   type: LOGOUT,
@@ -57,8 +58,7 @@ export const loginThunk = (username, password) => (dispatch) => {
   return axios
     .post('/user/login', { username, password })
     .then((res) => {
-      console.log(res.data);
-      dispatch(login(username));
+      dispatch(login(username, res.data.role));
       dispatch(loaded());
     })
     .catch(() => {
@@ -70,7 +70,7 @@ export const whoami = () => (dispatch) => {
   dispatch(loading());
   return axios.get('/user/whoami').then(({ data }) => {
     if (data.loggedIn) {
-      dispatch(login(data.username));
+      dispatch(login(data.username, data.role));
     } else {
       dispatch(logout());
     }
