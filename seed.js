@@ -1,4 +1,3 @@
-const bcrypt = require('bcrypt');
 const chalk = require('chalk');
 const { sync } = require('./server/db/db');
 const { User, Product, Category } = require('./server/db/models/index');
@@ -45,9 +44,7 @@ const seed = async () => {
       email: 'luke@yoda.com',
       role: 'admin',
     }
-    const saltRounds = 10;
-    const hash = await bcrypt.hash(user.password, saltRounds)
-    user.password = hash;
+
     await User.create(user);
     console.log(chalk.green('DB SEEDED'));
 
