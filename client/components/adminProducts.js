@@ -29,7 +29,7 @@ class AdminProducts extends Component{
           {products.map(product => {
               return (
                 <div key={product.id}>
-                  <Link to={`/admin/product/${product.id}`} className='title tag is-white is-large'>{product.name}</Link>
+                  <Link to={`/product/${product.id}`} className='title tag is-white is-large'>{product.name}</Link>
                 </div>
               ) 
             })}

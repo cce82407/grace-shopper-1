@@ -14,6 +14,7 @@ import AdminConsole from './admin';
 import AdminProducts from './adminProducts';
 import AdminCategories from './adminCategories';
 import EditProduct from './editProduct';
+import AddProductForm from './addProductForm';
 
 export {
   Login,
@@ -31,5 +32,6 @@ export {
   AdminConsole,
   AdminCategories,
   AdminProducts,
-  EditProduct
+  EditProduct,
+  AddProductForm
 };
