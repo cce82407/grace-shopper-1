@@ -23,8 +23,12 @@ const App = () => (
             <Route exact path="/categories" component={Categories} />
             <Route exact path="/login" component={LoginPage} />
             <Route exact path="/admin" component={AdminConsole} />
-            <Route exact path="/admin/categories" component={AdminCategories} />
-            <Route exact path="/admin/products" component={AdminProducts} />
+            <BrowserRouter
+              basename='/admin'
+            >
+              <Route exact path="/categories" component={AdminCategories} />
+              <Route exact path="/products" component={AdminProducts} />
+            </BrowserRouter>
             <Route exact path="/admin/product/:id" component={EditProduct} />
           </Switch>
         </ColorModeProvider>
