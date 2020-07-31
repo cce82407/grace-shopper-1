@@ -1,6 +1,6 @@
 export const loadingTypes = {
   LOADING: 'LOADING',
-  LOADED: 'LOADING',
+  LOADED: 'LOADED',
 }
 
 export const cartTypes = {
