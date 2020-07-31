@@ -1,4 +1,5 @@
 const { Router } = require("express");
+const { adminApiSecurityCheck, accessDeniedResponse } = require('../utils')
 
 const apiRouter = Router();
 
@@ -15,58 +16,88 @@ apiRouter.get("/categories", async (req, res) => {
 });
 
 apiRouter.post("/products", async (req, res) => {
-  const { price, name, description, categoryId } = req.body;
-  const createdProduct = await Product.create({
-    price,
-    name,
-    description,
-    categoryId
-  })
-  res.status(201).send({
-    product: createdProduct,
-    message: `Product ${name} created sucessfully`
-  })
+  try {
+    adminApiSecurityCheck(req);
+    const { price, name, description, categoryId } = req.body;
+    const createdProduct = await Product.create({
+      price,
+      name,
+      description,
+      categoryId
+    })
+    res.status(201).send({
+      product: createdProduct,
+      message: `Product ${name} created sucessfully`
+    });
+  } catch (err) {
+    accessDeniedResponse(err, res);
+  }
 })
 
 apiRouter.post("/categories", async (req, res) => {
-  const { name } = req.body;
-  const createdCategory = await Category.create({ name })
-  res.status(201).send({
-    category: createdCategory,
-    message: `Category ${name} created sucessfully`
-  })
+  try {
+    adminApiSecurityCheck(req);
+    const { name } = req.body;
+    const createdCategory = await Category.create({ name })
+    res.status(201).send({
+      category: createdCategory,
+      message: `Category ${name} created sucessfully`
+    })
+  } catch (err) {
+    accessDeniedResponse(err, res);
+  }
 })
 
 apiRouter.put('/products/:id', async (req, res) => {
-  console.log(req.body)
-  const { price, name, description, categoryId, id } = req.body
-  await Product.update({ price, name, description, categoryId }, { where: { id } })
-  const products = await Product.findAll()
-  res.send(products);
+  try {
+    adminApiSecurityCheck(req);
+    console.log(req.body)
+    const { price, name, description, categoryId, id } = req.body
+    await Product.update({ price, name, description, categoryId }, { where: { id } })
+    const products = await Product.findAll()
+    res.send(products);
+  } catch (err) {
+    accessDeniedResponse(err, res);
+  }
 })
 
 apiRouter.put('/categories/:id', async (req, res) => {
-  const { name, id } = req.body
-  await Category.update({ name }, { where: { id } })
-  const categories = await Category.findAll()
-  res.send(categories);
+  try {
+    adminApiSecurityCheck(req);
+    const { name, id } = req.body
+    await Category.update({ name }, { where: { id } })
+    const categories = await Category.findAll()
+    res.send(categories);
+  } catch (err) {
+    accessDeniedResponse(err, res);
+  }
 })
 
 apiRouter.delete('/categories/:id', async (req, res) => {
-  const deletedCat = await Category.findByPk(req.params.id)
-  await deletedCat.destroy()
-  await Product.destroy({ where: { categoryId: null } })
+  try {
+    adminApiSecurityCheck(req);
+    const deletedCat = await Category.findByPk(req.params.id)
+    await deletedCat.destroy()
+    await Product.destroy({ where: { categoryId: null } })
 
-  const products = await Product.findAll();
-  const categories = await Category.findAll();
-  res.send({ products, categories })
+    const products = await Product.findAll();
+    const categories = await Category.findAll();
+    res.send({ products, categories });
+  } catch (err) {
+    accessDeniedResponse(err, res);
+  }
 })
 
 apiRouter.delete('/products/:id', async (req, res) => {
-  const deletedProd = await Product.findByPk(req.params.id)
-  await deletedProd.destroy()
-  const products = await Product.findAll()
-  res.send(products)
+  try {
+    adminApiSecurityCheck(req);
+    const deletedProd = await Product.findByPk(req.params.id)
+    await deletedProd.destroy()
+    const products = await Product.findAll()
+    res.send(products);
+  } catch (err) {
+    accessDeniedResponse(err, res);
+  }
 })
 
 module.exports = {
