@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
-import { getCartThunk } from '../store/actionCreators';
 import { Flex } from '@chakra-ui/core';
+import { getCartThunk } from '../store/actionCreators';
 import Cart from './cart';
 
 const CartPage = ({ cart, getCart }) => {
