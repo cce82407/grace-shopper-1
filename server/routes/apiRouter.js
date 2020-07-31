@@ -38,6 +38,7 @@ apiRouter.post("/categories", async (req, res) => {
 })
 
 apiRouter.put('/products/:id', async (req, res) => {
+  console.log(req.body)
   const { price, name, description, categoryId, id } = req.body
   await Product.update({ price, name, description, categoryId }, { where: { id } })
   const products = await Product.findAll()

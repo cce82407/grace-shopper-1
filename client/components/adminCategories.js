@@ -9,18 +9,23 @@ class AdminCategories extends Component{
     super()
 
     this.state={
-      categories: store.getState().categories
+      categories: []
     }
+  }
+
+  async componentDidMount(){
+    await this.props.getCategories();
+    this.setState({categories: store.getState().categories})
   }
 
   render(){
     const { categories } = this.state.categories;
-
     return(
       <div>
-        <h1>Welcome to the Admin Console!</h1>
+        <h1>Categories</h1>
         <div>
-          {categories.map(category => {
+          {categories &&
+          categories.map(category => {
               return (
                 <div key={category.id}>
                   <Link to={`/admin/category/${category.id}`} className='title tag is-white is-large'>{category.name}</Link>
