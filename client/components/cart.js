@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { connect } from 'react-redux';
 import {
   Stack,
@@ -16,14 +16,11 @@ import {
   ModalCloseButton,
   useDisclosure,
 } from '@chakra-ui/core';
-import { getCartThunk, removeFromCartThunk } from '../store/actionCreators';
+import { removeFromCartThunk } from '../store/actionCreators';
 
-const Cart = ({ cart, getCart, remove }) => {
+const Cart = ({ cart, remove }) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
 
-  useEffect(() => {
-    getCart();
-  }, []);
   return (
     <>
       <Flex
@@ -35,7 +32,12 @@ const Cart = ({ cart, getCart, remove }) => {
           maxW='lg'
           minW='md'
         >
-          <Stack spacing={1}>
+          <Stack
+            spacing={0}
+            bg='#2D3748'
+            p='2em'
+            paddingBottom='1em'
+          >
             {
               !!cart.products && cart.products.map((product) => (
                 <Flex
@@ -45,6 +47,7 @@ const Cart = ({ cart, getCart, remove }) => {
                   direction="row"
                   bg='#4A5568'
                   p='1em'
+                  borderBottom='1px solid #2D3748'
                 >
                   <Heading as="h3" size="md" flexGrow='1'>
                     {product.name}
@@ -73,9 +76,9 @@ const Cart = ({ cart, getCart, remove }) => {
           <Flex
             align='center'
             justify='space-between'
-            mt='0.5em'
             bg='#2D3748'
-            p='1em'
+            p='2em'
+            paddingTop='1em'
           >
             <Button
               variantColor='green'
@@ -119,7 +122,6 @@ const Cart = ({ cart, getCart, remove }) => {
 
 const mapStateToProps = ({ cart }) => ({ cart });
 const mapDispatchToProps = (dispatch) => ({
-  getCart: () => dispatch(getCartThunk()),
   remove: (id) => dispatch(removeFromCartThunk(id))
 });
 

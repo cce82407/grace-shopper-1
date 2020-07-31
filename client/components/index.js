@@ -6,6 +6,7 @@ import Loading from './loading';
 import ProductList from './productList';
 import ProductCard from './productCard';
 import Cart from './cart';
+import CartPage from './cartPage';
 import NavBar from './navbar';
 import Home from './home';
 import Categories from './categories';
@@ -23,6 +24,7 @@ export {
   ProductList,
   ProductCard,
   Cart,
+  CartPage,
   NavBar,
   Home,
   Categories,
