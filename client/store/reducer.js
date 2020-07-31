@@ -96,6 +96,8 @@ const cartReducer = (state = {}, action) => {
       return action.cart;
     case GET_CART:
       return action.cart;
+    case LOGOUT:
+      return {};
     default:
       return state;
   }

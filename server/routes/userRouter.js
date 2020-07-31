@@ -31,7 +31,8 @@ userRouter.post("/login", async (req, res) => {
       let userCart;
       userCart = await Cart.findOne({
         where: {
-          completed: false
+          completed: false,
+          UserId: user.id
         }
       });
       if (userCart) {
