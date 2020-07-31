@@ -1,5 +1,8 @@
-const adminApiSecurityCheck = require('./adminApiSecurity');
+const { adminApiSecurityCheck, accessDeniedResponse } = require('./adminApiSecurity');
+const noDirectAccess = require('./noDirectAccess');
 
 module.exports = {
-  adminApiSecurityCheck
+  adminApiSecurityCheck,
+  accessDeniedResponse,
+  noDirectAccess,
 }

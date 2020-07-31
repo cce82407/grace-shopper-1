@@ -1,9 +1,18 @@
-const adminApiSecurityCheck = async (req, res, next) => {
+const adminApiSecurityCheck = (req) => {
   if (!req.user || req.user.role !== 'admin') {
-    res.sendStatus(401);
-  } else {
-    next();
+    throw new Error('unauthorized')
   }
 }
 
-module.exports = adminApiSecurityCheck;
+const accessDeniedResponse = (err, res) => {
+  if (err.message === 'unauthorized') {
+    res.sendStatus(401)
+  } else {
+    res.sendStatus(500)
+  }
+}
+
+module.exports = {
+  adminApiSecurityCheck,
+  accessDeniedResponse,
+};

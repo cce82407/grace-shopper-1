@@ -5,7 +5,7 @@ const chalk = require('chalk');
 const { sync } = require('./db/db');
 const routes = require('./routes');
 const { Session, User, Cart } = require('./db/models');
-const { adminApiSecurityCheck } = require('./utils')
+const { noDirectAccess } = require('./utils')
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -80,15 +80,15 @@ app.use(async (req, res, next) => {
 
 });
 
-app.use('/api', async (req, res, next) => {
-  adminApiSecurityCheck(req, res, next);
-});
-app.use('/user', async (req, res, next) => {
-  adminApiSecurityCheck(req, res, next);
-});
-app.use('/cart', async (req, res, next) => {
-  adminApiSecurityCheck(req, res, next);
-});
+app.use('/api', (req, res, next) => {
+  noDirectAccess(req, res, next);
+})
+app.use('/user', (req, res, next) => {
+  noDirectAccess(req, res, next);
+})
+app.use('/cart', (req, res, next) => {
+  noDirectAccess(req, res, next);
+})
 
 routes.forEach(({ url, router }) => {
   app.use(url, router);

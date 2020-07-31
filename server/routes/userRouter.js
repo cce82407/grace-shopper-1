@@ -1,25 +1,38 @@
 const { Router } = require("express");
+const chalk = require("chalk");
+const bcrypt = require("bcrypt");
+const { adminApiSecurityCheck, accessDeniedResponse } = require('../utils');
+const { User, Session, Cart } = require("../db/models/index");
 
 const userRouter = Router();
-const bcrypt = require("bcrypt");
-const chalk = require("chalk");
 
-const { User, Session } = require("../db/models/index");
-const Cart = require("../db/models/cart");
 
+
+userRouter.get('/whoami', (req, res) => {
+  if (req.user) {
+    res.send({
+      username: req.user.username,
+      loggedIn: true,
+      role: req.user.role,
+    });
+  } else {
+    res.send({
+      username: null,
+      loggedIn: false,
+    });
+  }
+});
 
 //
 // LOGIN FLOW
 //
 userRouter.post("/login", async (req, res) => {
   const { username, password } = req.body;
-  console.log(req.body)
   const user = await User.findOne({
     where: {
       username,
     },
   });
-  console.log(user)
   if (user) {
     const match = await bcrypt.compare(password, user.password);
     if (match) {
@@ -98,21 +111,6 @@ userRouter.post("/login", async (req, res) => {
   }
 });
 
-userRouter.get("/whoami", (req, res) => {
-  if (req.user) {
-    res.send({
-      username: req.user.username,
-      loggedIn: true,
-      role: req.user.role,
-    });
-  } else {
-    res.send({
-      username: null,
-      loggedIn: false,
-    });
-  }
-});
-
 userRouter.get("/logout", async (req, res) => {
   try {
     res.clearCookie("session_id");
@@ -127,8 +125,13 @@ userRouter.get("/logout", async (req, res) => {
 
 // Basic user API calls
 userRouter.get("/users", async (req, res) => {
-  const users = await User.findAll();
-  res.status(200).send(users);
+  try {
+    adminApiSecurityCheck(req);
+    const users = await User.findAll();
+    res.status(200).send(users);
+  } catch (err) {
+    accessDeniedResponse(err, res);
+  }
 });
 
 userRouter.post("/create", async (req, res) => {
