@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { whoami } from '../store/actionCreators';
+import { whoami } from '../store/userActions';
 
 const NavBar = ({ whoAmI, user }) => {
   const [isAdmin, setAdmin] = useState(false)

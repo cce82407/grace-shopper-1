@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { connect } from 'react-redux';
 import { Stack, Heading, Button, Flex, Text, useToast, Input } from '@chakra-ui/core';
-import { addToCartThunk } from '../store/actionCreators';
+import { addToCartThunk } from '../store/cartActions';
 
 const ProductCard = ({ product, addToCart }) => {
   const [quantity, setQuantity] = useState(1);
