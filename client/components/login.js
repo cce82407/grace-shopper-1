@@ -1,16 +1,26 @@
 import React, { useState } from 'react';
-import { Button } from '@chakra-ui/core';
+import { Button, useToast } from '@chakra-ui/core';
 import { connect } from 'react-redux';
 import { loginThunk } from '../store/actionCreators';
 
 const Login = ({ login, user }) => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
+  const toast = useToast();
 
   const handleSubmit = (e) => {
     e.preventDefault();
     login(username, password)
-      .catch(console.log);
+      .catch((err) => {
+        toast({
+          title: "Login Failed",
+          description: "Please enter a valid username and password.",
+          status: "error",
+          duration: 9000,
+          isClosable: true,
+        });
+        console.log(err);
+      });
   };
 
   return (

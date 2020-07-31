@@ -4,7 +4,7 @@ import { Flex, Tabs, TabList, TabPanels, Tab, TabPanel, Box } from '@chakra-ui/c
 import LoginForm from './loginForm';
 import CreateAccount from './createAccount';
 
-const LoginPage = ({ history }) => {
+const LoginPage = ({ history, user }) => {
   return (
     <Flex
       minw='100vw'
@@ -17,12 +17,18 @@ const LoginPage = ({ history }) => {
           <TabList
             color='black'
           >
-            <Tab width='50%'>
-              Login
+            <Tab width={user && user.loggedIn ? '100%' : '50%'}>
+              {user && user.loggedIn ? 'Logout' : 'Login'}
             </Tab>
-            <Tab width='50%'>
-              Create Account
-            </Tab>
+            {
+              user && !user.loggedIn ?
+                (
+                  <Tab width='50%'>
+                    Create Account
+                  </Tab>
+                )
+                : null
+            }
           </TabList>
           <TabPanels>
             <TabPanel>
