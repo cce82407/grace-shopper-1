@@ -28,8 +28,8 @@ const App = () => (
             >
               <Route exact path="/categories" component={AdminCategories} />
               <Route exact path="/products" component={AdminProducts} />
+              <Route exact path="/product/:id" component={EditProduct} />
             </BrowserRouter>
-            <Route exact path="/admin/product/:id" component={EditProduct} />
           </Switch>
         </ColorModeProvider>
       </ThemeProvider>
