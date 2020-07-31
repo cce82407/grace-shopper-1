@@ -12,6 +12,7 @@ import Categories from './categories';
 import AdminConsole from './admin';
 import AdminProducts from './adminProducts';
 import AdminCategories from './adminCategories';
+import EditProduct from './editProduct';
 
 export {
   Login,
@@ -27,5 +28,6 @@ export {
   Categories,
   AdminConsole,
   AdminCategories,
-  AdminProducts
+  AdminProducts,
+  EditProduct
 };

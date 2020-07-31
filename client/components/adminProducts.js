@@ -10,24 +10,25 @@ class AdminProducts extends Component{
     super()
 
     this.state={
-      products: store.getState().products
+      products: []
     }
   }
 
-  componentDidMount(){
-    this.props.getProducts()
+  async componentDidMount(){
+    await this.props.getProducts();
+    this.setState({products: store.getState().products})
   }
 
   render(){
-    const { products } = this.state.products;
-    console.log(products)
+    const { products } = this.state;
+    
     return(
       <div>
-        <h1>Welcome to the Admin Console!</h1>
+        <h1>Select the product you would like to edit.</h1>
         <div>
           {products.map(product => {
               return (
-                <div key={products.id}>
+                <div key={product.id}>
                   <Link to={`/admin/product/${product.id}`} className='title tag is-white is-large'>{product.name}</Link>
                 </div>
               ) 
