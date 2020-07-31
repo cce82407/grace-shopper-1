@@ -16,7 +16,7 @@ import {
   ModalCloseButton,
   useDisclosure,
 } from '@chakra-ui/core';
-import { removeFromCartThunk } from '../store/actionCreators';
+import { removeFromCartThunk } from '../store/cartActions';
 
 const Cart = ({ cart, remove }) => {
   const { isOpen, onOpen, onClose } = useDisclosure();

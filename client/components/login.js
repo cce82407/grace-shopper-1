@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Button, useToast } from '@chakra-ui/core';
 import { connect } from 'react-redux';
-import { loginThunk } from '../store/actionCreators';
+import { loginThunk } from '../store/userActions';
 
 const Login = ({ login, user }) => {
   const [username, setUsername] = useState('');

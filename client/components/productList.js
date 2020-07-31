@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 import Loading from './loading';
 import ProductCard from './productCard';
-import { getProductsThunk } from '../store/actionCreators';
+import { getProductsThunk } from '../store/productThunks';
 
 const ProductList = ({ loading, products, getProducts }) => {
   // this works like componentDidMount
