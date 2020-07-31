@@ -37,14 +37,10 @@ const User = db.define('User', {
   }
 })
 
-User.beforeCreate((instance) => {
+User.beforeCreate(async (instance) => {
   const saltRounds = 10;
-  bcrypt.hash(instance.password, saltRounds, (err, hash) => {
-    if (err) {
-      throw err;
-    }
-    instance.password = hash;
-  });
+  const hash = await bcrypt.hash(instance.password, saltRounds);
+  instance.password = hash;
 });
 
 module.exports = { User };
