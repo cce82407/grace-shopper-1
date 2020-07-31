@@ -2,6 +2,7 @@ import axios from 'axios';
 import { CREATE_ACCOUNT } from './actions';
 import { loaded, loading } from './actionCreators';
 
+
 const createAccount = (username) => {
   return {
     type: CREATE_ACCOUNT,
@@ -10,17 +11,17 @@ const createAccount = (username) => {
   }
 }
 
-const createAccountThunk = (username, password) => {
+const createAccountThunk = (username, password, email) => {
   return (dispatch) => {
     dispatch(loading());
-    return axios.post('/user/create', { username, password, role: 'customer' })
+    return axios.post('/user/create', { username, password, email, role: 'customer' })
       .then(({ data }) => {
         dispatch(createAccount(data.username));
         dispatch(loaded());
       })
-      .catch((e) => {
+      .catch(() => {
         dispatch(loaded());
-        console.error(e);
+        // console.error(e);
       })
   }
 }

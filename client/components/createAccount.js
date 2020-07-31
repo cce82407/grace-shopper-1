@@ -1,10 +1,12 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
 import {
   Button,
   Flex,
   FormControl,
   FormLabel,
+  useToast,
+  Input
 } from '@chakra-ui/core';
 import createAccountThunk from '../store/userActions';
 
@@ -12,11 +14,56 @@ const CreateAccount = ({ createAccount, history }) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [username, setUsername] = useState('');
+  const [passwordStrength, setPasswordStrength] = useState(0);
+  const toast = useToast();
+
+  const validateEmail = () => {
+    return email.length && !/^[a-zA-Z0-9_.]+@[a-zA-Z0-9-.]+\.[a-z]{2,}$/.test(email);
+  }
+
+  const validateUsername = () => {
+    return username.length && !/^[a-zA-Z0-9_.]{6,16}$/.test(username);
+  }
+
+  const assessPasswordStrength = () => {
+    const strength = [];
+
+    if (/[a-z]/.test(password)) strength.push('lowercase');
+    if (/[A-Z]/.test(password)) strength.push('uppercase');
+    if (/[0-9]/.test(password)) strength.push('number');
+    if (/[!@#$%^&*()_-]/.test(password)) strength.push('special');
+    if (password.length >= 8) strength.push('8 chars');
+
+    setPasswordStrength(strength.length);
+  }
+
+  useEffect(() => assessPasswordStrength(), [password])
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    createAccount(username, password);
-    history.push('/products');
+    if (!validateUsername() && !validateEmail() && passwordStrength >= 3) {
+      createAccount(username, password, email)
+        .then(() => {
+          toast({
+            title: "Account created.",
+            description: "We've created your account for you.",
+            status: "success",
+            duration: 9000,
+            isClosable: true,
+          });
+          history.push('/products');
+        })
+        .catch(console.log)
+    } else {
+      toast({
+        title: "Invalid",
+        description: "Please enter a valid email, username, and password.",
+        status: "warning",
+        duration: 9000,
+        isClosable: true,
+      })
+    }
+    console.log(email);
   }
 
   return (
@@ -34,12 +81,13 @@ const CreateAccount = ({ createAccount, history }) => {
         isRequired
       >
         <FormLabel htmlFor="emailCA">Email address</FormLabel>
-        <input
+        <Input
           type="email"
           id="emailCA"
-          className='input'
+          bg='#E2E8F0'
           value={email}
           onChange={(e) => setEmail(e.target.value)}
+          isInvalid={validateEmail()}
         />
       </FormControl>
       <FormControl
@@ -47,11 +95,12 @@ const CreateAccount = ({ createAccount, history }) => {
         isRequired
       >
         <FormLabel htmlFor="usernameCA">Username</FormLabel>
-        <input
+        <Input
           type="text"
           id="usernameCA"
-          className='input'
+          bg='#E2E8F0'
           value={username}
+          isInvalid={validateUsername()}
           onChange={(e) => setUsername(e.target.value)}
         />
       </FormControl>
@@ -60,12 +109,13 @@ const CreateAccount = ({ createAccount, history }) => {
         isRequired
       >
         <FormLabel htmlFor="passwordCA">Password</FormLabel>
-        <input
+        <Input
           type="password"
           id="passwordCA"
-          className='input'
+          bg='#E2E8F0'
           value={password}
           onChange={(e) => setPassword(e.target.value)}
+          isInvalid={password.length && passwordStrength < 3 && password.length < 8}
         />
       </FormControl>
       <Button
@@ -83,7 +133,7 @@ const CreateAccount = ({ createAccount, history }) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    createAccount: (uname, pword) => dispatch(createAccountThunk(uname, pword))
+    createAccount: (uname, pword, eml) => dispatch(createAccountThunk(uname, pword, eml))
   }
 }
 

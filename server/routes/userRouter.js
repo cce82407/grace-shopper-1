@@ -13,11 +13,13 @@ const Cart = require("../db/models/cart");
 //
 userRouter.post("/login", async (req, res) => {
   const { username, password } = req.body;
+  console.log(req.body)
   const user = await User.findOne({
     where: {
       username,
     },
   });
+  console.log(user)
   if (user) {
     const match = await bcrypt.compare(password, user.password);
     if (match) {
@@ -130,8 +132,8 @@ userRouter.get("/users", async (req, res) => {
 
 userRouter.post("/create", async (req, res) => {
   try {
-    const { username, password, role } = req.body;
-    const createdUser = await User.create({ username, password, role });
+    const { username, password, email, role } = req.body;
+    const createdUser = await User.create({ username, password, email, role });
     const session = await Session.findByPk(req.session_id);
     await session.update({ UserId: createdUser.id });
     const cart = await Cart.findByPk(req.cart_id);

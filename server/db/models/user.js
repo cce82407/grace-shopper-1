@@ -23,6 +23,13 @@ const User = db.define('User', {
       notEmpty: true
     }
   },
+  email: {
+    type: STRING,
+    allowNull: false,
+    validate: {
+      notEmpty: true
+    }
+  },
   role: {
     type: ENUM,
     values: ['customer', 'admin', 'guest'],
@@ -30,10 +37,14 @@ const User = db.define('User', {
   }
 })
 
-User.beforeCreate(async (instance) => {
+User.beforeCreate((instance) => {
   const saltRounds = 10;
-  const hash = await bcrypt.hash(instance.password, saltRounds);
-  instance.password = hash;
+  bcrypt.hash(instance.password, saltRounds, (err, hash) => {
+    if (err) {
+      throw err;
+    }
+    instance.password = hash;
+  });
 });
 
 module.exports = { User };
