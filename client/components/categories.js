@@ -1,9 +1,11 @@
 import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
+import { Link } from 'react-router-dom'
 import { getCategoriesThunk } from '../store/actionCreators';
 
+
 const Categories = ({ categories, getCategories }) => {
-  
+
   useEffect(() => {
     getCategories();
   }, []);
@@ -13,13 +15,13 @@ const Categories = ({ categories, getCategories }) => {
       <h2>Shop By Our Categories</h2>
       {
         categories.categories &&
-          categories.categories.map(category=>{
-            return (
-              <div key={category.id} className='box'>
-                <h2> {category.name} </h2>
-              </div>
-            )
-          }) 
+        categories.categories.map(category => {
+          return (
+            <div key={category.id} className='box'>
+              <Link to={`/categories/${category.name}`}> <h2>{category.name}</h2> </Link>
+            </div>
+          )
+        })
       }
     </div>
   )
