@@ -5,7 +5,7 @@ const chalk = require('chalk');
 const { sync } = require('./db/db');
 const routes = require('./routes');
 const { Session, User, Cart } = require('./db/models');
-const { noDirectAccess } = require('./utils')
+const { noDirectAccess, adminApiSecurityCheck, accessDeniedResponse } = require('./utils')
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -13,7 +13,14 @@ const PORT = process.env.PORT || 3000;
 app.use(express.json());
 app.use('/client/assets', express.static(path.join(__dirname, '../client/assets')))
 app.use(express.static(path.join(__dirname, '../dist')))
-app.use('/admin', express.static(path.join(__dirname, '../dist')))
+app.use('/admin', (req, res, next) => {
+  try {
+    adminApiSecurityCheck(req, next)
+    express.static(path.join(__dirname, '../dist'))
+  } catch (err) {
+    accessDeniedResponse(err, res)
+  }
+})
 
 app.use(cookieParser());
 
@@ -80,17 +87,10 @@ app.use(async (req, res, next) => {
 
 });
 
-app.use('/api', (req, res, next) => {
-  noDirectAccess(req, res, next);
-})
-app.use('/user', (req, res, next) => {
-  noDirectAccess(req, res, next);
-})
-app.use('/cart', (req, res, next) => {
-  noDirectAccess(req, res, next);
-})
-
 routes.forEach(({ url, router }) => {
+  app.use(url, (req, res, next) => {
+    noDirectAccess(req, res, next);
+  })
   app.use(url, router);
 });
 
