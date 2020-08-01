@@ -31,10 +31,10 @@ const Login = ({ login }) => {
         color='black'
         isRequired
       >
-        <FormLabel htmlFor="usernameCA">Username</FormLabel>
+        <FormLabel htmlFor="username">Username</FormLabel>
         <Input
           type="text"
-          id="usernameCA"
+          id="username"
           bg='#E2E8F0'
           value={username}
           onChange={(e) => setUsername(e.target.value)}
@@ -44,10 +44,10 @@ const Login = ({ login }) => {
         color='black'
         isRequired
       >
-        <FormLabel htmlFor="passwordCA">Password</FormLabel>
+        <FormLabel htmlFor="password">Password</FormLabel>
         <Input
           type="password"
-          id="passwordCA"
+          id="password"
           bg='#E2E8F0'
           value={password}
           onChange={(e) => setPassword(e.target.value)}
