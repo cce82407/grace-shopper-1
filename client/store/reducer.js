@@ -77,17 +77,13 @@ const productsReducer = (state = [], action) => {
 const categoriesReducer = (state = [], action) => {
   switch (action.type) {
     case types.ADD_CATEGORY:
-      return {
-        ...state,
-        categories: [...state, action.payload],
-      };
+      return [...state, action.payload];
     case types.GET_CATEGORIES:
-      return {
-        ...state,
-        categories: action.payload,
-      };
+      return  action.payload;
     case types.DELETE_CATEGORY:
-      return action.payload;
+      return action.payload.categories;
+    case types.UPDATE_CATEGORY:
+      return action.payload
     default:
       return state;
   }

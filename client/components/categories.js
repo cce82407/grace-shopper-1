@@ -14,8 +14,8 @@ const Categories = ({ categories, getCategories }) => {
     <div>
       <h2>Shop By Our Categories</h2>
       {
-        categories.categories &&
-        categories.categories.map(category => {
+        categories &&
+        categories.map(category => {
           return (
             <div key={category.id} className='box'>
               <Link to={`/categories/${category.id}/${category.name}`}> <h2>{category.name}</h2> </Link>

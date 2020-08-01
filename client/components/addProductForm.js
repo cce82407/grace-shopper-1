@@ -48,7 +48,7 @@ class AddProductForm extends Component{
 }
 
   render(){
-    const { categories } = this.state.categories;
+    const { categories } = this.state;
     return(
       <div>
         <h1>Add Product</h1>

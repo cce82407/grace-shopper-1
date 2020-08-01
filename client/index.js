@@ -5,7 +5,7 @@ import { Provider } from 'react-redux';
 import { ThemeProvider, CSSReset, } from '@chakra-ui/core';
 import store from './store';
 import {
-  ProductList, LoginPage, CartPage, NavBar, Categories, Home, AdminConsole, AdminProducts, AdminCategories, EditProduct, SingleCategory
+  ProductList, LoginPage, CartPage, NavBar, Categories, Home, AdminConsole, AdminProducts, AdminCategories, EditProduct, SingleCategory, EditCategory
 } from './components';
 
 
@@ -22,13 +22,14 @@ const App = () => (
           <Route exact path="/categories" component={Categories} />
           <Route exact path="/login" component={LoginPage} />
           <Route exact path="/admin" component={AdminConsole} />
+          <Route exact path="/categories/:id/:name" component={SingleCategory} />
           <BrowserRouter
             basename='/admin'
           >
             <Route exact path="/categories" component={AdminCategories} />
-            <Route exact path="/categories/:id/:name" component={SingleCategory} />
             <Route exact path="/products" component={AdminProducts} />
             <Route exact path="/product/:id" component={EditProduct} />
+            <Route exact path="/category/:id" component={EditCategory} />
           </BrowserRouter>
         </Switch>
       </ThemeProvider>
