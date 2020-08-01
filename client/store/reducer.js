@@ -64,10 +64,11 @@ const productsReducer = (state = [], action) => {
     case types.GET_PRODUCTS:
       return action.products
     case types.ADD_PRODUCT:
-      return {
-        ...state,
-        products: [...state, action.payload],
-      };
+      return [...state, action.payload];
+    case types.DELETE_PRODUCT:
+      return action.payload;
+    case types.UPDATE_PRODUCT:
+      return action.payload
     default:
       return state;
   }
@@ -85,6 +86,8 @@ const categoriesReducer = (state = [], action) => {
         ...state,
         categories: action.payload,
       };
+    case types.DELETE_CATEGORY:
+      return action.payload;
     default:
       return state;
   }

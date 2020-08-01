@@ -30,6 +30,7 @@ apiRouter.post("/products", async (req, res) => {
       message: `Product ${name} created sucessfully`
     });
   } catch (err) {
+    console.log(err)
     accessDeniedResponse(err, res);
   }
 })
@@ -51,7 +52,6 @@ apiRouter.post("/categories", async (req, res) => {
 apiRouter.put('/products/:id', async (req, res) => {
   try {
     adminApiSecurityCheck(req);
-    console.log(req.body)
     const { price, name, description, categoryId, id } = req.body
     await Product.update({ price, name, description, categoryId }, { where: { id } })
     const products = await Product.findAll()

@@ -12,10 +12,10 @@ export const updateProductThunk = (id, name, price, description, history) => (di
   return axios.put(`/api/products/${id}`, updatedProduct)
     .then(res => {
       dispatch({
-        type: types.ADD_PRODUCT,
+        type: types.UPDATE_PRODUCT,
         payload: res.data
       })
-      history.push('/admin/Products')
+      history.push('/Products')
     })
     .catch((e) => {
       console.log('failed to update Product')
@@ -23,32 +23,35 @@ export const updateProductThunk = (id, name, price, description, history) => (di
     })
 }
 
-export const addProductThunk = (obj) => async (dispatch) => axios
-  .post('/api/products', {
-    price: obj.price,
+export const addProductThunk = (obj) => async (dispatch) => {
+  const newProduct={
+    price: Number(obj.price),
     name: obj.name,
     description: obj.description,
     categoryId: obj.categoryId,
-  })
+  }
+return axios
+  .post('/api/products', newProduct)
   .then((res) => {
     dispatch({
       type: types.ADD_PRODUCT,
-      payload: res.data.products,
+      payload: res.data.product,
     });
   })
   .catch((e) => {
     console.log(e);
   });
+}
 
 export const deleteProductThunk = (id, history) => async (dispatch) => {
   const deletedProduct = { id }
   return axios.delete(`/api/products/${id}`, deletedProduct)
     .then(res => {
       dispatch({
-        type: types.ADD_PRODUCT,
+        type: types.DELETE_PRODUCT,
         payload: res.data
       })
-      history.push('/admin/products')
+      history.push('/products')
     })
     .catch((e) => {
       console.log('failed to delete Product')
