@@ -23,7 +23,7 @@ const NavBar = ({ whoAmI, user }) => {
       <nav className="navbar is-light" role="navigation" aria-label="main navigation">
         <Link to="/" className="navbar-item">Home</Link>
         <Link to="/products" className="navbar-item">View All Products</Link>
-        <Link to="/cart" className="navbar-item">Cart</Link>
+        <Link to="/shopping-cart" className="navbar-item">Cart</Link>
         <Link to="/login" className="navbar-item">Login</Link>
         {isAdmin &&
           <Link to="/admin" className="navbar-item">Admin</Link>}
