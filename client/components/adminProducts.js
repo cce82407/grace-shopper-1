@@ -14,7 +14,6 @@ class AdminProducts extends Component {
     const { products } = this.props;
     return (
       <div>
-        <h1>Add A Product:</h1>
         <AddProductForm />
         <h1>Select the product you would like to edit.</h1>
         <div>

@@ -35,13 +35,14 @@ export const getCategoriesThunk = () => (dispatch) => {
 };
 
 export const addCategoryThunk = (obj) => (dispatch) => axios
-  .post('/api/category', {
+  .post('/api/categories', {
     name: obj.name,
   })
   .then((res) => {
+    console.log(res.data)
     dispatch({
       type: types.ADD_CATEGORY,
-      payload: res.data.categories,
+      payload: res.data.category,
     });
   })
   .catch((e) => {

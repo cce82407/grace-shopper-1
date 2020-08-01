@@ -2,27 +2,20 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { getCategoriesThunk } from '../store/actionCreators';
-import store from '../store/reducer';
+import AddCategoryForm from './addCategoryForm';
 
 class AdminCategories extends Component {
-  constructor() {
-    super()
-
-    this.state = {
-      categories: []
-    }
-  }
 
   async componentDidMount() {
     await this.props.getCategories();
-    this.setState({ categories: store.getState().categories })
   }
 
   render() {
-    const { categories } = this.state.categories;
+    const { categories } = this.props;
     return (
       <div>
         <h1>Categories</h1>
+        <AddCategoryForm />
         <div>
           {categories &&
             categories.map(category => {
