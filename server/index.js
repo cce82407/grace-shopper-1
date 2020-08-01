@@ -13,14 +13,6 @@ const PORT = process.env.PORT || 3000;
 app.use(express.json());
 app.use('/client/assets', express.static(path.join(__dirname, '../client/assets')))
 app.use(express.static(path.join(__dirname, '../dist')))
-app.use('/admin', (req, res, next) => {
-  try {
-    adminApiSecurityCheck(req, next)
-    express.static(path.join(__dirname, '../dist'))
-  } catch (err) {
-    accessDeniedResponse(err, res)
-  }
-})
 
 app.use(cookieParser());
 
@@ -86,6 +78,16 @@ app.use(async (req, res, next) => {
   }
 
 });
+
+app.use('/admin', (req, res, next) => {
+  try {
+    adminApiSecurityCheck(req)
+    next();
+  } catch (err) {
+    accessDeniedResponse(err, res)
+  }
+});
+app.use('/admin', express.static(path.join(__dirname, '../dist')));
 
 routes.forEach(({ url, router }) => {
   app.use(url, (req, res, next) => {

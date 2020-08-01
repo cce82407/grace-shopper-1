@@ -1,4 +1,6 @@
 const adminApiSecurityCheck = (req) => {
+  // console.log(Object.keys(req))
+  // console.log(req.baseUrl)
   if (!req.user || req.user.role !== 'admin') {
     throw new Error('unauthorized')
   }

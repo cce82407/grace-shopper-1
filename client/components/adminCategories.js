@@ -4,33 +4,33 @@ import { Link } from 'react-router-dom';
 import { getCategoriesThunk } from '../store/actionCreators';
 import store from '../store/reducer';
 
-class AdminCategories extends Component{
-  constructor(){
+class AdminCategories extends Component {
+  constructor() {
     super()
 
-    this.state={
+    this.state = {
       categories: []
     }
   }
 
-  async componentDidMount(){
+  async componentDidMount() {
     await this.props.getCategories();
-    this.setState({categories: store.getState().categories})
+    this.setState({ categories: store.getState().categories })
   }
 
-  render(){
+  render() {
     const { categories } = this.state.categories;
-    return(
+    return (
       <div>
         <h1>Categories</h1>
         <div>
           {categories &&
-          categories.map(category => {
+            categories.map(category => {
               return (
                 <div key={category.id}>
-                  <Link to={`/admin/category/${category.id}`} className='title tag is-white is-large'>{category.name}</Link>
+                  <Link to={`/category/${category.id}`} className='title tag is-white is-large'>{category.name}</Link>
                 </div>
-              ) 
+              )
             })}
         </div>
       </div>
