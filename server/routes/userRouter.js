@@ -2,7 +2,8 @@ const { Router } = require("express");
 const chalk = require("chalk");
 const bcrypt = require("bcrypt");
 const { adminApiSecurityCheck, accessDeniedResponse } = require('../utils');
-const { User, Session, Cart } = require("../db/models/index");
+const { User, Session, Cart, ProductCart } = require("../db/models/index");
+const Product = require("../db/models/product");
 
 const userRouter = Router();
 
@@ -48,7 +49,20 @@ userRouter.post("/login", async (req, res) => {
           UserId: user.id
         }
       });
+      const guestCart = await Cart.findByPk(req.cart_id);
+      const guestItems = await ProductCart.findAll({
+        where: {
+          cartId: req.cart_id
+        }
+      });
       if (userCart) {
+
+        guestItems.forEach(async (pc) => {
+          const product = await Product.findByPk(pc.productId);
+          userCart.addItem(product.id, pc.quantity);
+          await product.removeCart(guestCart);
+        })
+        await guestCart.destroy();
         req.cart_id = userCart.id;
 
         res.clearCookie("cart_id");
