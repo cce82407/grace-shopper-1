@@ -17,7 +17,7 @@ const App = () => (
         <Route render={() => <NavBar />} />
         <Switch>
           <Route exact path="/" component={Home} />
-          <Route exact path="/cart" component={CartPage} />
+          <Route exact path="/shopping-cart" component={CartPage} />
           <Route exact path="/products" component={ProductList} />
           <Route exact path="/categories" component={Categories} />
           <Route exact path="/login" component={LoginPage} />

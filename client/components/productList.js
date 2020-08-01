@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
+import { Flex, Stack } from '@chakra-ui/core';
 import Loading from './loading';
 import ProductCard from './productCard';
 import { getProductsThunk } from '../store/productThunks';
@@ -20,11 +21,21 @@ const ProductList = ({ loading, products, getProducts }) => {
       : <p>Error fetching products</p>
   }
   return (
-    <div>
-      {
-        loading ? <Loading /> : showProductsList()
-      }
-    </div>
+    <Flex
+      width='100vw'
+      minHeight='75vh'
+      justify='center'
+      align='center'
+    >
+      <Stack
+        bg="#2D3748"
+        p='1.5em 2em'
+      >
+        {
+          loading ? <Loading /> : showProductsList()
+        }
+      </Stack>
+    </Flex>
   );
 };
 

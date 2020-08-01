@@ -26,6 +26,7 @@ const ProductCard = ({ product, addToCart }) => {
       direction='Row'
       align='center'
       justify='space-between'
+      margin='0.5em 0'
     >
       <Stack spacing="1">
         <Heading as="h2" size="lg">
@@ -44,6 +45,7 @@ const ProductCard = ({ product, addToCart }) => {
           width='3em'
           value={quantity}
           onChange={(e) => setQuantity(e.target.value)}
+          color='black'
           mr='1em'
         />
         <Button

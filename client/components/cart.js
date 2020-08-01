@@ -99,7 +99,9 @@ const Cart = ({ cart, remove }) => {
       </Flex>
       <Modal isOpen={isOpen} onClose={onClose}>
         <ModalOverlay />
-        <ModalContent>
+        <ModalContent
+          color='black'
+        >
           <ModalHeader>Checkout</ModalHeader>
           <ModalCloseButton />
           <ModalBody>
