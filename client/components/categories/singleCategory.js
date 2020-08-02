@@ -1,7 +1,8 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { getProductsThunk } from '../../store/productThunks'
 import { Link } from 'react-router-dom'
+import { getProductsThunk } from '../../store/productThunks'
+
 
 class SingleCategory extends Component {
   async componentDidMount() {
@@ -9,14 +10,14 @@ class SingleCategory extends Component {
   }
 
   render() {
-    const { match: { params: { name, id } }, products } = this.props
+    const { match: { params: { name } }, products, categories } = this.props
     return (
       <>
         <h1>{name.toUpperCase()}</h1><br />
         <div>
-          {products.filter(product => product.categoryId === id).map(cProduct => (
+          {products.filter(product => product.categoryId === (categories.find(category => category.name === name)).id).map(cProduct => (
             <div key={cProduct.id} className='box'>
-              <Link to={`products/${cProduct.name}`}>{cProduct.name}</Link>
+              <Link to={`${name}/${cProduct.name}`}>{cProduct.name}</Link>
             </div>
           ))}
         </div>
@@ -26,7 +27,7 @@ class SingleCategory extends Component {
 }
 
 const mapStateToProps = (state) => {
-  return { products: state.products }
+  return { products: state.products, categories: state.categories }
 };
 
 const mapDispatchToProps = (dispatch) => {
