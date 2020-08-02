@@ -114,6 +114,7 @@ apiRouter.get('/products/sort/:sort', async (req, res) => {
       default: return products;
     }
     res.send(products) 
+    return null
 })
 
 module.exports = {
