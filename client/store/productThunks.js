@@ -73,3 +73,14 @@ export const getProductsThunk = () => (dispatch) => {
       return 'Error fetching products';
     });
 };
+
+export const sortProductsThunk = (type) => (dispatch) =>{
+  return axios.get(`api/products/sort/${type}`)
+      .then(({ data })=>{
+        dispatch(getProducts(data));
+      })
+      .catch((e)=>{
+          console.log('failed to fetch Products');
+          console.log(e);
+      })
+}
