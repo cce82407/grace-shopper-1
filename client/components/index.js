@@ -16,6 +16,7 @@ import AdminCategories from './adminCategories';
 import EditProduct from './editProduct';
 import AddProductForm from './addProductForm';
 import SingleCategory from './categories/singleCategory';
+import SingleProduct from './product/singleProduct'
 
 export {
   Login,
@@ -36,4 +37,5 @@ export {
   EditProduct,
   AddProductForm,
   SingleCategory
+  SingleProduct
 };
