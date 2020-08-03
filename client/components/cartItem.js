@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { Flex, Heading, Input, Button } from '@chakra-ui/core';
+import React, { useState, useEffect } from 'react';
+import { Flex, Heading, Input, Button, IconButton } from '@chakra-ui/core';
 
 const CartItem = ({ product, remove, update }) => {
   const [quantity, setQuantity] = useState(product.productCart.quantity);
@@ -8,6 +8,10 @@ const CartItem = ({ product, remove, update }) => {
     if (!Number(quantity)) return true;
     return quantity === product.productCart.quantity || !quantity;
   }
+  useEffect(() => {
+    if (quantity < 1) setQuantity(1);
+  }, [quantity]);
+
   return (
     <Flex
       align="center"
@@ -20,18 +24,34 @@ const CartItem = ({ product, remove, update }) => {
       <Heading as="h3" size="md" flexGrow='1'>
         {product.name}
       </Heading>
+      <IconButton
+        variant='outline'
+        variantColor='white'
+        aria-label='increment quantity'
+        icon='minus'
+        size='sm'
+        onClick={() => setQuantity(quantity - 1)}
+      />
       <Input
         type='text'
         className='quantity'
         fontSize='xs'
         color='#000'
-        mr='1em'
         size='sm'
         width='3em'
         p='0.25em'
         textAlign='center'
         value={quantity}
         onChange={e => setQuantity(e.target.value)}
+      />
+      <IconButton
+        variant='outline'
+        variantColor='white'
+        aria-label='increment quantity'
+        icon='add'
+        size='sm'
+        mr='1em'
+        onClick={() => setQuantity(quantity + 1)}
       />
       <Button
         variantColor='gray'
