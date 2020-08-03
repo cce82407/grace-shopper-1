@@ -79,7 +79,7 @@ const categoriesReducer = (state = [], action) => {
     case types.ADD_CATEGORY:
       return [...state, action.payload];
     case types.GET_CATEGORIES:
-      return  action.payload;
+      return action.payload;
     case types.DELETE_CATEGORY:
       return action.payload.categories;
     case types.UPDATE_CATEGORY:
@@ -94,6 +94,8 @@ const cartReducer = (state = {}, action) => {
     case cartTypes.ADD_TO_CART:
       return action.cart;
     case cartTypes.GET_CART:
+      return action.cart;
+    case cartTypes.UPDATE_CART:
       return action.cart;
     case userTypes.LOGOUT:
       return {};

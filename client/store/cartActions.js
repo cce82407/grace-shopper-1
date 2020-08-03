@@ -12,6 +12,13 @@ const getCart = (cart) => ({
   cart,
 });
 
+const updateCart = (cart) => {
+  return {
+    type: cartTypes.UPDATE_CART,
+    cart
+  }
+}
+
 export const addToCartThunk = (productId, quantity) => (dispatch) => {
   dispatch(loading());
   return axios
@@ -37,7 +44,7 @@ export const getCartThunk = () => (dispatch) => {
     })
     .catch((e) => {
       console.error(e);
-      dispatch(loaded())
+      dispatch(loaded());
     })
 };
 
@@ -51,6 +58,21 @@ export const removeFromCartThunk = (id) => (dispatch) => {
     })
     .catch((e) => {
       console.error(e);
-      dispatch(loaded())
+      dispatch(loaded());
+    })
+}
+
+export const updateCartThunk = (id, quantity) => (dispatch) => {
+  dispatch(loading());
+  return axios.put(`/cart/update/${id}?quantity=${quantity}`)
+    .then(({ data }) => {
+      console.log(data)
+      dispatch(updateCart(data));
+      dispatch(loaded());
+    })
+    .catch((e) => {
+      console.error(e);
+      dispatch(loaded());
+      return 'Error updataing quantity'
     })
 }

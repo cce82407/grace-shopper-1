@@ -16,11 +16,11 @@ import {
   ModalCloseButton,
   useDisclosure,
 } from '@chakra-ui/core';
-import { removeFromCartThunk } from '../store/cartActions';
+import CartItem from './cartItem';
+import { removeFromCartThunk, updateCartThunk } from '../store/cartActions';
 
-const Cart = ({ cart, remove }) => {
+const Cart = ({ cart, remove, update }) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
-
   return (
     <>
       <Flex
@@ -40,36 +40,7 @@ const Cart = ({ cart, remove }) => {
           >
             {
               !!cart.products && cart.products.map((product) => (
-                <Flex
-                  key={product.id}
-                  align="center"
-                  justify="space-between"
-                  direction="row"
-                  bg='#4A5568'
-                  p='1em'
-                  borderBottom='1px solid #2D3748'
-                >
-                  <Heading as="h3" size="md" flexGrow='1'>
-                    {product.name}
-                  </Heading>
-                  <Text
-                    color='#A0AEC0'
-                    fontSize='xs'
-                    mr='1em'
-                  >
-                    Qty: {product.productCart.quantity}
-                  </Text>
-                  <Heading as="h2" size="sm" mr='1em'>
-                    ${+product.price * +product.productCart.quantity}
-                  </Heading>
-                  <Button
-                    variantColor='red'
-                    size='xs'
-                    onClick={() => remove(product.id)}
-                  >
-                    Remove
-                  </Button>
-                </Flex>
+                <CartItem update={update} remove={remove} product={product} key={product.id} />
               ))
             }
           </Stack>
@@ -89,7 +60,7 @@ const Cart = ({ cart, remove }) => {
             </Button>
             <Heading
               as='h3'
-              size='m'
+              size='lg'
               color='#F7FAFC'
             >
               Total: ${cart.total}
@@ -124,7 +95,8 @@ const Cart = ({ cart, remove }) => {
 
 const mapStateToProps = ({ cart }) => ({ cart });
 const mapDispatchToProps = (dispatch) => ({
-  remove: (id) => dispatch(removeFromCartThunk(id))
+  remove: (id) => dispatch(removeFromCartThunk(id)),
+  update: (id, quantity) => dispatch(updateCartThunk(id, quantity))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Cart);
