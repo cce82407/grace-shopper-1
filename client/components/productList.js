@@ -5,7 +5,6 @@ import { Flex, Stack } from '@chakra-ui/core';
 import Loading from './loading';
 import ProductCard from './productCard';
 import { getProductsThunk, sortProductsThunk } from '../store/productThunks';
-import { black } from 'chalk';
 
 const ProductList = ({ loading, products, getProducts, sortProducts }) => {
   // this works like componentDidMount
