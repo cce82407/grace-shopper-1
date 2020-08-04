@@ -1,16 +1,19 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { connect } from 'react-redux';
 import { Flex, Stack } from '@chakra-ui/core';
 import Loading from './loading';
 import ProductCard from './productCard';
 import { getProductsThunk, sortProductsThunk } from '../store/productThunks';
+import { black } from 'chalk';
 
 const ProductList = ({ loading, products, getProducts, sortProducts }) => {
   // this works like componentDidMount
   useEffect(() => {
     getProducts();
   }, []);
+
+  const [sortBy, setSortBy] = useState(''); 
 
   const showProductsList = () => {
     return products.length
@@ -23,6 +26,7 @@ const ProductList = ({ loading, products, getProducts, sortProducts }) => {
   }
 
   const handleSort = async (e)=> {
+    setSortBy(e.target.value)
     products = await sortProducts(e.target.value);
   }
   
@@ -39,12 +43,12 @@ const ProductList = ({ loading, products, getProducts, sortProducts }) => {
       >
         <label>
           Sort By: 
-          <select onChange={handleSort}>
-            <option>-- Select --</option>
-            <option>Price High to Low</option>
-            <option>Price Low to High</option>
-            <option>Name A to Z</option>
-            <option>Name Z to A</option>
+          <select onChange={handleSort} value={sortBy} style={{color:'black'}}>
+            <option value=''>-- Select --</option>
+            <option value='Price High to Low'>Price High to Low</option>
+            <option value='Price Low to High'>Price Low to High</option>
+            <option value='Name A to Z'>Name A to Z</option>
+            <option value='Name Z to A'>Name Z to A</option>
           </select>
         </label>
         {
