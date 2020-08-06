@@ -1,8 +1,16 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
+import axios from 'axios'
 import ProductCard from '../productCard'
 
+
+
 class SingleProduct extends Component {
+  componentDidMount() {
+
+    const div = document.getElementById('something')
+    axios.get('/image').then(({ data }) => { div.innerHTML = data })
+  }
 
   render() {
 
@@ -11,6 +19,7 @@ class SingleProduct extends Component {
     return (
       <>
         <ProductCard product={currentProduct} />
+        <div id='something' />
       </>
     )
   }
