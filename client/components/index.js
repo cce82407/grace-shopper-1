@@ -18,7 +18,9 @@ import AddProductForm from './addProductForm';
 import SingleCategory from './categories/singleCategory';
 import EditCategory from './editCategory';
 import AddCategoryForm from './addCategoryForm';
-import SingleProduct from './products/singleProduct'
+import SingleProduct from './products/singleProduct';
+import Checkout from './checkout/checkout';
+import PaymentSuccess from './checkout/paymentSuccess';
 
 export {
   Login,
@@ -41,5 +43,7 @@ export {
   SingleCategory,
   EditCategory,
   AddCategoryForm,
-  SingleProduct
+  SingleProduct,
+  Checkout,
+  PaymentSuccess
 };
