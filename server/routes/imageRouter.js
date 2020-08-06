@@ -5,8 +5,8 @@ const imageRouter = Router()
 
 imageRouter.get('/', (req, res) => {
   AWS.config.update({
-    accessKeyId: "AKIAJI46TS2NWBWOKYWQ",
-    secretAccessKey: "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"
+    accessKeyId: process.env.AWS_ACCESS_KEY_ID,
+    secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY
   });
   const s3 = new AWS.S3();
   async function getImage() {

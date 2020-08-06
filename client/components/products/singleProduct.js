@@ -6,14 +6,13 @@ import ProductCard from '../productCard'
 
 
 class SingleProduct extends Component {
-  componentDidMount() {
 
+  componentDidMount() {
     const div = document.getElementById('something')
     axios.get('/image').then(({ data }) => { div.innerHTML = data })
   }
 
   render() {
-
     const { match: { params: { name } }, products } = this.props
     const currentProduct = products.find(product => product.name === name)
     return (
