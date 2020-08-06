@@ -31,7 +31,7 @@ class ReviewForm extends Component {
       <>
         <div id='reviewForm'>
           <div style={{ fontSize: '3rem' }}>Write a Product Review</div>
-          <h1>Choose a Product</h1>
+          <h1>Product</h1>
           <form>
             <select
               name="product"
