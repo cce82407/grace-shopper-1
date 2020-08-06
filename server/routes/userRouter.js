@@ -5,8 +5,8 @@ const { adminApiSecurityCheck, accessDeniedResponse } = require('../utils');
 const { User, Session, Cart, ProductCart } = require("../db/models/index");
 const Product = require("../db/models/product");
 
-const userRouter = Router();
 
+const userRouter = Router();
 
 
 userRouter.get('/whoami', (req, res) => {

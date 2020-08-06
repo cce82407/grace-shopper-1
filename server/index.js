@@ -2,10 +2,12 @@ const express = require('express');
 const path = require('path');
 const cookieParser = require('cookie-parser');
 const chalk = require('chalk');
+const dotenv = require('dotenv');
 const { sync } = require('./db/db');
 const routes = require('./routes');
 const { Session, User, Cart } = require('./db/models');
 const { noDirectAccess, adminApiSecurityCheck, accessDeniedResponse } = require('./utils')
+
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -15,6 +17,8 @@ app.use('/client/assets', express.static(path.join(__dirname, '../client/assets'
 app.use(express.static(path.join(__dirname, '../dist')))
 
 app.use(cookieParser());
+
+dotenv.config();
 
 app.use(async (req, res, next) => {
 
