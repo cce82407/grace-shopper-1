@@ -19,6 +19,7 @@ import SingleCategory from './categories/singleCategory';
 import EditCategory from './editCategory';
 import AddCategoryForm from './addCategoryForm';
 import SingleProduct from './products/singleProduct'
+import ReviewForm from './reviewForm'
 
 export {
   Login,
@@ -41,5 +42,6 @@ export {
   SingleCategory,
   EditCategory,
   AddCategoryForm,
-  SingleProduct
+  SingleProduct,
+  ReviewForm
 };
