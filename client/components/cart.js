@@ -1,3 +1,4 @@
+/* eslint-disable no-return-assign */
 import React from 'react';
 import { connect } from 'react-redux';
 import {
@@ -20,7 +21,7 @@ import CartItem from './cartItem';
 import { removeFromCartThunk, updateCartThunk } from '../store/cartActions';
 
 const Cart = ({ cart, remove, update }) => {
-  const { isOpen, onOpen, onClose } = useDisclosure();
+  const { isOpen, onClose } = useDisclosure();
   return (
     <>
       <Flex
@@ -54,7 +55,7 @@ const Cart = ({ cart, remove, update }) => {
             <Button
               variantColor='green'
               size='lg'
-              onClick={onOpen}
+              onClick={()=>window.location.pathname=`checkout/${cart.id}`}
             >
               Checkout
             </Button>
@@ -82,7 +83,7 @@ const Cart = ({ cart, remove, update }) => {
           </ModalBody>
 
           <ModalFooter>
-            <Button variantColor="blue" mr={3} onClick={onClose}>
+            <Button variantColor="blue" mr={3} onClick={()=>window.location.pathname='/checkout'}>
               Close
             </Button>
 
