@@ -68,6 +68,7 @@ class ReviewForm extends Component {
               numberOfStars={5}
               name='rating'
               starDimension='25px'
+              starSpacing='3px'
             />
             <br />
             <br />
