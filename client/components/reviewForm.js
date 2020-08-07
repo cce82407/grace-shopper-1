@@ -1,6 +1,8 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
+import StarRatings from 'react-star-ratings';
 import { getProductsThunk } from '../store/productThunks'
+
 
 class ReviewForm extends Component {
   constructor(props) {
@@ -12,6 +14,7 @@ class ReviewForm extends Component {
       reviewText: ''
     }
     this.handleInputChange = this.handleInputChange.bind(this)
+    this.changeRating = this.changeRating.bind(this)
   }
 
   async componentDidMount() {
@@ -23,6 +26,13 @@ class ReviewForm extends Component {
     this.setState({
       [name]: value,
     })
+  }
+
+  changeRating(newRating) {
+    console.log(newRating)
+    this.setState({
+      starRating: newRating
+    });
   }
 
   render() {
@@ -48,9 +58,18 @@ class ReviewForm extends Component {
             </select>
             <br />
             <br />
-            <label htmlFor='rating'>Overall Rating <br />
-              <input id='rating' className='reviewForm' name='starRating' type='number' min='0' max='5' step='1' value={this.state.starRating} onChange={this.handleInputChange} />
-            </label>
+            <div>Star Rating</div><br />
+            <StarRatings
+              rating={this.state.starRating}
+              starRatedColor="gold"
+              starHoverColor="gold"
+              starEmptyColor="gray"
+              changeRating={this.changeRating}
+              numberOfStars={5}
+              name='rating'
+              starDimension='25px'
+              starSpacing='3px'
+            />
             <br />
             <br />
             <label htmlFor='title'>Review Title <br />
@@ -71,11 +90,7 @@ class ReviewForm extends Component {
   }
 }
 
-const mapStateToProps = (state) => {
-  return {
-    products: state.products
-  }
-}
+const mapStateToProps = ({ products }) => ({ products })
 
 const mapDispatchToProps = (dispatch) => ({
   getProducts: () => dispatch(getProductsThunk()),
@@ -83,12 +98,3 @@ const mapDispatchToProps = (dispatch) => ({
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(ReviewForm)
-
-/**
- * Amazon Structure:
- * Create Review (Title)
- * Image and name of Product
- * Overall Rating (stars)
- * Add a headline "whats most important to know"
- * Write your review "what did you like or dislike?" What did you use this product for?
- */
