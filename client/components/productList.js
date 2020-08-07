@@ -12,7 +12,7 @@ const ProductList = ({ loading, products, getProducts, sortProducts }) => {
     getProducts();
   }, []);
 
-  const [sortBy, setSortBy] = useState(''); 
+  const [sortBy, setSortBy] = useState('');
 
   const showProductsList = () => {
     return products.length
@@ -24,11 +24,11 @@ const ProductList = ({ loading, products, getProducts, sortProducts }) => {
       : <p>Error fetching products</p>
   }
 
-  const handleSort = async (e)=> {
+  const handleSort = async (e) => {
     setSortBy(e.target.value)
     products = await sortProducts(e.target.value);
   }
-  
+
   return (
     <Flex
       width='100vw'
@@ -41,8 +41,8 @@ const ProductList = ({ loading, products, getProducts, sortProducts }) => {
         p='1.5em 2em'
       >
         <label>
-          Sort By: 
-          <select onChange={handleSort} value={sortBy} style={{color:'black'}}>
+          Sort By:
+          <select onChange={handleSort} value={sortBy} style={{ color: 'black' }}>
             <option value=''>-- Select --</option>
             <option value='Price High to Low'>Price High to Low</option>
             <option value='Price Low to High'>Price Low to High</option>
