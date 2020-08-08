@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { connect } from 'react-redux';
-import { Stack, Heading, Button, Flex, Text, useToast, Input } from '@chakra-ui/core';
+import { Stack, Heading, Button, Flex, Text, useToast, Input, Image } from '@chakra-ui/core';
 import { addToCartThunk } from '../store/cartActions';
 
 const ProductCard = ({ product, addToCart }) => {
@@ -21,41 +21,48 @@ const ProductCard = ({ product, addToCart }) => {
   };
   return (
     <Flex
-      minW='sm'
-      maxW='md'
+      minW='lg'
+      maxW='xl'
       direction='Row'
       align='center'
       justify='space-between'
       margin='0.5em 0'
     >
+      <Image
+        src={product.imgSrcSm}
+        alt={product.name}
+        height='100px'
+        width='100px'
+        marginRight='1em'
+      />
       <Stack spacing="1">
         <Heading as="h2" size="lg">
           {product.name}
         </Heading>
-        <Text color='#CBD5E0'>
-          {product.description}
-        </Text>
-      </Stack>
-      <Flex>
-        <Text mr='1em'>
-          ${+product.price * +quantity}
-        </Text>
-        <Input
-          size='sm'
-          width='3em'
-          value={quantity}
-          onChange={(e) => setQuantity(e.target.value)}
-          color='black'
-          mr='1em'
-        />
-        <Button
-          variantColor="green"
-          size="xs"
-          onClick={(e) => handleAddToCart(e, product.id, quantity)}
+        <Flex
+          align='center'
+          justify='flex-end'
         >
-          Add to Cart
-        </Button>
-      </Flex>
+          <Text mr='1em'>
+            ${+product.price * +quantity}
+          </Text>
+          <Input
+            size='sm'
+            width='3em'
+            value={quantity}
+            onChange={(e) => setQuantity(e.target.value)}
+            color='black'
+            mr='1em'
+          />
+          <Button
+            variantColor="green"
+            size="xs"
+            onClick={(e) => handleAddToCart(e, product.id, quantity)}
+          >
+            Add to Cart
+          </Button>
+        </Flex>
+      </Stack>
     </Flex>
   );
 };
