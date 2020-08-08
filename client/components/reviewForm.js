@@ -8,7 +8,8 @@ class ReviewForm extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      product: '',
+      userId: '',
+      productId: '',
       starRating: 0,
       reviewTitle: '',
       reviewText: ''
@@ -46,13 +47,12 @@ class ReviewForm extends Component {
             <select
               name="product"
               className='reviewForm'
-              value={this.state.product}
+              value={this.state.productId}
               onChange={this.handleInputChange}
             >
               <option hidden>--Select A Product--</option>
               {products.map((product) => (
-                <option className='reviewForm' key={product.id} value={product.name}>
-                  {product.name}
+                <option className='reviewForm' key={product.id} value={product.id}>
                 </option>
               ))}
             </select>
