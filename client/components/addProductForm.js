@@ -51,8 +51,8 @@ class AddProductForm extends Component{
     const { categories } = this.state;
     return(
       <div>
-        <h1>Add Product</h1>
         <div className='box form' style={{width:'50vw', margin:'auto'}}>
+          <h1 className='subtitle'>Add Product</h1>
           <form>
             <label className='label'>
               Product Name:
@@ -74,7 +74,7 @@ class AddProductForm extends Component{
                   categories.map(category=><option key={category.id} value={category.id}>{category.name}</option>)}
               </select>
             </label>
-            <Button onClick={()=>{this.handleSubmit()}}>Add Product</Button>
+            <Button onClick={()=>{this.handleSubmit()}} variantColor='green'>Add Product</Button>
           </form>
         </div>
       </div>

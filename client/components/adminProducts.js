@@ -13,14 +13,14 @@ class AdminProducts extends Component {
   render() {
     const { products } = this.props;
     return (
-      <div>
+      <div style={{padding:'30px'}}>
         <AddProductForm />
-        <h1>Select the product you would like to edit.</h1>
-        <div>
+        <div className='box' style={{width:'85%', margin:'auto', marginTop:'30px'}}>
+          <h1 className='subtitle'>Select the product you would like to edit.</h1>
           {
           products.map(product => {
             return (
-              <div key={product.id}>
+              <div key={product.id} className='box'>
                 <Link to={`/product/${product.id}`} className='title tag is-white is-large'>{product.name}</Link>
               </div>
             )

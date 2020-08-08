@@ -30,18 +30,18 @@ class EditCategory extends Component {
     const { id, name } = this.state;
     const { history } = this.props;
     return (
-      <div>
-        <h1>Edit {name}</h1>
+      <div style={{padding:'30px'}}>
+        <h1 className='title' style={{color:'white'}}>Edit {name}</h1>
         <div>
           {
             name && (
               <div>
-                <label>
+                <label className='subtitle' style={{color:'white'}}>
                   Name:
-                  <input value={this.state.name} onChange={(e) => this.setState({ name: e.target.value })} className='input' />
+                  <input value={this.state.name} onChange={(e) => this.setState({ name: e.target.value })} className='input' style={{width:'50%'}} />
                 </label>
-                <Button onClick={() => this.props.updateCategory(id, name, history)}>Save Changes</Button>
-                <Button onClick={() => this.props.deleteCategory(id, history)}>Delete Category</Button>
+                <Button onClick={() => this.props.updateCategory(id, name, history)} variantColor='green'>Save Changes</Button>
+                <Button onClick={() => this.props.deleteCategory(id, history)} variantColor='red'>Delete Category</Button>
               </div>
             )
           }

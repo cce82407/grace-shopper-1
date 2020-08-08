@@ -33,26 +33,26 @@ class EditProduct extends Component {
     const { id, name, price, description } = this.state;
     const { history } = this.props;
     return (
-      <div>
-        <h1>Edit {name}</h1>
+      <div style={{padding:'30px'}}>
+        <h1 className='title' style={{color:'white'}}>Edit{name}</h1>
         <div>
           {
             name && (
               <div>
-                <label>
+                <label className='label' style={{color:'white'}}>
                   Name:
-                  <input value={this.state.name} onChange={(e) => this.setState({ name: e.target.value })} className='input' />
+                  <input value={this.state.name} onChange={(e) => this.setState({ name: e.target.value })} className='input' style={{width:'50%'}} />
                 </label>
-                <label>
+                <label className='label' style={{color:'white'}}>
                   Price:
-                  <input value={this.state.price} onChange={(e) => this.setState({ price: e.target.value })} className='input' />
+                  <input value={this.state.price} onChange={(e) => this.setState({ price: e.target.value })} className='input' style={{width:'50%'}} />
                 </label>
-                <label>
+                <label className='label' style={{color:'white'}}>
                   Description:
-                  <input value={this.state.description} onChange={(e) => this.setState({ description: e.target.value })} className='input' />
+                  <input value={this.state.description} onChange={(e) => this.setState({ description: e.target.value })} className='input' style={{width:'50%'}} />
                 </label>
-                <Button onClick={() => this.props.updateProduct(id, name, price, description, history)}>Save Changes</Button>
-                <Button onClick={() => this.props.deleteProduct(id, history)}>Delete Product</Button>
+                <Button onClick={() => this.props.updateProduct(id, name, price, description, history)} variantColor='green'>Save Changes</Button>
+                <Button onClick={() => this.props.deleteProduct(id, history)} variantColor='red'>Delete Product</Button>
               </div>
             )
           }
