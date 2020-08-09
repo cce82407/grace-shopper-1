@@ -6,6 +6,7 @@ import { connect } from 'react-redux';
 import axios from 'axios';
 import { FormLabel, Input } from '@chakra-ui/core';
 import CardSection from './cardSelection';
+import { updateCartStatusThunk } from  '../../store/cartActions';
 
 function CheckoutForm(props) {
   const stripe = useStripe();
@@ -23,6 +24,7 @@ function CheckoutForm(props) {
 
     await axios.get(`/checkout/secret/${props.match.params.id}`)
       .then(async(data)=>{
+        console.log(data)
         const result = await stripe.confirmCardPayment(`${data.data.client_secret}`, {
           payment_method: {
             card: elements.getElement(CardElement),
@@ -38,11 +40,13 @@ function CheckoutForm(props) {
         } else {
           // The payment has been processed!
           if (result.paymentIntent.status === 'succeeded') {
+            props.updateStatus(props.match.params.id)
             props.history.push('/success');
           }
         }
       })
   };
+
 
   return (
     <form onSubmit={handleSubmit} className='box checkoutForm'>
@@ -59,5 +63,9 @@ function CheckoutForm(props) {
     </form>
   );
 }
+const mapStateToProps = (props) => (props);
+const mapDispatchToProps = (dispatch) => ({
+  updateStatus: (id) => dispatch(updateCartStatusThunk(id))
+});
 
-export default connect(null, null)(CheckoutForm);
+export default connect(mapStateToProps, mapDispatchToProps)(CheckoutForm);

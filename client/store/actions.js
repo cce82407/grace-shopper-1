@@ -5,6 +5,7 @@ export const loadingTypes = {
 
 export const cartTypes = {
   GET_CART: 'GET_CART',
+  GET_CARTS: 'GET_CARTS',
   ADD_TO_CART: 'ADD_TO_CART',
   UPDATE_CART: 'UPDATE_CART'
 }

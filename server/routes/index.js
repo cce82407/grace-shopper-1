@@ -6,4 +6,4 @@ const checkoutRouter=require('./checkoutRouter');
 module.exports = [apiRouter, userRouter, cartRouter, checkoutRouter]
 const imageRouter = require('./imageRouter');
 
-module.exports = [apiRouter, userRouter, cartRouter, imageRouter]
+module.exports = [apiRouter, userRouter, cartRouter, imageRouter, checkoutRouter]
