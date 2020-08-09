@@ -4,8 +4,9 @@ const { Review } = require('../db/models')
 
 const reviewRouter = Router()
 
-reviewRouter.post('/', async (req, res) => {
-  const { userId, productId, starRating, reviewTitle, reviewText } = req.body;
+reviewRouter.post('/reviews', async (req, res) => {
+  const { productId, starRating, reviewTitle, reviewText } = req.body;
+  const userId = req.user.id
   const review = await Review.create({
     userId, productId, starRating, reviewTitle, reviewText
   });
@@ -13,6 +14,6 @@ reviewRouter.post('/', async (req, res) => {
 });
 
 module.exports = {
-  url: '/reviews',
+  url: '/api',
   router: reviewRouter
 };

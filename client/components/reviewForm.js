@@ -2,13 +2,13 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import StarRatings from 'react-star-ratings';
 import { getProductsThunk } from '../store/productThunks'
+import { createReviewThunk } from '../store/reviewThunks'
 
 
 class ReviewForm extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      userId: '',
       productId: '',
       starRating: 0,
       reviewTitle: '',
@@ -37,22 +37,24 @@ class ReviewForm extends Component {
   }
 
   render() {
+    const { productId, starRating, reviewText, reviewTitle } = this.state
     const { products } = this.props
     return (
       <>
         <div id='reviewForm'>
           <div style={{ fontSize: '3rem' }}>Write a Product Review</div>
           <h1>Product</h1>
-          <form>
+          <form onSubmit={() => { this.props.createReview(productId, starRating, reviewText, reviewTitle) }}>
             <select
               name="product"
               className='reviewForm'
-              value={this.state.productId}
+              value={this.state.product}
               onChange={this.handleInputChange}
             >
               <option hidden>--Select A Product--</option>
               {products.map((product) => (
-                <option className='reviewForm' key={product.id} value={product.id}>
+                <option className='reviewForm' key={product.id} value={product.name}>
+                  {product.name}
                 </option>
               ))}
             </select>
@@ -94,7 +96,7 @@ const mapStateToProps = ({ products }) => ({ products })
 
 const mapDispatchToProps = (dispatch) => ({
   getProducts: () => dispatch(getProductsThunk()),
-
+  createReview: () => dispatch(createReviewThunk())
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(ReviewForm)
