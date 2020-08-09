@@ -32,9 +32,10 @@ export const loginThunk = (username, password) => (dispatch) => {
       dispatch(login(username, res.data.role));
       dispatch(loaded());
     })
-    .catch(() => {
+    .catch((e) => {
       dispatch(loginFail('Incorrect username or password'));
       dispatch(loaded());
+      throw e;
     });
 };
 

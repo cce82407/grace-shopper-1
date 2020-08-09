@@ -41,8 +41,21 @@ nav {
 body {
 	width: 100vw;
 	height: 100vh;
+	overflow-y: scroll;
 	background-color: #1a202c;
 	color: white;
+}
+.productList {
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+	flex-wrap: wrap;
+	width: 100vw;
+	padding: 2em;
+}
+
+.productList a:hover {
+	color: #cbd5e0;
 }
 
 .box-container {
@@ -58,11 +71,15 @@ body {
 }
 
 .reviewForm {
-  color: black;
-  border-radius: 4px;
-  padding: 5px;
+	color: black;
+	border-radius: 4px;
+	padding: 5px;
 }
 
 #reviewForm {
-  margin: 2rem 10rem;
+	margin: 2rem 10rem;
+}
+
+label > select {
+	margin: 1em;
 }
