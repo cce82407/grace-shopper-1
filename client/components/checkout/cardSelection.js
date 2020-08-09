@@ -16,17 +16,21 @@ const CARD_ELEMENT_OPTIONS = {
       "::placeholder": {
         color: "#aab7c4",
       },
+      ":hover":{
+        color: 'green'
+      }
     },
     invalid: {
       color: "#fa755a",
       iconColor: "#fa755a",
+      disable:true
     },
   },
 };
 
 function CardSection() {
   return (
-    <label className='box'>
+    <label>
       Card details
       <CardElement options={CARD_ELEMENT_OPTIONS} />
     </label>

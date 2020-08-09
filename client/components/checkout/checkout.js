@@ -1,14 +1,16 @@
 /* eslint-disable no-alert */
 /* eslint-disable no-lonely-if */
-import React from 'react';
+import React, {useState} from 'react';
 import {useStripe, useElements, CardElement} from '@stripe/react-stripe-js';
 import { connect } from 'react-redux';
 import axios from 'axios';
+import { FormLabel, Input } from '@chakra-ui/core';
 import CardSection from './cardSelection';
 
-function CheckoutForm() {
+function CheckoutForm(props) {
   const stripe = useStripe();
   const elements = useElements();
+  const [email, setEmail] = useState('');
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -19,7 +21,7 @@ function CheckoutForm() {
       return;
     }
 
-    await axios.get(`/checkout/secret/${window.location.pathname.slice(10)}`)
+    await axios.get(`/checkout/secret/${props.match.params.id}`)
       .then(async(data)=>{
         const result = await stripe.confirmCardPayment(`${data.data.client_secret}`, {
           payment_method: {
@@ -36,19 +38,24 @@ function CheckoutForm() {
         } else {
           // The payment has been processed!
           if (result.paymentIntent.status === 'succeeded') {
-            window.location.pathname='/success';
+            props.history.push('/success');
           }
         }
-
-
       })
-
   };
 
   return (
-    <form onSubmit={handleSubmit}>
+    <form onSubmit={handleSubmit} className='box checkoutForm'>
+      <FormLabel htmlFor="username">Email:</FormLabel>
+      <Input
+        type="text"
+        id="email"
+        bg='#E2E8F0'
+        value={email}
+        onChange={(e) => setEmail(e.target.value)}
+      />
       <CardSection />
-      <button disabled={!stripe} type='submit' className='button is-danger'>Confirm order</button>
+      <button disabled={!stripe} type='submit' className='button is-danger' style={{marginTop:'10px'}}>Confirm order</button>
     </form>
   );
 }
