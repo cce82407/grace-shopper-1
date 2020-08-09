@@ -36,24 +36,26 @@ class ReviewForm extends Component {
     });
   }
 
+
+
   render() {
     const { productId, starRating, reviewText, reviewTitle } = this.state
-    const { products } = this.props
+    const { products, createReview } = this.props
     return (
       <>
         <div id='reviewForm'>
           <div style={{ fontSize: '3rem' }}>Write a Product Review</div>
           <h1>Product</h1>
-          <form onSubmit={() => { this.props.createReview(productId, starRating, reviewText, reviewTitle) }}>
+          <form onSubmit={() => createReview(productId, starRating, reviewText, reviewTitle)}>
             <select
-              name="product"
+              name="productId"
               className='reviewForm'
-              value={this.state.product}
+              value={productId}
               onChange={this.handleInputChange}
             >
               <option hidden>--Select A Product--</option>
               {products.map((product) => (
-                <option className='reviewForm' key={product.id} value={product.name}>
+                <option className='reviewForm' key={product.id} value={product.id}>
                   {product.name}
                 </option>
               ))}
@@ -62,7 +64,7 @@ class ReviewForm extends Component {
             <br />
             <div>Star Rating</div><br />
             <StarRatings
-              rating={this.state.starRating}
+              rating={starRating}
               starRatedColor="gold"
               starHoverColor="gold"
               starEmptyColor="gray"
@@ -75,12 +77,12 @@ class ReviewForm extends Component {
             <br />
             <br />
             <label htmlFor='title'>Review Title <br />
-              <input id='title' className='reviewForm' name='reviewTitle' type='text' value={this.state.reviewTitle} onChange={this.handleInputChange} placeholder='Title of your review' />
+              <input id='title' className='reviewForm' name='reviewTitle' type='text' value={reviewTitle} onChange={this.handleInputChange} placeholder='Title of your review' />
             </label>
             <br />
             <br />
             <label htmlFor='text'>Review Text <br />
-              <textarea id='text' className='reviewForm' rows='4' cols='50' name='reviewText' type='text' value={this.state.reviewText} onChange={this.handleInputChange} placeholder='What did you like or dislike about the product? ' />
+              <textarea id='text' className='reviewForm' rows='4' cols='50' name='reviewText' type='text' value={reviewText} onChange={this.handleInputChange} placeholder='What did you like or dislike about the product? ' />
             </label>
             <br />
             <br />
@@ -96,7 +98,7 @@ const mapStateToProps = ({ products }) => ({ products })
 
 const mapDispatchToProps = (dispatch) => ({
   getProducts: () => dispatch(getProductsThunk()),
-  createReview: () => dispatch(createReviewThunk())
+  createReview: (productId, starRating, reviewText, reviewTitle) => dispatch(createReviewThunk(productId, starRating, reviewText, reviewTitle))
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(ReviewForm)

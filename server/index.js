@@ -94,9 +94,9 @@ app.use('/admin', express.static(path.join(__dirname, '../dist')));
 app.use('/checkout', express.static(path.join(__dirname, '../dist')));
 
 routes.forEach(({ url, router }) => {
-  app.use(url, (req, res, next) => {
-    noDirectAccess(req, res, next);
-  });
+  // app.use(url, (req, res, next) => {
+  //   noDirectAccess(req, res, next);
+  // });
   app.use(url, router);
 });
 

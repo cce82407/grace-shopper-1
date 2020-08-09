@@ -1,4 +1,4 @@
-const { UUID, UUIDV4, INTEGER, TEXT } = require('sequelize');
+const { UUID, UUIDV4, INTEGER, STRING } = require('sequelize');
 const { db } = require('../db');
 
 const Review = db.define('Review', {
@@ -17,11 +17,11 @@ const Review = db.define('Review', {
     allowNull: false,
   },
   reviewTitle: {
-    type: TEXT,
+    type: STRING,
     allowNull: false,
   },
   reviewText: {
-    type: TEXT,
+    type: STRING,
     allowNull: false,
   }
 })

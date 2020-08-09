@@ -1,5 +1,6 @@
 import { createStore, applyMiddleware, combineReducers } from 'redux';
 import thunks from 'redux-thunk';
+import reviewReducer from './reviewReducer'
 
 import {
   loadingTypes, cartTypes, types, userTypes
@@ -110,6 +111,7 @@ const reducer = combineReducers({
   products: productsReducer,
   cart: cartReducer,
   categories: categoriesReducer,
+  reviews: reviewReducer
 });
 
 const store = createStore(reducer, applyMiddleware(

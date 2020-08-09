@@ -9,7 +9,7 @@ const NEW_REVIEW = {
   reviewText: "",
 };
 
-const newReview = (state = NEW_REVIEW, action) => {
+const reviewReducer = (state = NEW_REVIEW, action) => {
   switch (action.type) {
     case reviewTypes.CREATE_REVIEW:
       return {
@@ -21,4 +21,4 @@ const newReview = (state = NEW_REVIEW, action) => {
   }
 }
 
-export default newReview
+export default reviewReducer
