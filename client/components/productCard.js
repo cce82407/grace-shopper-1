@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { connect } from 'react-redux';
-import { Stack, Heading, Button, Flex, Text, useToast, Input, Image } from '@chakra-ui/core';
+import { Link } from 'react-router-dom';
+import { Heading, Button, Flex, useToast, Input, Image, } from '@chakra-ui/core';
 import { addToCartThunk } from '../store/cartActions';
 
 const ProductCard = ({ product, addToCart }) => {
@@ -21,48 +22,58 @@ const ProductCard = ({ product, addToCart }) => {
   };
   return (
     <Flex
-      minW='lg'
-      maxW='xl'
-      direction='Row'
+      width='300px'
+      direction='column'
       align='center'
       justify='space-between'
-      margin='0.5em 0'
+      margin='2em'
+      bg='#4A5568'
+      p='1em'
     >
       <Image
         src={product.imgSrcSm}
         alt={product.name}
-        height='100px'
-        width='100px'
-        marginRight='1em'
+        height='200px'
+        width='200px'
+        m='1em'
       />
-      <Stack spacing="1">
-        <Heading as="h2" size="lg">
-          {product.name}
+      <Flex
+        direction='column'
+        justify='space-between'
+        height='150px'
+        width='100%'
+      >
+        <Heading as="h3" size="md" isTruncated>
+          <Link to={`/products/${product.id}`}>
+            {product.name}
+          </Link>
         </Heading>
         <Flex
           align='center'
-          justify='flex-end'
+          justify='center'
+          m='1em'
         >
-          <Text mr='1em'>
+          <Heading as='h4' size='md' mr='1em'>
             ${+product.price * +quantity}
-          </Text>
+          </Heading>
           <Input
             size='sm'
             width='3em'
             value={quantity}
             onChange={(e) => setQuantity(e.target.value)}
             color='black'
-            mr='1em'
           />
+        </Flex>
+        <Flex justify='center'>
           <Button
             variantColor="green"
-            size="xs"
+            size="md"
             onClick={(e) => handleAddToCart(e, product.id, quantity)}
           >
             Add to Cart
           </Button>
         </Flex>
-      </Stack>
+      </Flex>
     </Flex>
   );
 };
