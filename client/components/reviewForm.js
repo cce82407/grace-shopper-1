@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import StarRatings from 'react-star-ratings';
 import { getProductsThunk } from '../store/productThunks'
-import { createReviewThunk } from '../store/reviewThunks'
+import createReviewThunk from '../store/reviewThunks'
 
 
 class ReviewForm extends Component {

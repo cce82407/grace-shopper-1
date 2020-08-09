@@ -9,16 +9,15 @@ const createReview = ({ productId, starRating, reviewTitle, reviewText }) => {
     payload: {
       id: null,
       userId: null,
-      productId: productId,
-      starRating: starRating,
-      reviewTitle: newTitle,
-      reviewText: reviewText,
+      productId,
+      starRating,
+      reviewTitle,
+      reviewText,
     }
   }
 }
 
-
-export const createReviewThunk = (productId, starRating, reviewTitle, reviewText) => {
+const createReviewThunk = (productId, starRating, reviewTitle, reviewText) => {
   return (dispatch) => {
     dispatch(loading())
     return axios.post('/reviews', { productId, starRating, reviewTitle, reviewText })
@@ -33,3 +32,4 @@ export const createReviewThunk = (productId, starRating, reviewTitle, reviewText
   }
 }
 
+export default createReviewThunk
