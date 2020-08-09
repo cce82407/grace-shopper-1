@@ -24,23 +24,23 @@ export const updateProductThunk = (id, name, price, description, history) => (di
 }
 
 export const addProductThunk = (obj) => async (dispatch) => {
-  const newProduct={
+  const newProduct = {
     price: Number(obj.price),
     name: obj.name,
     description: obj.description,
     categoryId: obj.categoryId,
   }
-return axios
-  .post('/api/products', newProduct)
-  .then((res) => {
-    dispatch({
-      type: types.ADD_PRODUCT,
-      payload: res.data.product,
+  return axios
+    .post('/api/products', newProduct)
+    .then((res) => {
+      dispatch({
+        type: types.ADD_PRODUCT,
+        payload: res.data.product,
+      });
+    })
+    .catch((e) => {
+      console.log(e);
     });
-  })
-  .catch((e) => {
-    console.log(e);
-  });
 }
 
 export const deleteProductThunk = (id, history) => async (dispatch) => {
@@ -64,6 +64,7 @@ export const getProductsThunk = () => (dispatch) => {
   return axios
     .get('/api/products')
     .then(({ data }) => {
+      console.log(data)
       dispatch(getProducts(data));
       dispatch(loaded());
     })
@@ -74,13 +75,13 @@ export const getProductsThunk = () => (dispatch) => {
     });
 };
 
-export const sortProductsThunk = (type) => (dispatch) =>{
+export const sortProductsThunk = (type) => (dispatch) => {
   return axios.get(`api/products/sort/${type}`)
-      .then(({ data })=>{
-        dispatch(getProducts(data));
-      })
-      .catch((e)=>{
-          console.log('failed to fetch Products');
-          console.log(e);
-      })
+    .then(({ data }) => {
+      dispatch(getProducts(data));
+    })
+    .catch((e) => {
+      console.log('failed to fetch Products');
+      console.log(e);
+    })
 }

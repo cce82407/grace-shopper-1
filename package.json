@@ -1,19 +1,19 @@
 {
-	"name": "grace-shopper",
-	"version": "1.0.0",
-	"description": "",
-	"main": "app.js",
-	"scripts": {
-		"start": "node server",
-		"start:client": "webpack-dev-server --open",
-		"start:server": "nodemon server/index.js",
-		"build": "webpack --mode=\"production\"",
-		"build:watch": "webpack --watch",
-		"lint": "eslint server client"
-	},
-	"keywords": [],
-	"author": "",
-	"license": "ISC",
+  "name": "grace-shopper",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "start": "node server",
+    "start:client": "webpack-dev-server --open",
+    "start:server": "nodemon server/index.js",
+    "build": "webpack --mode=\"production\"",
+    "build:watch": "webpack --watch",
+    "lint": "eslint server client"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
   "dependencies": {
     "@chakra-ui/core": "^0.8.0",
     "@emotion/core": "^10.0.28",

@@ -2,11 +2,13 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
 import { getProductsThunk } from '../../store/productThunks'
+import { getCategoriesThunk } from '../../store/actionCreators';
 
 
 class SingleCategory extends Component {
   async componentDidMount() {
     await this.props.getProducts()
+    await this.props.getCategories()
   }
 
   render() {
@@ -15,11 +17,15 @@ class SingleCategory extends Component {
       <>
         <h1>{name.toUpperCase()}</h1><br />
         <div>
-          {products.filter(product => product.categoryId === (categories.find(category => category.name === name)).id).map(cProduct => (
-            <div key={cProduct.id} className='box'>
-              <Link to={`${name}/${cProduct.name}`}>{cProduct.name}</Link>
-            </div>
-          ))}
+          {
+            !!products.length && !!categories.length &&
+            products.filter(product => product.categoryId === (categories.find(category => category.name === name)).id)
+              .map(cProduct => (
+                <div key={cProduct.id} className='box'>
+                  <Link to={`/products/${cProduct.id}`}>{cProduct.name}</Link>
+                </div>
+              ))
+          }
         </div>
       </>
     )
@@ -31,7 +37,10 @@ const mapStateToProps = (state) => {
 };
 
 const mapDispatchToProps = (dispatch) => {
-  return { getProducts: () => dispatch(getProductsThunk()) }
+  return {
+    getProducts: () => dispatch(getProductsThunk()),
+    getCategories: () => dispatch(getCategoriesThunk()),
+  }
 };
 
 
