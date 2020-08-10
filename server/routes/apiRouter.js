@@ -13,6 +13,12 @@ apiRouter.get("/products", async (req, res) => {
   res.status(200).send(products);
 });
 
+apiRouter.get("/products/:id", async (req, res) => {
+  const { id } = req.params;
+  const product = await Product.findByPk(id);
+  res.status(200).send(product);
+});
+
 apiRouter.get("/categories", async (req, res) => {
   const categories = await Category.findAll();
   res.status(200).send(categories);

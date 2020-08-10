@@ -35,10 +35,12 @@ const ProductList = ({ loading, products, getProducts, sortProducts }) => {
       minHeight='75vh'
       justify='center'
       align='center'
+      direction='column'
     >
       <Stack
         bg="#2D3748"
         p='1.5em 2em'
+        align='center'
       >
         <label>
           Sort By:
@@ -50,9 +52,11 @@ const ProductList = ({ loading, products, getProducts, sortProducts }) => {
             <option value='Name Z to A'>Name Z to A</option>
           </select>
         </label>
-        {
-          loading ? <Loading /> : showProductsList()
-        }
+        <div className='productList'>
+          {
+            loading ? <Loading /> : showProductsList()
+          }
+        </div>
       </Stack>
     </Flex>
   );

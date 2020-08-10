@@ -13,9 +13,8 @@ const app = express();
 const PORT = process.env.PORT || 3000;
 
 app.use(express.json());
-app.use('/client/assets', express.static(path.join(__dirname, '../client/assets')))
-app.use(express.static(path.join(__dirname, '../dist')))
-
+app.use('/client/assets', express.static(path.join(__dirname, '../client/assets')));
+app.use(express.static(path.join(__dirname, '../dist')));
 app.use(cookieParser());
 
 dotenv.config();
@@ -97,7 +96,7 @@ app.use('/checkout', express.static(path.join(__dirname, '../dist')));
 routes.forEach(({ url, router }) => {
   app.use(url, (req, res, next) => {
     noDirectAccess(req, res, next);
-  })
+  });
   app.use(url, router);
 });
 

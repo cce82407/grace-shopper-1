@@ -45,6 +45,18 @@ body {
 	background-color: #1a202c;
 	color: white;
 }
+.productList {
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+	flex-wrap: wrap;
+	width: 100vw;
+	padding: 2em;
+}
+
+.productList a:hover {
+	color: #cbd5e0;
+}
 
 .box-container {
 	width: 33vw;
