@@ -5,6 +5,7 @@ import { whoami } from '../store/userActions';
 
 const NavBar = ({ whoAmI, user }) => {
   const [isAdmin, setAdmin] = useState(false)
+  const [isCustomer, setCustomer] = useState(false)
 
   useEffect(() => {
     whoAmI();
@@ -16,6 +17,11 @@ const NavBar = ({ whoAmI, user }) => {
     } else {
       setAdmin(false)
     }
+    if (user.role === 'customer') {
+      setCustomer(true)
+    } else {
+      setCustomer(false)
+    }
   }, [user]);
 
   return (
@@ -24,9 +30,11 @@ const NavBar = ({ whoAmI, user }) => {
         <Link to="/" className="navbar-item">Home</Link>
         <Link to="/products" className="navbar-item">View All Products</Link>
         <Link to="/shopping-cart" className="navbar-item">Cart</Link>
-        <Link to="/login" className="navbar-item">{user.username? 'Log Out' : 'Login'}</Link>
+        <Link to="/login" className="navbar-item">{user.username ? 'Log Out' : 'Login'}</Link>
         {isAdmin &&
           <Link to="/admin" className="navbar-item">Admin</Link>}
+        {isCustomer &&
+          <Link to="/review" className="navbar-item">Write a Review</Link>}
       </nav>
     </div>
   );
