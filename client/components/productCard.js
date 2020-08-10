@@ -27,7 +27,7 @@ const ProductCard = ({ product, addToCart }) => {
       align='center'
       justify='space-between'
       margin='2em'
-      bg='#4A5568'
+      bg='#2D3748'
       p='1em'
     >
       <Image
@@ -40,12 +40,19 @@ const ProductCard = ({ product, addToCart }) => {
       <Flex
         direction='column'
         justify='space-between'
-        height='150px'
+        height='160px'
         width='100%'
       >
-        <Heading as="h3" size="md" isTruncated>
-          <Link to={`/products/${product.id}`}>
-            {product.name}
+        <Heading
+          as="h3"
+          size="md"
+        >
+          <Link to={`/products/${product.id}`} className='heading'>
+            {
+              product.name.split(' ')
+                .filter((word, i) => i < 3)
+                .join(' ')
+            }
           </Link>
         </Heading>
         <Flex

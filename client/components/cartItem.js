@@ -21,58 +21,70 @@ const CartItem = ({ product, remove, update }) => {
       p='1em'
       borderBottom='1px solid #2D3748'
     >
-      <Heading as="h3" size="md" flexGrow='1'>
-        {product.name}
-      </Heading>
-      <IconButton
-        variant='outline'
-        variantColor='white'
-        aria-label='increment quantity'
-        icon='minus'
-        size='sm'
-        onClick={() => setQuantity(quantity - 1)}
-      />
-      <Input
-        type='text'
-        className='quantity'
-        fontSize='xs'
-        color='#000'
-        size='sm'
-        width='3em'
-        p='0.25em'
-        textAlign='center'
-        value={quantity}
-        onChange={e => setQuantity(e.target.value)}
-      />
-      <IconButton
-        variant='outline'
-        variantColor='white'
-        aria-label='increment quantity'
-        icon='add'
-        size='sm'
-        mr='1em'
-        onClick={() => setQuantity(quantity + 1)}
-      />
-      <Button
-        variantColor='gray'
-        color='black'
-        size='xs'
-        onClick={() => { update(product.id, quantity) }}
-        isDisabled={validateQuantity()}
-        mr='1em'
+      <div>
+        <Heading as="h3" size="md" flexGrow='1'>
+          {
+            product.name
+              .split(' ')
+              .filter((_, i) => i < 3)
+              .join(' ')
+          }
+        </Heading>
+      </div>
+      <Flex
+        alignItems='center'
+        marginLeft='1em'
       >
-        Update
-      </Button>
-      <Heading as="h2" size="sm" mr='1em'>
-        ${+product.price * +product.productCart.quantity}
-      </Heading>
-      <Button
-        variantColor='red'
-        size='xs'
-        onClick={() => remove(product.id)}
-      >
-        Remove
-      </Button>
+        <IconButton
+          variant='outline'
+          variantColor='white'
+          aria-label='increment quantity'
+          icon='minus'
+          size='sm'
+          onClick={() => setQuantity(quantity - 1)}
+        />
+        <Input
+          type='text'
+          className='quantity'
+          fontSize='xs'
+          color='#000'
+          size='sm'
+          width='3em'
+          p='0.25em'
+          textAlign='center'
+          value={quantity}
+          onChange={e => setQuantity(e.target.value)}
+        />
+        <IconButton
+          variant='outline'
+          variantColor='white'
+          aria-label='increment quantity'
+          icon='add'
+          size='sm'
+          mr='1em'
+          onClick={() => setQuantity(quantity + 1)}
+        />
+        <Button
+          variantColor='gray'
+          color='black'
+          size='xs'
+          onClick={() => { update(product.id, quantity) }}
+          isDisabled={validateQuantity()}
+          mr='1em'
+        >
+          Update
+        </Button>
+        <Heading as="h2" size="sm" mr='1em'>
+          ${+product.price * +product.productCart.quantity}
+        </Heading>
+        <Button
+          variantColor='red'
+          size='xs'
+          onClick={() => remove(product.id)}
+        >
+          Remove
+        </Button>
+      </Flex>
     </Flex>
   );
 }

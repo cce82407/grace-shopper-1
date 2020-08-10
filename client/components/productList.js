@@ -38,7 +38,6 @@ const ProductList = ({ loading, products, getProducts, sortProducts }) => {
       direction='column'
     >
       <Stack
-        bg="#2D3748"
         p='1.5em 2em'
         align='center'
       >

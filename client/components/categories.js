@@ -12,13 +12,12 @@ const Categories = ({ categories, getCategories }) => {
 
   return (
     <div>
-      <h2>Shop By Our Categories</h2>
       {
         categories &&
         categories.map(category => {
           return (
-            <div key={category.id} className='box'>
-              <Link to={`/categories/${category.name}`}> <h2>{category.name}</h2> </Link>
+            <div key={category.id} className='dropList'>
+              <Link to={`/categories/${category.name}`} className='navLink'> <h2>{category.name}</h2> </Link>
             </div>
           )
         })

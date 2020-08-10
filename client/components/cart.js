@@ -28,10 +28,10 @@ const Cart = ({ cart, remove, update }) => {
         align='center'
         justify='center'
         mt='1em'
+        minW='xl'
       >
         <Box
-          maxW='lg'
-          minW='md'
+          w='100%'
         >
           <Stack
             spacing={0}
@@ -55,7 +55,7 @@ const Cart = ({ cart, remove, update }) => {
             <Button
               variantColor='green'
               size='lg'
-              onClick={()=>window.location.pathname=`checkout/${cart.id}`}
+              onClick={() => window.location.pathname = `checkout/${cart.id}`}
             >
               Checkout
             </Button>
@@ -83,7 +83,7 @@ const Cart = ({ cart, remove, update }) => {
           </ModalBody>
 
           <ModalFooter>
-            <Button variantColor="blue" mr={3} onClick={()=>window.location.pathname='/checkout'}>
+            <Button variantColor="blue" mr={3} onClick={() => window.location.pathname = '/checkout'}>
               Close
             </Button>
 
