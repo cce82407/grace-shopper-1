@@ -12,6 +12,11 @@ const getCart = (cart) => ({
   cart,
 });
 
+const getCarts = (carts) => ({
+  type: cartTypes.GET_CARTS,
+  carts,
+});
+
 const updateCart = (cart) => {
   return {
     type: cartTypes.UPDATE_CART,
@@ -48,11 +53,22 @@ export const getCartThunk = () => (dispatch) => {
     })
 };
 
+export const getUserCartsThunk = () => (dispatch) => {
+  return axios.get('/cart/get/carts')
+    .then(({ data }) => {
+      dispatch(getCarts(data));
+      dispatch(loaded());
+    })
+    .catch((e) => {
+      console.error(e);
+      dispatch(loaded());
+    })
+};
+
 export const removeFromCartThunk = (id) => (dispatch) => {
   dispatch(loading());
   return axios.delete(`/cart/remove/${id}`)
     .then(({ data }) => {
-      console.log(data)
       dispatch(getCart(data));
       dispatch(loaded());
     })
@@ -74,5 +90,20 @@ export const updateCartThunk = (id, quantity) => (dispatch) => {
       console.error(e);
       dispatch(loaded());
       return 'Error updataing quantity'
+    })
+}
+
+export const updateCartStatusThunk = (id) => (dispatch) => {
+  dispatch(loading());
+  return axios.put(`/cart/updateCart/${id}`)
+    .then(({ data }) => {
+      console.log(data)
+      dispatch(updateCart(data));
+      dispatch(loaded());
+    })
+    .catch((e) => {
+      console.error(e);
+      dispatch(loaded());
+      return 'Error updataing status'
     })
 }

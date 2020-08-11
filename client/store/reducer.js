@@ -100,6 +100,10 @@ const cartReducer = (state = {}, action) => {
       return action.cart;
     case userTypes.LOGOUT:
       return {};
+    case cartTypes.GET_CARTS:
+      return {
+        carts: action.carts
+      }
     default:
       return state;
   }
