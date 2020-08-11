@@ -30,5 +30,6 @@ export const types = {
 };
 
 export const reviewTypes = {
-  CREATE_REVIEW: 'CREATE_REVIEW'
+  CREATE_REVIEW: 'CREATE_REVIEW',
+  GET_REVIEWS: 'GET_REVIEWS'
 }

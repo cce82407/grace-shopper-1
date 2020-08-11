@@ -4,9 +4,10 @@ import thunks from 'redux-thunk';
 import {
   loadingTypes, cartTypes, types, userTypes
 } from './actions';
-import reviewReducer from './reviewReducer'
+import { reviewReducer, getReviewsReducer } from './reviewReducer'
 
 const initialUserState = {
+  id: null,
   username: null,
   loggedIn: false,
   role: 'guest',
@@ -18,6 +19,7 @@ const loginReducer = (state = initialUserState, action) => {
     case userTypes.LOGIN:
       return {
         ...state,
+        id: action.id,
         username: action.username,
         loggedIn: true,
         role: action.role,
@@ -115,7 +117,8 @@ const reducer = combineReducers({
   products: productsReducer,
   cart: cartReducer,
   categories: categoriesReducer,
-  reviews: reviewReducer
+  newReview: reviewReducer,
+  reviews: getReviewsReducer
 });
 
 const store = createStore(reducer, applyMiddleware(

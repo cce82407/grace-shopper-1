@@ -9,7 +9,7 @@ const NEW_REVIEW = {
   reviewText: "",
 };
 
-const reviewReducer = (state = NEW_REVIEW, action) => {
+export const reviewReducer = (state = NEW_REVIEW, action) => {
   switch (action.type) {
     case reviewTypes.CREATE_REVIEW:
       return {
@@ -21,4 +21,13 @@ const reviewReducer = (state = NEW_REVIEW, action) => {
   }
 }
 
-export default reviewReducer
+export const getReviewsReducer = (state = [], action) => {
+  switch (action.type) {
+    case reviewTypes.GET_REVIEWS:
+      return action.payload
+    default:
+      return state;
+  }
+}
+
+
