@@ -1,7 +1,8 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
 import React, { useEffect, useState } from 'react';
 import { connect } from 'react-redux';
-import { Flex, Stack } from '@chakra-ui/core';
+import axios from 'axios';
+import { Flex, Stack, Input, Button } from '@chakra-ui/core';
 import Loading from './loading';
 import ProductCard from './productCard';
 import { getProductsThunk, sortProductsThunk } from '../store/productThunks';
@@ -13,20 +14,35 @@ const ProductList = ({ loading, products, getProducts, sortProducts }) => {
   }, []);
 
   const [sortBy, setSortBy] = useState('');
+  const [searchTerm, setSearchTerm] = useState('');
+  const [searchResults, setSearchResults] = useState(null);
 
   const showProductsList = () => {
-    return products.length
-      ? products.map((product) => (
-        <div key={product.id}>
-          <ProductCard product={product} />
-        </div>
-      ))
-      : <p>Error fetching products</p>
+    let productsToShow;
+    if (searchResults) {
+      productsToShow = searchResults;
+    } else if (products.length) {
+      productsToShow = products
+    } else {
+      return <p>Error fetching products</p>
+    }
+
+    return productsToShow.map((product) => (
+      <div key={product.id}>
+        <ProductCard product={product} />
+      </div>
+    ))
   }
 
   const handleSort = async (e) => {
     setSortBy(e.target.value)
     products = await sortProducts(e.target.value);
+  }
+
+  const handleSearch = () => {
+    axios.get(`/search?term=${searchTerm}`)
+      .then(({ data }) => setSearchResults(data))
+      .catch(console.log)
   }
 
   return (
@@ -41,6 +57,24 @@ const ProductList = ({ loading, products, getProducts, sortProducts }) => {
         p='1.5em 2em'
         align='center'
       >
+        <Flex
+          align='center'
+        >
+          <Input
+            placeholder='search products'
+            value={searchTerm}
+            color='black'
+            onChange={(e) => setSearchTerm(e.target.value)}
+            m='1em 0.5em'
+          />
+          <Button
+            variantColor="blue"
+            size="md"
+            onClick={handleSearch}
+          >
+            Search
+          </Button>
+        </Flex>
         <label>
           Sort By:
           <select onChange={handleSort} value={sortBy} style={{ color: 'black' }}>

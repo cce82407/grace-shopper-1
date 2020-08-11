@@ -204,9 +204,9 @@ body {
 }
 
 @media screen and (max-width: 1024px) {
-	/* .navLogo {
+	.navLogo {
 		font-size: 1.5em;
-	} */
+	}
 	a.navLink {
 		font-size: 1.2em;
 	}
