@@ -5,6 +5,7 @@ export const loadingTypes = {
 
 export const cartTypes = {
   GET_CART: 'GET_CART',
+  GET_CARTS: 'GET_CARTS',
   ADD_TO_CART: 'ADD_TO_CART',
   UPDATE_CART: 'UPDATE_CART'
 }
@@ -27,3 +28,7 @@ export const types = {
   UPDATE_PRODUCT: 'UPDATE_PRODUCT',
   UPDATE_CATEGORY: 'UPDATE_CATEGORY'
 };
+
+export const reviewTypes = {
+  CREATE_REVIEW: 'CREATE_REVIEW'
+}

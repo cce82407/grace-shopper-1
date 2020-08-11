@@ -53,6 +53,20 @@ cartRouter.put('/update/:id', async (req, res) => {
   }
 })
 
+cartRouter.put('/updateCart/:id', async (req, res)=>{
+  try{
+    const { id } =req.params;
+    const cart = await Cart.findOne({where: {id}})
+    cart.completed=true;
+    const { completed } = cart
+    await Cart.update({completed}, { where: { id } })
+    res.send(cart)
+  }
+  catch (err){
+    console.log(err)
+  }
+})
+
 cartRouter.get('/get', async (req, res) => {
   try {
     let cart;
@@ -73,6 +87,21 @@ cartRouter.get('/get', async (req, res) => {
     res.sendStatus(500);
   }
 });
+
+cartRouter.get('/get/carts', async (req, res)=>{
+  try {
+    const carts = await Cart.findAll({
+      where: {
+        UserId: req.user.id
+      },
+      include: [Product]
+    });
+    res.send(carts)
+  }
+  catch (err){
+    console.log(err)
+  }
+})
 
 cartRouter.delete('/remove/:id', async (req, res) => {
   const { id } = req.params;

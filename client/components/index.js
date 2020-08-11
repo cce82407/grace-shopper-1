@@ -22,6 +22,8 @@ import SingleProduct from './products/singleProduct';
 import Checkout from './checkout/checkout';
 import PaymentSuccess from './checkout/paymentSuccess';
 import ReviewForm from './reviewForm';
+import UserProfile from './profile';
+import PastOrder from './pastOrder';
 
 export {
   Login,
@@ -48,4 +50,6 @@ export {
   Checkout,
   PaymentSuccess,
   ReviewForm,
+  UserProfile,
+  PastOrder,
 };

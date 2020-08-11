@@ -33,14 +33,14 @@ class AddCategoryForm extends Component{
   render(){
     return(
       <div>
-        <h1>Add Product</h1>
         <div className='box form' style={{width:'50vw', margin:'auto'}}>
+          <h1 className='subtitle'>Add Category</h1>
           <form>
             <label className='label'>
-              Product Name:
+              Category Name:
               <input value={this.state.name} name='name' className='input' onChange={this.handleInput} />
             </label>
-            <Button onClick={()=>{this.handleSubmit()}}>Add Category</Button>
+            <Button onClick={()=>{this.handleSubmit()}} variantColor='green'>Add Category</Button>
           </form>
         </div>
       </div>

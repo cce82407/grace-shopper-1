@@ -4,6 +4,7 @@ import thunks from 'redux-thunk';
 import {
   loadingTypes, cartTypes, types, userTypes
 } from './actions';
+import reviewReducer from './reviewReducer'
 
 const initialUserState = {
   username: null,
@@ -99,6 +100,10 @@ const cartReducer = (state = {}, action) => {
       return action.cart;
     case userTypes.LOGOUT:
       return {};
+    case cartTypes.GET_CARTS:
+      return {
+        carts: action.carts
+      }
     default:
       return state;
   }
@@ -110,6 +115,7 @@ const reducer = combineReducers({
   products: productsReducer,
   cart: cartReducer,
   categories: categoriesReducer,
+  reviews: reviewReducer
 });
 
 const store = createStore(reducer, applyMiddleware(
