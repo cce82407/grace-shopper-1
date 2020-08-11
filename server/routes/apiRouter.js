@@ -109,23 +109,6 @@ apiRouter.delete('/products/:id', async (req, res) => {
   }
 })
 
-apiRouter.get('/products/sort/:sort', async (req, res) => {
-  const products = await Product.findAll();
-  switch (req.params.sort) {
-    case 'Price High to Low': products.sort((a, b) => Number(a.price) > Number(b.price) ? -1 : 1);
-      break;
-    case 'Price Low to High': products.sort((a, b) => Number(a.price) < Number(b.price) ? -1 : 1);
-      break;
-    case 'Name A to Z': products.sort((a, b) => a.name < b.name ? -1 : 1);
-      break;
-    case 'Name Z to A': products.sort((a, b) => a.name > b.name ? -1 : 1);
-      break;
-    default: return products;
-  }
-  res.send(products)
-  return null
-})
-
 module.exports = {
   url: '/api',
   router: apiRouter
