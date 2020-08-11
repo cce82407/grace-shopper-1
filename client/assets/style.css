@@ -68,10 +68,17 @@ a.heading:hover {
 	color: #cbd5e0;
 }
 
+.navSection {
+	display: flex;
+}
+
 .navLogo {
 	display: flex;
 	align-items: center;
 	font-size: 2em;
+}
+.navContainer {
+	display: flex;
 }
 
 .dropContainer {
@@ -79,7 +86,7 @@ a.heading:hover {
 }
 .dropDown {
 	position: absolute;
-	top: 2em;
+	top: 2.5em;
 	left: -1em;
 	opacity: 0;
 	transition: 0.3s all;
@@ -114,6 +121,37 @@ body {
 	background-color: #1a202c;
 	color: white;
 }
+.burgerLogo {
+	display: flex;
+	justify-content: space-between;
+}
+#burger {
+	display: none;
+	flex-direction: column;
+	justify-content: center;
+	width: 40px;
+	height: 75px;
+	margin: 0 2em;
+}
+#burger > div {
+	width: 100%;
+	height: 5px;
+	background: #1a202c;
+	margin: 5px 0;
+	opacity: 1;
+	transition: 0.2s all ease-in-out;
+}
+
+#burger1.active {
+	transform: rotate(45deg) translateY(21px);
+}
+#burger2.active {
+	opacity: 0;
+}
+#burger3.active {
+	transform: rotate(-45deg) translateY(-21px);
+}
+
 .productList {
 	display: flex;
 	flex-direction: row;
@@ -142,7 +180,7 @@ body {
 .reviewForm {
 	color: black;
 	border-radius: 4px;
-  padding: 5px;
+	padding: 5px;
 }
 
 #reviewForm {
@@ -157,10 +195,77 @@ body {
 	background-position: center;
 }
 
-.checkoutForm{
-  width: 50%;
-  display: flex;
-  flex-direction: column;
-  margin: auto;
-  margin-top: 100px;
+.checkoutForm {
+	width: 50%;
+	display: flex;
+	flex-direction: column;
+	margin: auto;
+	margin-top: 100px;
+}
+
+@media screen and (max-width: 1024px) {
+	/* .navLogo {
+		font-size: 1.5em;
+	} */
+	a.navLink {
+		font-size: 1.2em;
+	}
+}
+@media screen and (max-width: 768px) {
+	nav {
+		flex-direction: column;
+		justify-content: center;
+	}
+	.navSection {
+		flex-direction: column;
+	}
+	.navContainer {
+		background-color: #f7fafc;
+		flex-direction: column;
+		width: 100vw;
+		position: absolute;
+		top: 75px;
+		left: -100%;
+		z-index: 1000;
+		transition: 0.3s all;
+	}
+	#burger {
+		display: flex;
+		flex-direction: column;
+	}
+	.burgerLogo {
+		width: 100%;
+	}
+	.showMenu {
+		left: 0;
+	}
+
+	.navContainer a.navLink {
+		margin: 1em auto;
+	}
+	.dropList a.navLink > h2 {
+		margin: 1em auto;
+		display: block;
+	}
+	.dropDown {
+		position: relative;
+		opacity: 1;
+		top: 0;
+		left: 0;
+	}
+	svg.chevron {
+		display: none;
+	}
+	a.navLink {
+		text-align: center;
+	}
+	.dropList {
+		/*
+      hack to prevent margin collapse
+    */
+		padding: 0.05px;
+	}
+	.navLogo {
+		justify-self: center;
+	}
 }
