@@ -33,7 +33,6 @@ const App = () => (
             <Route exact path="/profile" component={UserProfile} />
             <Route exact path="/order-details/:id" component={PastOrder} />
             <Route exact path="/categories/:name" component={SingleCategory} />
-
             <BrowserRouter
               basename='/admin'
             >

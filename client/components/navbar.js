@@ -32,19 +32,39 @@ const NavBar = ({ whoAmI, user }) => {
     }
   }, [user]);
 
+  const burgerDance = () => {
+    const menu = document.querySelector('.navContainer');
+    const burgers = document.querySelectorAll('#burger>div');
+    menu.classList.toggle('showMenu');
+    burgers.forEach(burger => burger.classList.toggle('active'))
+  }
+
   return (
-    <div>
-      <nav className="" role="navigation" aria-label="main navigation">
+    <nav className="" role="navigation" aria-label="main navigation">
+      <div className='burgerLogo'>
+        {/* eslint-disable-next-line jsx-a11y/no-noninteractive-element-interactions */}
+        <div
+          role='navigation'
+          onKeyPress={() => burgerDance()}
+          id='burger'
+          onClick={() => burgerDance()}
+        >
+          <div id='burger1' />
+          <div id='burger2' />
+          <div id='burger3' />
+        </div>
         <div className='navLogo'>
           <Link to="/">Grace&apos;s Hopper</Link>
         </div>
-        <div className='dropContainer' id='productsDrop'>
-          <Link to="/products" className='navLink'>Products <Icon name='chevron-down' /></Link>
+      </div>
+      <div className='navContainer'>
+        <div className='dropContainer navSection' id='productsDrop'>
+          <Link to="/products" className='navLink'>Products <Icon name='chevron-down' className='chevron' /></Link>
           <div className='dropDown' id='dropDown'>
             <Categories />
           </div>
         </div>
-        <div style={{ display: 'flex' }}>
+        <div className='navSection'>
           {
             isAdmin &&
             <Link to="/admin" className='navLink'>Admin</Link>
@@ -52,8 +72,8 @@ const NavBar = ({ whoAmI, user }) => {
           <Link to="/shopping-cart" className='navLink'>Cart</Link>
           <Link to="/login" className='navLink'>{user.username ? 'Log Out' : 'Login'}</Link>
         </div>
-      </nav>
-    </div>
+      </div>
+    </nav>
   );
 }
 
