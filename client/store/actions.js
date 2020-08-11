@@ -28,3 +28,7 @@ export const types = {
   UPDATE_PRODUCT: 'UPDATE_PRODUCT',
   UPDATE_CATEGORY: 'UPDATE_CATEGORY'
 };
+
+export const reviewTypes = {
+  CREATE_REVIEW: 'CREATE_REVIEW'
+}

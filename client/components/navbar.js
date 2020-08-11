@@ -24,7 +24,7 @@ const NavBar = ({ whoAmI, user }) => {
         <Link to="/" className="navbar-item">Home</Link>
         <Link to="/products" className="navbar-item">View All Products</Link>
         <Link to="/shopping-cart" className="navbar-item">Cart</Link>
-        <Link to="/login" className="navbar-item">{user.username? 'Log Out' : 'Login'}</Link>
+        <Link to="/login" className="navbar-item">{user.username ? 'Log Out' : 'Login'}</Link>
         {user.role !== ' guest' &&
           <Link to="/profile" className="navbar-item">Profile</Link>}
         {isAdmin &&
