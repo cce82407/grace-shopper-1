@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
+import { Icon } from '@chakra-ui/core';
+import Categories from './categories';
 import { whoami } from '../store/userActions';
 
 const NavBar = ({ whoAmI, user }) => {
@@ -8,6 +10,18 @@ const NavBar = ({ whoAmI, user }) => {
 
   useEffect(() => {
     whoAmI();
+    const productsDrop = document.getElementById('productsDrop');
+    const dropDown = document.getElementById('dropDown');
+    const svg = productsDrop.querySelector('svg');
+
+    productsDrop.addEventListener('mouseenter', () => {
+      dropDown.classList.add('showMenu');
+      svg.classList.add('rotate');
+    });
+    productsDrop.addEventListener('mouseleave', () => {
+      dropDown.classList.remove('showMenu');
+      svg.classList.remove('rotate');
+    });
   }, []);
 
   useEffect(() => {
@@ -20,15 +34,24 @@ const NavBar = ({ whoAmI, user }) => {
 
   return (
     <div>
-      <nav className="navbar is-light" role="navigation" aria-label="main navigation">
-        <Link to="/" className="navbar-item">Home</Link>
-        <Link to="/products" className="navbar-item">View All Products</Link>
-        <Link to="/shopping-cart" className="navbar-item">Cart</Link>
-        <Link to="/login" className="navbar-item">{user.username ? 'Log Out' : 'Login'}</Link>
-        {user.role !== ' guest' &&
-          <Link to="/profile" className="navbar-item">Profile</Link>}
-        {isAdmin &&
-          <Link to="/admin" className="navbar-item">Admin</Link>}
+      <nav className="" role="navigation" aria-label="main navigation">
+        <div className='navLogo'>
+          <Link to="/">Grace&apos;s Hopper</Link>
+        </div>
+        <div className='dropContainer' id='productsDrop'>
+          <Link to="/products" className='navLink'>Products <Icon name='chevron-down' /></Link>
+          <div className='dropDown' id='dropDown'>
+            <Categories />
+          </div>
+        </div>
+        <div style={{ display: 'flex' }}>
+          {
+            isAdmin &&
+            <Link to="/admin" className='navLink'>Admin</Link>
+          }
+          <Link to="/shopping-cart" className='navLink'>Cart</Link>
+          <Link to="/login" className='navLink'>{user.username ? 'Log Out' : 'Login'}</Link>
+        </div>
       </nav>
     </div>
   );

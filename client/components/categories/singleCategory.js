@@ -1,8 +1,9 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { Link } from 'react-router-dom'
+import { Flex, Heading } from '@chakra-ui/core';
 import { getProductsThunk } from '../../store/productThunks'
 import { getCategoriesThunk } from '../../store/actionCreators';
+import ProductCard from '../productCard'
 
 
 class SingleCategory extends Component {
@@ -14,20 +15,29 @@ class SingleCategory extends Component {
   render() {
     const { match: { params: { name } }, products, categories } = this.props
     return (
-      <>
-        <h1>{name.toUpperCase()}</h1><br />
-        <div>
+      <Flex
+        direction='column'
+        align='center'
+      >
+        <Heading as='h2' size='lg' className='heading' m='1em'>
+          {name.toUpperCase()}
+        </Heading>
+        <Flex
+          wrap='wrap'
+          justify='center'
+        >
           {
             !!products.length && !!categories.length &&
             products.filter(product => product.categoryId === (categories.find(category => category.name === name)).id)
               .map(cProduct => (
-                <div key={cProduct.id} className='box'>
-                  <Link to={`/products/${cProduct.id}`}>{cProduct.name}</Link>
+                <div key={cProduct.id}>
+                  {/* <Link to={`/products/${cProduct.id}`}>{cProduct.name}</Link> */}
+                  <ProductCard product={cProduct} />
                 </div>
               ))
           }
-        </div>
-      </>
+        </Flex>
+      </Flex>
     )
   }
 }
