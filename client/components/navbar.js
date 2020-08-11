@@ -49,6 +49,10 @@ const NavBar = ({ whoAmI, user }) => {
             isAdmin &&
             <Link to="/admin" className='navLink'>Admin</Link>
           }
+          {
+            user.role!=='guest' &&
+            <Link to="/profile" className='navLink'>Profile</Link>
+          }
           <Link to="/shopping-cart" className='navLink'>Cart</Link>
           <Link to="/login" className='navLink'>{user.username ? 'Log Out' : 'Login'}</Link>
         </div>
