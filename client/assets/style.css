@@ -86,7 +86,7 @@ a.heading:hover {
 }
 .dropDown {
 	position: absolute;
-	top: 2em;
+	top: 2.5em;
 	left: -1em;
 	opacity: 0;
 	transition: 0.3s all;
