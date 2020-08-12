@@ -56,6 +56,7 @@ a.navLink:hover {
 
 .heading,
 h2.heading,
+h1.heading,
 h4.heading {
 	font-family: 'Righteous', 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
 }
@@ -88,19 +89,19 @@ a.heading:hover {
 .dropDown {
 	position: absolute;
 	transition: 0.3s all;
-	top: 2em;
+	top: 1em;
 	left: -1em;
 	display: none;
 	z-index: 10;
-	padding-top: 0.5em;
+	padding-top: 1.5em;
 }
 
 .dropContainer > a svg {
-	transition: 0.3s all;
+	transition: 0.2s all;
 }
 
 .showMenu {
-	display: inline-block;
+	display: block;
 }
 
 .rotate {
@@ -230,7 +231,7 @@ body {
 		top: 75px;
 		left: -100%;
 		z-index: 1000;
-		transition: 0.3s all;
+		transition: 0.2s all;
 	}
 	#burger {
 		display: flex;
@@ -255,6 +256,8 @@ body {
 		opacity: 1;
 		top: 0;
 		left: 0;
+		display: block;
+		padding-top: 0.5em;
 	}
 	svg.chevron {
 		display: none;

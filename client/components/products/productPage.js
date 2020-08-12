@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import { connect } from 'react-redux';
-import { Flex, Image, Heading, Button, Input, useToast } from '@chakra-ui/core';
+import { Flex, Image, Heading, Button, Input, useToast, Breadcrumb, BreadcrumbItem, BreadcrumbLink } from '@chakra-ui/core';
 import { addToCartThunk } from '../../store/cartActions'
 
-const ProductPage = ({ product, addToCart }) => {
+const ProductPage = ({ product, addToCart, categories }) => {
   const [quantity, setQuantity] = useState(1);
 
   const toast = useToast();
@@ -20,81 +20,105 @@ const ProductPage = ({ product, addToCart }) => {
     })
   };
 
+  const categoryName = categories.find(c => c.id === product.categoryId).name;
+
   return (
-    <Flex
-      justify='center'
-      m='2em'
-    >
-      <Flex m='1em'>
-        <Image
-          src={product.imgSrcLg}
-          w='400px'
-          h='400px'
-        />
-      </Flex>
-      <Flex
-        w='400px'
-        bg='#2D3748'
-        m='1em'
-        direction='column'
-        justifyContent='space-between'
-        p='1em'
+    <div>
+      <Breadcrumb
+        style={{
+          color: 'white',
+          backgroundColor: '#1a202c'
+        }}
       >
-        <Heading
-          as='h2'
-          size='lg'
-          className='heading'
-          textAlign='center'
-          marginBottom='1em'
-        >
-          {product.name}
-        </Heading>
-        <p>
-          {product.description}
-        </p>
+        <BreadcrumbItem>
+          <BreadcrumbLink href="/products">Products</BreadcrumbLink>
+        </BreadcrumbItem>
+
+        <BreadcrumbItem>
+          <BreadcrumbLink href={`/categories/${categoryName}`}>{categoryName}</BreadcrumbLink>
+        </BreadcrumbItem>
+
+        <BreadcrumbItem isCurrentPage>
+          <BreadcrumbLink href="#">{product.name}</BreadcrumbLink>
+        </BreadcrumbItem>
+      </Breadcrumb>
+      <Flex
+        justify='center'
+        m='2em'
+        wrap='wrap'
+      >
+        <Flex m='1em'>
+          <Image
+            src={product.imgSrcLg}
+            w='400px'
+            h='400px'
+          />
+        </Flex>
         <Flex
-          justify='space-between'
-          align='center'
+          w='400px'
+          bg='#2D3748'
+          m='1em'
+          direction='column'
+          justifyContent='space-between'
+          p='1em'
         >
-          <Flex
-            align='center'
-            justify='center'
-            m='1em'
+          <Heading
+            as='h2'
+            size='lg'
+            className='heading'
+            textAlign='center'
+            marginBottom='1em'
           >
-            <Heading as='h4' size='lg' mr='1em'>
-              ${+product.price}
-            </Heading>
-          </Flex>
+            {product.name}
+          </Heading>
+          <p>
+            {product.description}
+          </p>
           <Flex
-            justify='center'
+            justify='space-between'
             align='center'
           >
-            <Input
-              size='sm'
-              width='3em'
-              value={quantity}
-              onChange={(e) => setQuantity(e.target.value)}
-              color='black'
-              placeholder='1'
+            <Flex
+              align='center'
+              justify='center'
               m='1em'
-            />
-            <Button
-              variantColor="green"
-              size="md"
-              onClick={(e) => handleAddToCart(e, product.id, quantity)}
             >
-              Add to Cart
-            </Button>
+              <Heading as='h4' size='lg' mr='1em'>
+                ${+product.price}
+              </Heading>
+            </Flex>
+            <Flex
+              justify='center'
+              align='center'
+            >
+              <Input
+                size='sm'
+                width='3em'
+                value={quantity}
+                onChange={(e) => setQuantity(e.target.value)}
+                color='black'
+                placeholder='1'
+                m='1em'
+              />
+              <Button
+                variantColor="green"
+                size="md"
+                onClick={(e) => handleAddToCart(e, product.id, quantity)}
+              >
+                Add to Cart
+              </Button>
+            </Flex>
           </Flex>
         </Flex>
       </Flex>
-
-    </Flex>
+    </div>
   );
 }
+
+const mapStateToProps = ({ categories }) => ({ categories });
 
 const mapDispatchToProps = (dispatch) => ({
   addToCart: (productId, quantity = 1) => dispatch(addToCartThunk(productId, quantity)),
 });
 
-export default connect(null, mapDispatchToProps)(ProductPage);
+export default connect(mapStateToProps, mapDispatchToProps)(ProductPage);
