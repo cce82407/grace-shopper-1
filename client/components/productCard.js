@@ -30,13 +30,15 @@ const ProductCard = ({ product, addToCart }) => {
       bg='#2D3748'
       p='1em'
     >
-      <Image
-        src={product.imgSrcSm}
-        alt={product.name}
-        height='200px'
-        width='200px'
-        m='1em'
-      />
+      <Link to={`/products/${product.id}`}>
+        <Image
+          src={product.imgSrcSm}
+          alt={product.name}
+          height='200px'
+          width='200px'
+          m='1em'
+        />
+      </Link>
       <Flex
         direction='column'
         justify='space-between'
