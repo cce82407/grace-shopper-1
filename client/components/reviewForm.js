@@ -41,8 +41,6 @@ class ReviewForm extends Component {
     const { changeRating, handleInputChange } = this
     const { productId, starRating, reviewText, reviewTitle } = this.state
     const { products, createReview } = this.props
-    console.log(this.props.match.params.prodId)
-    console.log(this.props)
     const product = products.find((prod) => {
       return prod.id === this.props.match.params.prodId
     })
