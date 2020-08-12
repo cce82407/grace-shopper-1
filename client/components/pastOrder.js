@@ -1,8 +1,10 @@
 import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
+import { Image, Button } from '@chakra-ui/core'
 import { getUserCartsThunk } from '../store/cartActions';
 import { getReviewsThunk } from '../store/reviewThunks';
+
 
 const PastOrder = (props) => {
   useEffect(() => {
@@ -21,6 +23,7 @@ const PastOrder = (props) => {
     const review = reviews.find((rev) => {
       return rev.productId === id && rev.UserId === user.id
     })
+
     return review ? `"${review.reviewText}"` : null
   }
 
@@ -36,6 +39,7 @@ const PastOrder = (props) => {
         <thead>
           <tr>
             <th>Product Name</th>
+            <th>Product Image</th>
             <th>Price</th>
             <th>Description</th>
             <th>Your Reviews</th>
@@ -47,9 +51,15 @@ const PastOrder = (props) => {
               return (
                 <tr key={prod.id}>
                   <td>{prod.name}</td>
-                  <td>{prod.price}</td>
+                  <td><Image
+                    src={prod.imgSrcLg}
+                    w='150px'
+                    h='150px'
+                  />
+                  </td>
+                  <td>${prod.price}</td>
                   <td>{prod.description}</td>
-                  <td>{reviews && reviews.length && userReview(prod.id) || <Link to='/review'>Write a review</Link>}
+                  <td>{(reviews && reviews.length && userReview(prod.id)) || <Link to={`/review/${user.id}/${prod.id}`}><Button variantColor="green">Write a review</Button></Link>}
                   </td>
                 </tr>
               )

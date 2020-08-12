@@ -29,7 +29,7 @@ const App = () => (
             <Route exact path="/admin" component={AdminConsole} />
             <Route exact path="/checkout/:id" component={Checkout} />
             <Route exact path="/success" component={PaymentSuccess} />
-            <Route exact path="/review" component={ReviewForm} />
+            <Route exact path="/review/:userId/:prodId" component={ReviewForm} />
             <Route exact path="/profile" component={UserProfile} />
             <Route exact path="/order-details/:id" component={PastOrder} />
             <Route exact path="/categories/:name" component={SingleCategory} />
