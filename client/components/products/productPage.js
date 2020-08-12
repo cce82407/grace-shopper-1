@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { connect } from 'react-redux';
-import { Flex, Image, Heading, Button, Input, useToast, Breadcrumb, BreadcrumbItem, BreadcrumbLink, BreadcrumbSeparator } from '@chakra-ui/core';
+import { Flex, Image, Heading, Button, Input, useToast, Breadcrumb, BreadcrumbItem, BreadcrumbLink } from '@chakra-ui/core';
 import { addToCartThunk } from '../../store/cartActions'
 
 const ProductPage = ({ product, addToCart, categories }) => {
