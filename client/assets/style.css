@@ -55,7 +55,8 @@ a.navLink:hover {
 }
 
 .heading,
-h2.heading {
+h2.heading,
+h4.heading {
 	font-family: 'Righteous', 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
 }
 
@@ -86,14 +87,20 @@ a.heading:hover {
 }
 .dropDown {
 	position: absolute;
-	top: 2.5em;
-	left: -1em;
-	opacity: 0;
 	transition: 0.3s all;
+	top: 2em;
+	left: -1em;
+	display: none;
+	z-index: 10;
+	padding-top: 0.5em;
 }
 
 .dropContainer > a svg {
 	transition: 0.3s all;
+}
+
+.showMenu {
+	display: inline-block;
 }
 
 .rotate {
@@ -108,10 +115,6 @@ a.heading:hover {
 
 .dropList > a {
 	margin: 0;
-}
-
-.showMenu {
-	opacity: 1;
 }
 
 body {
