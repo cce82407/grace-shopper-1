@@ -1,7 +1,7 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Button } from '@chakra-ui/core';
+import { Button, Flex, Heading, Input } from '@chakra-ui/core';
 import { updateProductThunk, deleteProductThunk, getProductsThunk } from '../store/productThunks';
 
 class EditProduct extends Component {
@@ -33,31 +33,49 @@ class EditProduct extends Component {
     const { id, name, price, description } = this.state;
     const { history } = this.props;
     return (
-      <div style={{padding:'30px'}}>
-        <h1 className='title' style={{color:'white'}}>Edit{name}</h1>
-        <div>
+      <Flex
+        direction='column'
+        align='center'
+        w='100vw'
+        p='1em'
+      >
+        <Flex
+          m='2em'
+          direction='column'
+          align='center'
+          textAlign='center'
+          bg='#2D3748'
+          w='xl'
+          p='1em'
+        >
+          <Heading
+            as='h2'
+            className='heading'
+          >
+            Edit {name}
+          </Heading>
           {
             name && (
               <div>
-                <label className='label' style={{color:'white'}}>
+                <label className='label' style={{ color: 'white' }}>
                   Name:
-                  <input value={this.state.name} onChange={(e) => this.setState({ name: e.target.value })} className='input' style={{width:'50%'}} />
+                  <Input value={this.state.name} onChange={(e) => this.setState({ name: e.target.value })} color='black' bg='#E2E8F0' />
                 </label>
-                <label className='label' style={{color:'white'}}>
+                <label className='label' style={{ color: 'white' }}>
                   Price:
-                  <input value={this.state.price} onChange={(e) => this.setState({ price: e.target.value })} className='input' style={{width:'50%'}} />
+                  <Input value={this.state.price} onChange={(e) => this.setState({ price: e.target.value })} color='black' bg='#E2E8F0' />
                 </label>
-                <label className='label' style={{color:'white'}}>
+                <label className='label' style={{ color: 'white' }}>
                   Description:
-                  <input value={this.state.description} onChange={(e) => this.setState({ description: e.target.value })} className='input' style={{width:'50%'}} />
+                  <Input value={this.state.description} onChange={(e) => this.setState({ description: e.target.value })} color='black' bg='#E2E8F0' />
                 </label>
-                <Button onClick={() => this.props.updateProduct(id, name, price, description, history)} variantColor='green'>Save Changes</Button>
-                <Button onClick={() => this.props.deleteProduct(id, history)} variantColor='red'>Delete Product</Button>
+                <Button onClick={() => this.props.updateProduct(id, name, price, description, history)} variantColor='green' size='sm' m='1em'>Save Changes</Button>
+                <Button onClick={() => this.props.deleteProduct(id, history)} variantColor='red' size='sm' m='1em'>Delete Product</Button>
               </div>
             )
           }
-        </div>
-      </div>
+        </Flex>
+      </Flex>
     )
   }
 }
