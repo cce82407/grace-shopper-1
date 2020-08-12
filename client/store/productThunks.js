@@ -75,13 +75,30 @@ export const getProductsThunk = () => (dispatch) => {
     });
 };
 
-export const sortProductsThunk = (type) => (dispatch) => {
-  return axios.get(`api/products/sort/${type}`)
+export const sortProductsThunk = (type, products) => (dispatch) => {
+  switch (type) {
+    case 'Price High to Low': products = products.sort((a, b) => Number(a.price) > Number(b.price) ? -1 : 1);
+      break;
+    case 'Price Low to High': products = products.sort((a, b) => Number(a.price) < Number(b.price) ? -1 : 1);
+      break;
+    case 'Name A to Z': products = products.sort((a, b) => a.name < b.name ? -1 : 1);
+      break;
+    case 'Name Z to A': products = products.sort((a, b) => a.name > b.name ? -1 : 1);
+      break;
+    default: break;
+  }
+  dispatch(getProducts(products));
+}
+
+export const searchProductsThunk = (searchTerm) => (dispatch) => {
+  dispatch(loading());
+  return axios.get(`/search?term=${searchTerm}`)
     .then(({ data }) => {
       dispatch(getProducts(data));
+      dispatch(loaded());
     })
-    .catch((e) => {
-      console.log('failed to fetch Products');
-      console.log(e);
+    .catch(e => {
+      dispatch(loaded());
+      throw e;
     })
 }
