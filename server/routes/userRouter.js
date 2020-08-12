@@ -12,6 +12,7 @@ const userRouter = Router();
 userRouter.get('/whoami', (req, res) => {
   if (req.user) {
     res.send({
+      id: req.user.id,
       username: req.user.username,
       loggedIn: true,
       role: req.user.role,

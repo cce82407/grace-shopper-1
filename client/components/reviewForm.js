@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import StarRatings from 'react-star-ratings';
 import { getProductsThunk } from '../store/productThunks'
-import createReviewThunk from '../store/reviewThunks'
+import { createReviewThunk } from '../store/reviewThunks'
 
 
 class ReviewForm extends Component {
@@ -45,7 +45,7 @@ class ReviewForm extends Component {
         <div id='reviewForm'>
           <div style={{ fontSize: '3rem' }}>Write a Product Review</div>
           <h1>Product</h1>
-          <form onSubmit={() => createReview(productId, starRating, reviewText, reviewTitle)}>
+          <form onSubmit={() => createReview(productId, starRating, reviewTitle, reviewText)}>
             <select
               name="productId"
               className='reviewForm'

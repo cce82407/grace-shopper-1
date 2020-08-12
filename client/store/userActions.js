@@ -2,8 +2,9 @@ import axios from 'axios';
 import { userTypes } from './actions';
 import { loaded, loading } from './actionCreators';
 
-const login = (username, role) => ({
+const login = (id, username, role) => ({
   type: userTypes.LOGIN,
+  id,
   username,
   role,
 });
@@ -29,7 +30,7 @@ export const loginThunk = (username, password) => (dispatch) => {
   return axios
     .post('/user/login', { username, password })
     .then((res) => {
-      dispatch(login(username, res.data.role));
+      dispatch(login(res.data.id, username, res.data.role));
       dispatch(loaded());
     })
     .catch((e) => {
@@ -43,7 +44,7 @@ export const whoami = () => (dispatch) => {
   dispatch(loading());
   return axios.get('/user/whoami').then(({ data }) => {
     if (data.loggedIn) {
-      dispatch(login(data.username, data.role));
+      dispatch(login(data.id, data.username, data.role));
     } else {
       dispatch(logout());
     }
