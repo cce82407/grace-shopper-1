@@ -5,6 +5,7 @@ import {useStripe, useElements, CardElement} from '@stripe/react-stripe-js';
 import { connect } from 'react-redux';
 import axios from 'axios';
 import { FormLabel, Input } from '@chakra-ui/core';
+import emailjs from 'emailjs-com';
 import CardSection from './cardSelection';
 import { updateCartStatusThunk } from  '../../store/cartActions';
 
@@ -12,6 +13,8 @@ function CheckoutForm(props) {
   const stripe = useStripe();
   const elements = useElements();
   const [email, setEmail] = useState('');
+  
+  console.log(props)
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -22,14 +25,14 @@ function CheckoutForm(props) {
       return;
     }
 
+
     await axios.get(`/checkout/secret/${props.match.params.id}`)
       .then(async(data)=>{
-        console.log(data)
         const result = await stripe.confirmCardPayment(`${data.data.client_secret}`, {
           payment_method: {
             card: elements.getElement(CardElement),
             billing_details: {
-              name: 'Jenny Rosen',
+              name: `${props.user.username}`,
             },
           }
         });
@@ -40,9 +43,25 @@ function CheckoutForm(props) {
         } else {
           // The payment has been processed!
           if (result.paymentIntent.status === 'succeeded') {
-            props.updateStatus(props.match.params.id)
+            props.updateStatus(props.match.params.id);
             props.history.push('/success');
+
+            const templateParams = {
+              user_email: email,
+              message: `Thank you for your purchase, your order number is ${props.match.params.id.slice(0,8)}`
+          };
+
+            emailjs.send('default_service','contact_form', templateParams, 'user_7rvIlz2vfvxHrQAEK5c56')
+              .then((response) => {
+                console.log('SUCCESS!', response.status, response.text);
+              }, (err) => {
+                console.log('FAILED...', err);
+              });
+
           }
+
+
+
         }
       })
   };

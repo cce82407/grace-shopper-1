@@ -4,6 +4,7 @@ const cartRouter = Router();
 const chalk = require('chalk');
 
 const { Cart, Product, ProductCart } = require('../db/models/index');
+const { User } = require("../db/models/user");
 
 cartRouter.post('/add/:id', async (req, res) => {
   try {
@@ -60,7 +61,22 @@ cartRouter.put('/updateCart/:id', async (req, res)=>{
     cart.completed=true;
     const { completed } = cart
     await Cart.update({completed}, { where: { id } })
-    res.send(cart)
+    
+    res.clearCookie("cart_id");
+    const newCart = await Cart.create();
+    
+    const oneWeek = 1000 * 60 * 60 * 24 * 7;
+    
+    res.cookie("cart_id", newCart.id, {
+      path: "/",
+      expires: new Date(Date.now() + oneWeek),
+    });
+    
+    req.cart_id = newCart.id;  
+    
+    await newCart.setUser(req.user);
+
+    res.sendStatus(200)
   }
   catch (err){
     console.log(err)
