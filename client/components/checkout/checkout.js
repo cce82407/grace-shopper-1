@@ -13,8 +13,6 @@ function CheckoutForm(props) {
   const stripe = useStripe();
   const elements = useElements();
   const [email, setEmail] = useState('');
-  
-  console.log(props)
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -24,7 +22,6 @@ function CheckoutForm(props) {
       // Make sure to disable form submission until Stripe.js has loaded.
       return;
     }
-
 
     await axios.get(`/checkout/secret/${props.match.params.id}`)
       .then(async(data)=>{
@@ -59,9 +56,6 @@ function CheckoutForm(props) {
               });
 
           }
-
-
-
         }
       })
   };

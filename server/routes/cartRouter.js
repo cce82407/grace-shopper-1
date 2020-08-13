@@ -2,9 +2,7 @@ const { Router } = require("express");
 
 const cartRouter = Router();
 const chalk = require('chalk');
-
 const { Cart, Product, ProductCart } = require('../db/models/index');
-const { User } = require("../db/models/user");
 
 cartRouter.post('/add/:id', async (req, res) => {
   try {
