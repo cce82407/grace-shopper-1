@@ -96,9 +96,8 @@ export const updateCartThunk = (id, quantity) => (dispatch) => {
 export const updateCartStatusThunk = (id) => (dispatch) => {
   dispatch(loading());
   return axios.put(`/cart/updateCart/${id}`)
-    .then(({ data }) => {
-      console.log(data)
-      dispatch(updateCart(data));
+    .then(( ) => {
+      dispatch(updateCart([]));
       dispatch(loaded());
     })
     .catch((e) => {
