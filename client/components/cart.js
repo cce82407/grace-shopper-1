@@ -7,28 +7,18 @@ import {
   Flex,
   Button,
   Box,
-  Text,
-  Modal,
-  ModalOverlay,
-  ModalContent,
-  ModalHeader,
-  ModalFooter,
-  ModalBody,
-  ModalCloseButton,
-  useDisclosure,
 } from '@chakra-ui/core';
 import CartItem from './cartItem';
 import { removeFromCartThunk, updateCartThunk } from '../store/cartActions';
 
 const Cart = ({ cart, remove, update }) => {
-  const { isOpen, onClose } = useDisclosure();
   return (
     <>
       <Flex
         align='center'
         justify='center'
         mt='1em'
-        minW='xl'
+        minW={['sm', 'md', 'lg', 'xl']}
       >
         <Box
           w='100%'
@@ -36,7 +26,7 @@ const Cart = ({ cart, remove, update }) => {
           <Stack
             spacing={0}
             bg='#2D3748'
-            p='2em'
+            p={['0', '1em', '2em']}
             paddingBottom='1em'
           >
             {
@@ -47,7 +37,7 @@ const Cart = ({ cart, remove, update }) => {
           </Stack>
           <Flex
             align='center'
-            justify='space-between'
+            justify={['center', 'center', 'space-between']}
             bg='#2D3748'
             p='2em'
             paddingTop='1em'
@@ -55,6 +45,7 @@ const Cart = ({ cart, remove, update }) => {
             <Button
               variantColor='green'
               size='lg'
+              marginRight={['1em', '1em', '0']}
               onClick={() => window.location.pathname = `checkout/${cart.id}`}
             >
               Checkout
@@ -69,27 +60,6 @@ const Cart = ({ cart, remove, update }) => {
           </Flex>
         </Box>
       </Flex>
-      <Modal isOpen={isOpen} onClose={onClose}>
-        <ModalOverlay />
-        <ModalContent
-          color='black'
-        >
-          <ModalHeader>Checkout</ModalHeader>
-          <ModalCloseButton />
-          <ModalBody>
-            <Text>
-              Checkout text here
-            </Text>
-          </ModalBody>
-
-          <ModalFooter>
-            <Button variantColor="blue" mr={3} onClick={() => window.location.pathname = '/checkout'}>
-              Close
-            </Button>
-
-          </ModalFooter>
-        </ModalContent>
-      </Modal>
     </>
   );
 };
