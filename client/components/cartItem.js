@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Flex, Heading, Input, Button, IconButton } from '@chakra-ui/core';
+import { Flex, Heading, Input, Button, IconButton, Box } from '@chakra-ui/core';
 
 const CartItem = ({ product, remove, update }) => {
   const [quantity, setQuantity] = useState(product.productCart.quantity);
@@ -16,13 +16,13 @@ const CartItem = ({ product, remove, update }) => {
     <Flex
       align="center"
       justify="space-between"
-      direction="row"
+      direction={['column', 'column', 'row']}
       bg='#4A5568'
-      p='1em'
+      p={['0 1em 1em', '0 1em 1em', '1em']}
       borderBottom='1px solid #2D3748'
     >
-      <div>
-        <Heading as="h3" size="md" flexGrow='1'>
+      <Box m={['1em', '1em', '0']}>
+        <Heading as="h3" size='md' flexGrow='1'>
           {
             product.name
               .split(' ')
@@ -30,7 +30,7 @@ const CartItem = ({ product, remove, update }) => {
               .join(' ')
           }
         </Heading>
-      </div>
+      </Box>
       <Flex
         alignItems='center'
         marginLeft='1em'

@@ -50,12 +50,12 @@ const ProductPage = ({ product, addToCart, categories }) => {
         <Flex m='1em'>
           <Image
             src={product.imgSrcLg}
-            w='400px'
-            h='400px'
+            w={['300px', '300px', '400px', '400px']}
+            h={['300px', '300px', '400px', '400px']}
           />
         </Flex>
         <Flex
-          w='400px'
+          w={['300px', '300px', '400px', '400px']}
           bg='#2D3748'
           m='1em'
           direction='column'
@@ -82,8 +82,9 @@ const ProductPage = ({ product, addToCart, categories }) => {
               align='center'
               justify='center'
               m='1em'
+              w={['300px', '300px', '400px', '400px']}
             >
-              <Heading as='h4' size='lg' mr='1em'>
+              <Heading as='h4' size='lg'>
                 ${+product.price}
               </Heading>
             </Flex>
@@ -92,17 +93,19 @@ const ProductPage = ({ product, addToCart, categories }) => {
               align='center'
             >
               <Input
-                size='sm'
+                size={['xs', 'sm']}
                 width='3em'
+                textAlign='center'
                 value={quantity}
                 onChange={(e) => setQuantity(e.target.value)}
                 color='black'
                 placeholder='1'
-                m='1em'
+                m={['0.5em', '1em']}
               />
               <Button
                 variantColor="green"
-                size="md"
+                size={['md', 'md', 'lg']}
+                p='0.5em 0.25em'
                 onClick={(e) => handleAddToCart(e, product.id, quantity)}
               >
                 Add to Cart
